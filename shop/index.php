@@ -36,8 +36,11 @@ $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $products = $stmt->fetchAll();
 
-// Get categories for sidebar
-$cat_stmt = $pdo->query("SELECT name FROM categories WHERE parent_id IS NULL");
+// Get categories for sidebar with custom ordering
+$order = ['Guitars', 'Keyboards', 'Drums & Percussion', 'Wind Instruments', 'String Instruments', 'Accessories', 'Digital Sheet Music'];
+$placeholders = implode(',', array_fill(0, count($order), '?'));
+$cat_stmt = $pdo->prepare("SELECT name FROM categories WHERE parent_id IS NULL ORDER BY FIELD(name, $placeholders)");
+$cat_stmt->execute($order);
 $all_categories = $cat_stmt->fetchAll();
 ?>
 

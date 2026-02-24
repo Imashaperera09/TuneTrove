@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="auth-page-wrapper" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent), radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.08), transparent); margin-top: -4rem;">
-    <div class="auth-glass-card" style="width: 100%; max-width: 440px; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 2rem; padding: 2.5rem 3rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.7); animation: authReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+<div class="auth-page-wrapper" style="min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; padding: 2rem; background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent), radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.08), transparent);">
+    <div class="auth-glass-card" style="width: 100%; max-width: 440px; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 2.5rem; padding: 3.5rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.7); animation: authReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
         
         <div style="text-align: center; margin-bottom: 2rem;">
             <div style="width: 54px; height: 54px; background: linear-gradient(135deg, var(--primary), #1e40af); border-radius: 1.25rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 1rem; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);">🔑</div>

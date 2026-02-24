@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="auth-page-wrapper" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.1), transparent), radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.15), transparent); margin-top: -5rem;">
+<div class="auth-page-wrapper" style="min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; padding: 2rem; background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.1), transparent), radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.15), transparent);">
     <div class="auth-glass-card" style="width: 100%; max-width: 550px; background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 2.5rem; padding: 4rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5); animation: authReveal 1s cubic-bezier(0.16, 1, 0.3, 1);">
         
         <div style="text-align: center; margin-bottom: 3rem;">

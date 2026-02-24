@@ -2,9 +2,13 @@
 require_once '../includes/header.php';
 require_once '../includes/db.php';
 
-// Fetch all main categories and their subcategories
+// Fetch all main categories with custom ordering
 try {
-    $stmt = $pdo->query("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY name");
+    $order = ['Guitars', 'Keyboards', 'Drums & Percussion', 'Wind Instruments', 'String Instruments', 'Accessories', 'Digital Sheet Music'];
+    $placeholders = implode(',', array_fill(0, count($order), '?'));
+    $sql = "SELECT * FROM categories WHERE parent_id IS NULL ORDER BY FIELD(name, $placeholders)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($order);
     $main_categories = $stmt->fetchAll();
 } catch (PDOException $e) {
     $main_categories = [];
@@ -17,7 +21,7 @@ try {
     <div class="category-grid">
         <?php if (!empty($main_categories)): ?>
             <?php foreach ($main_categories as $cat): ?>
-                <a href="/TuneTrove/shop/?cat=<?php echo urlencode($cat['name']); ?>" class="category-card" style="text-decoration: none; color: inherit;">
+                <a href="collection.php?name=<?php echo urlencode($cat['name']); ?>" class="category-card" style="text-decoration: none; color: inherit;">
                     <div class="category-img" <?php echo !empty($cat['image_url']) ? 'style="background-image: url(\'/TuneTrove/assets/images/' . htmlspecialchars($cat['image_url']) . '\');"' : ''; ?>>
                         <?php if (empty($cat['image_url'])): ?>
                              <span style="font-size: 3.5rem;">📦</span>
