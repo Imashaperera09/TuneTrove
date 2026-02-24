@@ -27,11 +27,11 @@ require_once __DIR__ . '/functions.php';
                 <ul>
                     <li><a href="/TuneTrove/">Home</a></li>
                     <li><a href="/TuneTrove/shop/">Shop</a></li>
-                    <li><a href="/TuneTrove/categories.php">Categories</a></li>
+                    <li><a href="/TuneTrove/shop/categories.php">Categories</a></li>
                     <?php if (is_logged_in()): ?>
-                        <li><a href="/TuneTrove/account.php">My Account</a></li>
+                        <li><a href="/TuneTrove/account/index.php">My Account</a></li>
                         <?php if (has_role('admin') || has_role('staff')): ?>
-                            <li><a href="/TuneTrove/admin/dashboard.php">Dashboard</a></li>
+                            <li class="admin-nav-item"><a href="/TuneTrove/admin/">Admin Dashboard</a></li>
                         <?php endif; ?>
                         <li><a href="/TuneTrove/auth/logout.php">Logout</a></li>
                     <?php else: ?>
@@ -40,7 +40,7 @@ require_once __DIR__ . '/functions.php';
                 </ul>
             </nav>
             <div class="header-actions">
-                <a href="/TuneTrove/cart.php" class="cart-link">
+                <a href="/TuneTrove/shop/cart.php" class="cart-link">
                     <span class="cart-icon">🛒</span>
                     <span class="cart-count"><?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?></span>
                 </a>
@@ -58,3 +58,28 @@ require_once __DIR__ . '/functions.php';
                     ?>
                 </div>
             <?php endif; ?>
+
+<script>
+    // Global Header & Scroll Logic
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.main-header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Global Reveal Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    });
+</script>

@@ -3,8 +3,8 @@
     <footer class="main-footer">
         <div class="container footer-container">
             <div class="footer-section">
-                <h3>Melody Masters</h3>
-                <p>Bringing the gift of music to your doorstep since 2024. Your premier destination for professional instruments and digital sheet music.</p>
+                <h3 style="color: #fff; font-size: 1.5rem; letter-spacing: -0.02em;">Melody<span style="color: var(--primary);">Masters</span></h3>
+                <p style="line-height: 1.8; margin-top: 1rem;">Experience the intersection of artistry and innovation. Providing the world's most discerning musicians with instruments that inspire greatness since 2024.</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
