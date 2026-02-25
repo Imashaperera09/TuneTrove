@@ -21,8 +21,8 @@ try {
         <h1 class="reveal">Experience <br><span class="logo-accent">Pure Sound</span></h1>
         <p class="reveal">From classical craftsmanship to modern digital innovation. Discover the world's finest musical instruments curated for the true artist.</p>
         <div class="hero-actions reveal" style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap;">
-            <a href="/TuneTrove/shop/" class="btn btn-primary" style="padding: 1.5rem 4rem; font-size: 1.25rem;">Explore Collection</a>
-            <a href="/TuneTrove/shop/categories.php" class="btn" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 1.5rem 2.5rem; font-size: 1.125rem;">The Collections</a>
+            <a href="/TuneTrove/user/shop/" class="btn btn-primary" style="padding: 1.5rem 4rem; font-size: 1.25rem;">Explore Collection</a>
+            <a href="/TuneTrove/user/shop/categories.php" class="btn" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 1.5rem 2.5rem; font-size: 1.125rem;">The Collections</a>
         </div>
     </div>
 </section>
@@ -60,7 +60,7 @@ try {
                 <p class="reveal" style="color: var(--text-muted); max-width: 450px; font-size: 1.125rem; line-height: 1.6;">Exquisite instruments for every stage of your musical journey. Hand-picked and meticulously tested for the professional artist.</p>
             </div>
             <div class="reveal" style="margin-bottom: 1rem;">
-                <a href="/TuneTrove/shop/categories.php" class="btn" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 1rem 2rem; border-radius: 1rem; text-decoration: none; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">View All Categories →</a>
+                <a href="/TuneTrove/user/shop/categories.php" class="btn" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 1rem 2rem; border-radius: 1rem; text-decoration: none; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">View All Categories →</a>
             </div>
         </div>
     </div>
@@ -80,8 +80,8 @@ try {
             ?>
             <?php if (!empty($categories)): ?>
                 <?php foreach ($categories as $cat): ?>
-                    <a href="/TuneTrove/shop/collection.php?name=<?php echo urlencode($cat['name']); ?>" class="category-card reveal">
-                        <div class="category-img" <?php echo !empty($cat['image_url']) ? 'style="background-image: url(\'/TuneTrove/assets/images/' . htmlspecialchars($cat['image_url']) . '\');"' : ''; ?>>
+                    <a href="/TuneTrove/user/shop/collection.php?name=<?php echo urlencode($cat['name']); ?>" class="category-card reveal">
+                        <div class="category-img" <?php echo !empty($cat['image_url']) ? 'style="background-image: url(\'/TuneTrove/user/assets/images/' . htmlspecialchars($cat['image_url']) . '\');"' : ''; ?>>
                             <?php if (empty($cat['image_url'])): ?>
                                 <span><?php echo $icons[$cat['name']] ?? '📦'; ?></span>
                             <?php endif; ?>
@@ -94,8 +94,8 @@ try {
                 <?php endforeach; ?>
             <?php else: ?>
                 <!-- Fallback Static Cards (Edit style tags to add your images) -->
-                <a href="/TuneTrove/shop/?cat=Guitars" class="category-card reveal">
-                    <div class="category-img" style="background-image: url('/TuneTrove/assets/images/guitar.');">
+                <a href="/TuneTrove/user/shop/?cat=Guitars" class="category-card reveal">
+                    <div class="category-img" style="background-image: url('/TuneTrove/user/assets/images/guitar.');">
                         <span>🎸</span>
                     </div>
                     <div class="category-info">
@@ -103,8 +103,8 @@ try {
                         <p>Acoustic, Electric, and Bass guitars from top brands.</p>
                     </div>
                 </a>
-                <a href="/TuneTrove/shop/?cat=Keyboards" class="category-card reveal">
-                    <div class="category-img" style="background-image: url('/TuneTrove/assets/images/keyboard_cat.jpg');">
+                <a href="/TuneTrove/user/shop/?cat=Keyboards" class="category-card reveal">
+                    <div class="category-img" style="background-image: url('/TuneTrove/user/assets/images/keyboard_cat.jpg');">
                         <span>🎹</span>
                     </div>
                     <div class="category-info">
@@ -112,8 +112,8 @@ try {
                         <p>Digital pianos, synthesizers, and modern MIDI gear.</p>
                     </div>
                 </a>
-                <a href="/TuneTrove/shop/?cat=Drums%20%26%20Percussion" class="category-card reveal">
-                    <div class="category-img" style="background-image: url('/TuneTrove/assets/images/drum_cat.jpg');">
+                <a href="/TuneTrove/user/shop/?cat=Drums%20%26%20Percussion" class="category-card reveal">
+                    <div class="category-img" style="background-image: url('/TuneTrove/user/assets/images/drum_cat.jpg');">
                         <span>🥁</span>
                     </div>
                     <div class="category-info">

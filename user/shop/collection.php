@@ -39,7 +39,7 @@ $icons = [
 <div class="collection-spotlight" style="min-height: 100vh; background: #020617;">
     <!-- Adaptive Collection Hero -->
     <section style="position: relative; min-height: 35vh; display: flex; align-items: center; overflow: hidden; background: #0f172a; padding: 2.5rem 0;">
-        <div style="position: absolute; inset: 0; background-image: url('/TuneTrove/assets/images/<?php echo !empty($category['image_url']) ? htmlspecialchars($category['image_url']) : ''; ?>'); background-size: cover; background-position: center; opacity: 0.3; filter: blur(20px) brightness(0.5); transform: scale(1.1);"></div>
+        <div style="position: absolute; inset: 0; background-image: url('/TuneTrove/user/assets/images/<?php echo !empty($category['image_url']) ? htmlspecialchars($category['image_url']) : ''; ?>'); background-size: cover; background-position: center; opacity: 0.3; filter: blur(20px) brightness(0.5); transform: scale(1.1);"></div>
         
         <div class="container" style="position: relative; z-index: 10;">
             <div style="max-width: 800px;">
@@ -92,7 +92,7 @@ $icons = [
                             <a href="product.php?id=<?php echo $p['id']; ?>" style="text-decoration: none; color: inherit; display: block;">
                                 <div class="mosaic-img-wrap" style="height: 400px; background: rgba(15, 23, 42, 0.4); border-radius: 2rem; overflow: hidden; position: relative;">
                                     <?php if ($p['image_url']): ?>
-                                        <img src="/TuneTrove/assets/images/<?php echo htmlspecialchars($p['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);" class="product-img">
+                                        <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($p['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);" class="product-img">
                                     <?php else: ?>
                                         <div style="font-size: 6rem; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.2;" class="product-img"><?php echo $icons[$category_name] ?? '🎸'; ?></div>
                                     <?php endif; ?>

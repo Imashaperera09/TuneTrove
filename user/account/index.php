@@ -3,7 +3,7 @@ require_once '../includes/header.php';
 require_once '../includes/db.php';
 
 if (!is_logged_in()) {
-    redirect('/TuneTrove/auth/login.php', 'Please login to access your account.', 'error');
+    redirect('/TuneTrove/user/auth/login.php', 'Please login to access your account.', 'error');
 }
 
 $user_id = $_SESSION['user_id'];
@@ -39,7 +39,7 @@ $orders = $stmt->fetchAll();
                     <nav style="display: flex; flex-direction: column; gap: 0.75rem;">
                         <a href="#orders" class="patron-nav-link active">HISTORY OF ACQUISITIONS</a>
                         <a href="#profile" class="patron-nav-link">IDENTITY SETTINGS</a>
-                        <a href="/TuneTrove/auth/logout.php" class="patron-nav-link" style="color: var(--error); border-color: rgba(239, 68, 68, 0.1);">EXECUTE LOGOUT</a>
+                        <a href="/TuneTrove/user/auth/logout.php" class="patron-nav-link" style="color: var(--error); border-color: rgba(239, 68, 68, 0.1);">EXECUTE LOGOUT</a>
                     </nav>
                 </div>
             </aside>
@@ -55,7 +55,7 @@ $orders = $stmt->fetchAll();
                     <?php if (empty($orders)): ?>
                         <div style="text-align: center; padding: 6rem; background: rgba(15, 23, 42, 0.3); border-radius: 2rem; border: 1px dashed rgba(255, 255, 255, 0.05);">
                             <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2.5rem;">No acquisitions detected in your narrative.</p>
-                            <a href="/TuneTrove/shop/" class="btn btn-primary" style="padding: 1rem 2.5rem; border-radius: 1.25rem; font-weight: 800;">ENTER SHOWROOM</a>
+                            <a href="/TuneTrove/user/shop/" class="btn btn-primary" style="padding: 1rem 2.5rem; border-radius: 1.25rem; font-weight: 800;">ENTER SHOWROOM</a>
                         </div>
                     <?php else: ?>
                         <div style="display: flex; flex-direction: column; gap: 1rem;">

@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
             <div style="position: sticky; top: 120px;">
                 <div class="glass-panel" style="background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); border-radius: 3rem; overflow: hidden; position: relative; aspect-ratio: 1/1.1; display: flex; align-items: center; justify-content: center; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
                     <?php if ($product['image_url']): ?>
-                        <img src="/TuneTrove/assets/images/<?php echo htmlspecialchars($product['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($product['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                     <?php else: ?>
                         <div style="font-size: 10rem; transform: rotate(-15deg); filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));" class="floating-asset">🎸</div>
                     <?php endif; ?>

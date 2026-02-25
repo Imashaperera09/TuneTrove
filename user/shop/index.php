@@ -121,7 +121,7 @@ $all_categories = $cat_stmt->fetchAll();
                                 <a href="product.php?id=<?php echo $p['id']; ?>" style="text-decoration: none; color: inherit; display: block;">
                                     <div style="height: 320px; background: rgba(15, 23, 42, 0.4); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                                         <?php if ($p['image_url']): ?>
-                                            <img src="/TuneTrove/assets/images/<?php echo htmlspecialchars($p['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);" class="product-img-hover">
+                                            <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($p['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);" class="product-img-hover">
                                         <?php else: ?>
                                             <div style="font-size: 4.5rem; opacity: 1; transition: transform 0.6s ease;" class="product-img-hover">🎸</div>
                                         <?php endif; ?>

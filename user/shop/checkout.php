@@ -3,7 +3,7 @@ require_once '../includes/header.php';
 require_once '../includes/db.php';
 
 if (!is_logged_in()) {
-    redirect('/TuneTrove/auth/login.php', 'Please login to proceed with checkout.', 'error');
+    redirect('/TuneTrove/user/auth/login.php', 'Please login to proceed with checkout.', 'error');
 }
 
 if (empty($_SESSION['cart'])) {

@@ -9,18 +9,18 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="/TuneTrove/about.php">About Us</a></li>
-                    <li><a href="/TuneTrove/contact.php">Contact</a></li>
-                    <li><a href="/TuneTrove/shipping.php">Shipping Policy</a></li>
-                    <li><a href="/TuneTrove/privacy.php">Privacy Policy</a></li>
+                    <li><a href="/TuneTrove/user/about.php">About Us</a></li>
+                    <li><a href="/TuneTrove/user/contact.php">Contact</a></li>
+                    <li><a href="/TuneTrove/user/shipping.php">Shipping Policy</a></li>
+                    <li><a href="/TuneTrove/user/privacy.php">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Categories</h3>
                 <ul>
-                    <li><a href="/TuneTrove/shop/?cat=Guitars">Guitars</a></li>
-                    <li><a href="/TuneTrove/shop/?cat=Keyboards">Keyboards</a></li>
-                    <li><a href="/TuneTrove/shop/?cat=Drums%20%26%20Percussion">Drums & Percussion</a></li>
+                    <li><a href="/TuneTrove/user/shop/?cat=Guitars">Guitars</a></li>
+                    <li><a href="/TuneTrove/user/shop/?cat=Keyboards">Keyboards</a></li>
+                    <li><a href="/TuneTrove/user/shop/?cat=Drums%20%26%20Percussion">Drums & Percussion</a></li>
                 </ul>
             </div>
         </div>
@@ -30,6 +30,6 @@
             </div>
         </div>
     </footer>
-    <script src="/TuneTrove/assets/js/main.js"></script>
+    <script src="/TuneTrove/user/assets/js/main.js"></script>
 </body>
 </html>

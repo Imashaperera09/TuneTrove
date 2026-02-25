@@ -3,7 +3,7 @@ require_once '../includes/header.php';
 require_once '../includes/db.php';
 
 if (!is_logged_in()) {
-    redirect('/TuneTrove/auth/login.php', 'Please login to view your orders.', 'error');
+    redirect('/TuneTrove/user/auth/login.php', 'Please login to view your orders.', 'error');
 }
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;

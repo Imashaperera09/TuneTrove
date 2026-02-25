@@ -101,7 +101,7 @@ $total = $subtotal + $shipping;
                             <!-- Item Visual -->
                             <div style="aspect-ratio: 1/1; background: rgba(15, 23, 42, 0.5); border-radius: 1.5rem; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                                 <?php if ($item['image_url']): ?>
-                                    <img src="/TuneTrove/assets/images/<?php echo htmlspecialchars($item['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($item['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                                 <?php else: ?>
                                     <span style="font-size: 2.5rem;">🎸</span>
                                 <?php endif; ?>

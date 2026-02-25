@@ -22,7 +22,7 @@ try {
         <?php if (!empty($main_categories)): ?>
             <?php foreach ($main_categories as $cat): ?>
                 <a href="collection.php?name=<?php echo urlencode($cat['name']); ?>" class="category-card" style="text-decoration: none; color: inherit;">
-                    <div class="category-img" <?php echo !empty($cat['image_url']) ? 'style="background-image: url(\'/TuneTrove/assets/images/' . htmlspecialchars($cat['image_url']) . '\');"' : ''; ?>>
+                    <div class="category-img" <?php echo !empty($cat['image_url']) ? 'style="background-image: url(\'/TuneTrove/user/assets/images/' . htmlspecialchars($cat['image_url']) . '\');"' : ''; ?>>
                         <?php if (empty($cat['image_url'])): ?>
                              <span style="font-size: 3.5rem;">📦</span>
                         <?php endif; ?>
