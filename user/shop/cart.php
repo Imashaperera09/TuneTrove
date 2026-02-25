@@ -47,7 +47,19 @@ $shipping = calculate_shipping($subtotal);
 $total = $subtotal + $shipping;
 ?>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 5rem; padding-bottom: 8rem;">
+<style>
+    main { padding-top: 1.5rem !important; }
+    .qty-input::-webkit-outer-spin-button,
+    .qty-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .qty-input {
+        -moz-appearance: textfield;
+    }
+</style>
+
+<div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
     <div class="container">
         <!-- Header -->
         <div style="margin-bottom: 5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2.5rem;">
@@ -69,87 +81,91 @@ $total = $subtotal + $shipping;
                 <!-- Items Table-like List -->
                 <div style="display: flex; flex-direction: column; gap: 1.5rem;">
                     <?php foreach ($cart_items as $item): ?>
-                        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 2.5rem; display: grid; grid-template-columns: 120px 1fr 140px 120px 40px; align-items: center; gap: 3rem; transition: all 0.3s;" onmouseover="this.style.borderColor='rgba(14, 165, 233, 0.2)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.05)'">
+                        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 2rem; display: grid; grid-template-columns: 100px 1fr 140px 160px 40px; align-items: center; gap: 2.5rem; transition: all 0.3s;" onmouseover="this.style.borderColor='rgba(14, 165, 233, 0.2)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.05)'">
                             <!-- Image -->
-                            <div style="height: 120px; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 1rem;">
+                            <div style="height: 100px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.75rem;">
                                 <?php if ($item['image_url']): ?>
                                     <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($item['image_url']); ?>" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));">
                                 <?php else: ?>
-                                    <div style="font-size: 3rem; opacity: 0.2;">🎻</div>
+                                    <div style="font-size: 2.5rem; opacity: 0.2;">�</div>
                                 <?php endif; ?>
                             </div>
 
                             <!-- Name & Brand -->
                             <div>
-                                <p style="font-size: 0.75rem; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.1em;"><?php echo htmlspecialchars($item['brand']); ?></p>
-                                <h3 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 800; color: #fff; margin: 0; letter-spacing: -0.01em;">
+                                <p style="font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 0.25rem; letter-spacing: 0.1em;"><?php echo htmlspecialchars($item['brand']); ?></p>
+                                <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0; letter-spacing: -0.01em;">
                                     <a href="product.php?id=<?php echo $item['id']; ?>" style="text-decoration: none; color: inherit;"><?php echo htmlspecialchars($item['name']); ?></a>
                                 </h3>
                             </div>
 
                             <!-- Price -->
                             <div style="text-align: right;">
-                                <span style="font-size: 1.5rem; font-weight: 800; color: #fff;">$<?php echo number_format($item['price'], 2); ?></span>
+                                <span style="font-size: 1.25rem; font-weight: 800; color: #fff;">$<?php echo number_format($item['price'], 2); ?></span>
                             </div>
 
-                            <!-- Quantity -->
+                            <!-- Custom Quantity Selector -->
                             <div>
-                                <form action="cart.php" method="POST">
+                                <form action="cart.php" method="POST" style="margin: 0;">
                                     <input type="hidden" name="action" value="update">
                                     <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                                    <input type="number" name="quantity" value="<?php echo $item['qty']; ?>" min="1" onchange="this.form.submit()" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; background: rgba(0, 0, 0, 0.2); color: #fff; text-align: center; font-weight: 700; font-size: 1.1rem;">
+                                    <div style="display: flex; align-items: center; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.4rem; overflow: hidden; height: 42px;">
+                                        <button type="button" onclick="const input = this.nextElementSibling; if(input.value > 1) { input.stepDown(); input.form.submit(); }" style="flex: 0 0 42px; height: 100%; background: rgba(255,255,255,0.02); border: none; color: #fff; cursor: pointer; font-size: 1rem; border-right: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">−</button>
+                                        <input type="number" name="quantity" value="<?php echo $item['qty']; ?>" min="1" onchange="this.form.submit()" style="flex: 1; border: none; background: transparent; color: #fff; text-align: center; font-weight: 700; font-size: 0.95rem; outline: none; width: 40px;" class="qty-input">
+                                        <button type="button" onclick="this.previousElementSibling.stepUp(); this.form.submit();" style="flex: 0 0 42px; height: 100%; background: rgba(255,255,255,0.02); border: none; color: #fff; cursor: pointer; font-size: 1rem; border-left: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">+</button>
+                                    </div>
                                 </form>
                             </div>
 
                             <!-- Remove -->
-                            <form action="cart.php" method="POST" style="text-align: right;">
+                            <form action="cart.php" method="POST" style="text-align: right; margin: 0;">
                                 <input type="hidden" name="action" value="remove">
                                 <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                                <button type="submit" style="background: none; border: none; color: #64748b; font-size: 2rem; cursor: pointer; padding: 0.5rem; transition: color 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#64748b'">&times;</button>
+                                <button type="submit" style="background: none; border: none; color: #475569; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; transition: color 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#475569'">&times;</button>
                             </form>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
                 <!-- Order Summary -->
-                <aside style="position: sticky; top: 120px;">
-                    <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 4rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
-                        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2rem; margin-bottom: 2.5rem; color: #fff; letter-spacing: -0.02em;">Order Summary</h2>
+                <aside style="position: sticky; top: 100px;">
+                    <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 3rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
+                        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 1.5rem; margin-bottom: 2rem; color: #fff; letter-spacing: -0.02em;">Summary</h2>
                         
-                        <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 3rem;">
-                            <div style="display: flex; justify-content: space-between; font-size: 1.05rem; color: #94a3b8;">
+                        <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.95rem; color: #94a3b8;">
                                 <span>Subtotal</span>
                                 <span style="font-weight: 800; color: #fff;">$<?php echo number_format($subtotal, 2); ?></span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; font-size: 1.05rem; color: #94a3b8;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.95rem; color: #94a3b8;">
                                 <span>Shipping</span>
                                 <span style="font-weight: 800; color: #4ade80;"><?php echo $shipping > 0 ? '$' . number_format($shipping, 2) : 'COMPLIMENTARY'; ?></span>
                             </div>
                             <?php if ($shipping > 0): ?>
-                                <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.1); padding: 1.25rem; border-radius: 0.5rem; font-size: 0.9rem; color: var(--primary); text-align: center; line-height: 1.4;">
-                                    Add <strong>$<?php echo number_format(100 - $subtotal, 2); ?></strong> more for <strong>FREE Shipping</strong>!
+                                <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.1); padding: 1rem; border-radius: 0.5rem; font-size: 0.85rem; color: var(--primary); text-align: center; line-height: 1.4;">
+                                    Add <strong>$<?php echo number_format(101 - $subtotal, 2); ?></strong> more for <strong>FREE Shipping</strong>!
                                 </div>
                             <?php endif; ?>
                         </div>
 
-                        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 3rem; margin-bottom: 4rem;">
-                            <span style="font-weight: 800; color: #64748b; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; padding-bottom: 0.5rem;">Estimated Total</span>
-                            <span style="font-size: 3rem; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -0.04em;">$<?php echo number_format($total, 2); ?></span>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 2rem; margin-bottom: 3rem;">
+                            <span style="font-weight: 800; color: #64748b; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Estimated Total</span>
+                            <span style="font-size: 2.25rem; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -0.03em;">$<?php echo number_format($total, 2); ?></span>
                         </div>
 
-                        <a href="checkout.php" class="btn btn-primary" style="width: 100%; padding: 1.5rem; border-radius: 0.5rem; text-align: center; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);">Proceed to Checkout</a>
+                        <a href="checkout.php" class="btn btn-primary" style="width: 100%; padding: 1.25rem; border-radius: 0.5rem; text-align: center; font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; display: block; text-decoration: none;">Checkout Archive</a>
                         
-                        <div style="margin-top: 2.5rem; text-align: center; color: #475569; font-size: 0.8rem;">
-                            <p>Premium insurance & tracking included. Safe & secure payment.</p>
+                        <div style="margin-top: 2rem; text-align: center; color: #475569; font-size: 0.75rem;">
+                            <p>Global tracking & transit insurance included.</p>
                         </div>
                     </div>
 
                     <!-- Trust Box -->
-                    <div style="margin-top: 2rem; background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 2.5rem; display: flex; align-items: center; gap: 1.5rem;">
-                        <span style="font-size: 2.5rem; filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.3));">🛡️</span>
+                    <div style="margin-top: 2rem; background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 2rem; display: flex; align-items: center; gap: 1.25rem;">
+                        <span style="font-size: 2rem; filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.3));">🛡️</span>
                         <div>
-                            <p style="font-weight: 800; font-size: 1rem; color: #fff; margin-bottom: 0.25rem;">Secure Acquisition</p>
-                            <p style="font-size: 0.85rem; color: #64748b;">Enterprise-grade 256-bit encryption.</p>
+                            <p style="font-weight: 800; font-size: 0.9rem; color: #fff; margin-bottom: 0.2rem;">Secure Transit</p>
+                            <p style="font-size: 0.75rem; color: #64748b;">Enterprise 256-bit encryption.</p>
                         </div>
                     </div>
                 </aside>

@@ -136,11 +136,13 @@ $all_categories = $cat_stmt->fetchAll();
                                         </div>
                                     </div>
                                 </a>
-                                <div style="padding: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.03); background: rgba(0, 0, 0, 0.1);">
-                                    <form action="cart_actions.php" method="POST">
-                                        <input type="hidden" name="action" value="add">
+                                <div style="padding: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.03); background: rgba(0, 0, 0, 0.1);">
+                                    <form action="cart_actions.php" method="POST" style="margin: 0;">
                                         <input type="hidden" name="product_id" value="<?php echo $p['id']; ?>">
-                                        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 0.9rem; padding: 0.85rem; border-radius: 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">Add to Cart</button>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                                            <button type="submit" name="add_to_cart" class="btn btn-primary" style="padding: 0.75rem; border-radius: 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.65rem;">Add to Cart</button>
+                                            <button type="submit" name="buy_now" value="1" style="padding: 0.75rem; border-radius: 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.65rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); color: #fff; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.3)'">Buy Now</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

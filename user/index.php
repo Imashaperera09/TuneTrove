@@ -16,7 +16,7 @@ try {
 ?>
 
 <!-- Blue Premium Hero Section -->
-<section class="marketing-hero" style="background: radial-gradient(circle at 0% 0%, #002d5a 0%, #020617 100%); padding: 8rem 0; overflow: hidden; color: white; position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+<section class="marketing-hero" style="background: radial-gradient(circle at 0% 0%, #002d5a 0%, var(--background) 100%); padding: 8rem 0; overflow: hidden; color: white; position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('/TuneTrove/user/assets/images/mesh-glow.png') no-repeat center center/cover; opacity: 0.1; pointer-events: none;"></div>
     <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2;">
         <div class="reveal">
@@ -40,14 +40,14 @@ try {
 </section>
 
 <!-- Financing Ticker -->
-<div style="background: #010409; color: #94a3b8; padding: 1rem 0; text-align: center; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+<div style="background: #060b1e; color: #94a3b8; padding: 1rem 0; text-align: center; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
     <div class="container">
         UP TO 48-MONTH SPECIAL FINANCING* ON QUALIFYING BRANDS &nbsp; <a href="#" style="color: var(--primary); text-decoration: none; margin-left: 1rem;">View Details</a>
     </div>
 </div>
 
 <!-- Values Section -->
-<section style="padding: 10rem 0; background: #020617;">
+<section style="padding: 10rem 0; background: var(--background);">
     <div class="container">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
             <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
@@ -70,7 +70,7 @@ try {
 </section>
 
 <!-- Categories Section -->
-<section style="padding: 10rem 0; background: #010409;">
+<section style="padding: 10rem 0; background: #060b1e;">
     <div class="container">
         <div style="margin-bottom: 6rem; text-align: left; border-left: 4px solid var(--primary); padding-left: 2.5rem;">
             <h2 class="reveal" style="font-family: var(--font-heading); font-size: 4rem; font-weight: 800; color: #fff; margin-bottom: 1rem; letter-spacing: -0.04em;">Shop by Category</h2>

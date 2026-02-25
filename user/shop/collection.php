@@ -90,9 +90,9 @@ $icons = [
                     <?php foreach ($products as $p): ?>
                         <div class="mosaic-card reveal">
                             <a href="product.php?id=<?php echo $p['id']; ?>" style="text-decoration: none; color: inherit; display: block;">
-                                <div class="mosaic-img-wrap" style="height: 480px; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1.5rem; overflow: hidden; position: relative; transition: all 0.5s;">
+                                <div class="mosaic-img-wrap" style="height: 400px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1.5rem; overflow: hidden; position: relative; transition: all 0.5s; display: flex; align-items: center; justify-content: center; padding: 2rem;">
                                     <?php if ($p['image_url']): ?>
-                                        <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($p['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: contrast(1.1) brightness(0.9);" class="product-img">
+                                        <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($p['image_url']); ?>" style="max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));" class="product-img">
                                     <?php else: ?>
                                         <div style="font-size: 8rem; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.1;" class="product-img"><?php echo $icons[$category_name] ?? '🎸'; ?></div>
                                     <?php endif; ?>

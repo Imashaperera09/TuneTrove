@@ -45,7 +45,11 @@ if (is_logged_in()) {
 }
 ?>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 4rem; padding-bottom: 8rem;">
+<style>
+    main { padding-top: 1.5rem !important; }
+</style>
+
+<div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
     <div class="container">
         <!-- Breadcrumbs -->
         <nav style="margin-bottom: 3rem; display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">
@@ -56,12 +60,12 @@ if (is_logged_in()) {
             <span style="color: var(--primary);"><?php echo htmlspecialchars($product['name']); ?></span>
         </nav>
 
-        <div style="display: grid; grid-template-columns: 1fr 450px; gap: 6rem; align-items: start;">
+        <div style="display: grid; grid-template-columns: 1fr 450px; gap: 6rem; align-items: center;">
             <!-- Left: Image & Specs -->
             <div>
-                <div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 4rem; text-align: center; margin-bottom: 4rem; display: flex; align-items: center; justify-content: center; min-height: 500px;">
+                <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1.5rem; padding: 4rem; text-align: center; margin-bottom: 4rem; display: flex; align-items: center; justify-content: center; height: 650px;">
                     <?php if ($product['image_url']): ?>
-                        <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($product['image_url']); ?>" style="max-width: 90%; height: auto; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));">
+                        <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($product['image_url']); ?>" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 20px 60px rgba(0,0,0,0.6));">
                     <?php else: ?>
                         <div style="font-size: 14rem; opacity: 0.1; filter: drop-shadow(0 0 40px var(--primary));">🎻</div>
                     <?php endif; ?>
@@ -76,20 +80,20 @@ if (is_logged_in()) {
             </div>
 
             <!-- Right: Action Box -->
-            <aside style="position: sticky; top: 120px;">
+            <aside>
                 <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 3.5rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
                     <p style="color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; margin-bottom: 1.25rem;"><?php echo htmlspecialchars($product['brand']); ?></p>
                     <h1 style="font-family: var(--font-heading); font-size: 2.75rem; font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 2rem; letter-spacing: -0.02em;"><?php echo htmlspecialchars($product['name']); ?></h1>
                     
-                    <div style="margin-bottom: 3rem;">
+                    <div style="margin-bottom: 2.5rem;">
                         <?php if (!empty($product['sale_price'])): ?>
-                            <div style="display: flex; align-items: baseline; gap: 1.5rem;">
-                                <span style="font-size: 3.5rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 0.25rem; letter-spacing: -0.04em;">$<?php echo number_format($product['sale_price'], 2); ?></span>
-                                <span style="font-size: 1.5rem; color: #64748b; text-decoration: line-through; font-weight: 600;">$<?php echo number_format($product['price'], 2); ?></span>
+                            <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem;">
+                                <span style="font-size: 2.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.02em;">$<?php echo number_format($product['sale_price'], 2); ?></span>
+                                <span style="font-size: 1.25rem; color: #64748b; text-decoration: line-through; font-weight: 600;">$<?php echo number_format($product['price'], 2); ?></span>
                             </div>
-                            <p style="color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Special Archival Value</p>
+                            <p style="color: var(--accent); font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Special Archival Value</p>
                         <?php else: ?>
-                            <span style="font-size: 3.5rem; font-weight: 800; color: #fff; display: block; margin-bottom: 0.75rem; letter-spacing: -0.04em;">$<?php echo number_format($product['price'], 2); ?></span>
+                            <span style="font-size: 2.5rem; font-weight: 800; color: #fff; display: block; margin-bottom: 0.75rem; letter-spacing: -0.02em;">$<?php echo number_format($product['price'], 2); ?></span>
                         <?php endif; ?>
                         <div style="display: flex; align-items: center; gap: 1rem;">
                             <?php if ($product['stock_quantity'] > 0): ?>
@@ -106,14 +110,34 @@ if (is_logged_in()) {
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                         
-                        <div style="margin-bottom: 2rem;">
+                        <div style="margin-bottom: 2.5rem;">
                             <label style="display: block; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #64748b; margin-bottom: 0.75rem; letter-spacing: 0.1em;">Select Quantity</label>
-                            <input type="number" name="quantity" value="1" min="1" max="<?php echo $product['stock_quantity']; ?>" style="width: 100%; padding: 1.15rem; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; background: rgba(0, 0, 0, 0.2); color: #fff; font-weight: 700; font-size: 1.1rem; outline: none; transition: all 0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.05)'">
+                            <div style="display: flex; align-items: center; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; overflow: hidden; height: 55px;">
+                                <button type="button" onclick="const input = this.nextElementSibling; if(input.value > 1) input.stepDown();" style="flex: 0 0 55px; height: 100%; background: rgba(255,255,255,0.02); border: none; color: #fff; cursor: pointer; font-size: 1.25rem; border-right: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">−</button>
+                                <input type="number" name="quantity" value="1" min="1" max="<?php echo $product['stock_quantity']; ?>" style="flex: 1; border: none; background: transparent; color: #fff; text-align: center; font-weight: 700; font-size: 1.1rem; outline: none; -moz-appearance: textfield; font-family: inherit;" class="qty-input">
+                                <button type="button" onclick="this.previousElementSibling.stepUp()" style="flex: 0 0 55px; height: 100%; background: rgba(255,255,255,0.02); border: none; color: #fff; cursor: pointer; font-size: 1.25rem; border-left: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">+</button>
+                            </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.5rem; border-radius: 0.5rem; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);" <?php echo $product['stock_quantity'] <= 0 ? 'disabled' : ''; ?>>
-                            Add to Cart
-                        </button>
+                        <style>
+                            .qty-input::-webkit-outer-spin-button,
+                            .qty-input::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
+                            .qty-input {
+                                -moz-appearance: textfield;
+                            }
+                        </style>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <button type="submit" name="add_to_cart" class="btn btn-primary" style="padding: 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 10px 30px -5px rgba(14, 165, 233, 0.4);" <?php echo $product['stock_quantity'] <= 0 ? 'disabled' : ''; ?>>
+                                Add to Cart
+                            </button>
+                            <button type="submit" name="buy_now" value="1" style="padding: 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); color: #fff; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(235, 235, 235, 0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.3)'; this.style.borderColor='rgba(255,255,255,0.05)'" <?php echo $product['stock_quantity'] <= 0 ? 'disabled' : ''; ?>>
+                                Buy Now
+                            </button>
+                        </div>
                     </form>
                     
                     <div style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.03);">

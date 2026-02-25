@@ -69,13 +69,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 5rem; padding-bottom: 8rem;">
+<style>
+    main { padding-top: 1.5rem !important; }
+</style>
+
+<div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
     <div class="container">
         <!-- Header -->
         <div style="margin-bottom: 5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2.5rem;">
             <p style="text-transform: uppercase; font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1rem;">Secure Channel</p>
-            <h1 style="font-family: var(--font-heading); font-size: 4rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Finalize Your <span style="color: var(--primary);">Acquisition</span></h1>
-            <p style="color: #64748b; font-size: 1.15rem; margin-top: 1rem;">Authorize your order and specify your premium delivery location.</p>
+            <h1 style="font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Finalize Your <span style="color: var(--primary);">Acquisition</span></h1>
+            <p style="color: #64748b; font-size: 1.15rem; margin-top: 1rem;">Authorize your order and specify your delivery location.</p>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 450px; gap: 5rem; align-items: flex-start;">
@@ -83,71 +87,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Left: Checkout Form -->
             <div>
                 <form action="checkout.php" method="POST">
-                    <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 4rem; margin-bottom: 4rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
-                        <h2 style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: #fff; margin-bottom: 3rem; letter-spacing: -0.03em;">Shipping Archive</h2>
+                    <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 3.5rem; margin-bottom: 4rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
+                        <h2 style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 2.5rem; letter-spacing: -0.02em;">Shipping Archive</h2>
                         
-                        <div style="margin-bottom: 4rem;">
+                        <div style="margin-bottom: 3rem;">
                             <label style="display: block; font-size: 0.75rem; font-weight: 800; color: #64748b; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">Delivery Particulars</label>
-                            <textarea name="address" required placeholder="Street Address, Suite, City, State, Zip Code. Phone Number for courier contact." style="width: 100%; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; background: rgba(0, 0, 0, 0.2); color: #fff; font-family: inherit; font-size: 1.1rem; min-height: 180px; transition: all 0.2s; outline: none; line-height: 1.6;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.05)'"></textarea>
-                            <p style="font-size: 0.85rem; color: #475569; margin-top: 1rem; line-height: 1.5;">Include any technical instructions or gated access codes for our logistics team.</p>
+                            <textarea name="address" required placeholder="Street Address, Suite, City, State, Zip Code..." style="width: 100%; padding: 1.25rem; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; background: rgba(0, 0, 0, 0.2); color: #fff; font-family: inherit; font-size: 1.05rem; min-height: 150px; transition: all 0.2s; outline: none; line-height: 1.6;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.05)'"></textarea>
                         </div>
 
-                        <h2 style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: #fff; margin-top: 5rem; margin-bottom: 3rem; letter-spacing: -0.03em;">Transfer Method</h2>
-                        <div style="background: rgba(14, 165, 233, 0.03); border: 1px solid rgba(14, 165, 233, 0.1); border-radius: 1rem; padding: 3rem; display: flex; align-items: flex-start; gap: 2.5rem;">
-                            <div style="font-size: 3.5rem; filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.3));">💎</div>
+                        <h2 style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: #fff; margin-top: 4rem; margin-bottom: 2.5rem; letter-spacing: -0.02em;">Transfer Method</h2>
+                        <div style="background: rgba(14, 165, 233, 0.03); border: 1px solid rgba(14, 165, 233, 0.1); border-radius: 1rem; padding: 2.5rem; display: flex; align-items: flex-start; gap: 2rem;">
+                            <div style="font-size: 3rem; filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.3));">💎</div>
                             <div>
-                                <p style="font-weight: 800; color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem; letter-spacing: 0.05em;">SECURE ACQUISITION PROTOCOL</p>
-                                <p style="font-size: 0.95rem; color: #94a3b8; line-height: 1.6;">This transaction is protected by enterprise-grade encryption. As this is a curated demonstration, your order will be authorized instantly.</p>
+                                <p style="font-weight: 800; color: #fff; font-size: 1rem; margin-bottom: 0.4rem; letter-spacing: 0.05em;">SECURE ACQUISITION PROTOCOL</p>
+                                <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6;">Protection by enterprise-grade encryption. Demonstration authorization is instant.</p>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.75rem; border-radius: 0.5rem; font-weight: 800; font-size: 1.25rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 5rem; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);">Authorize Acquisition</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.5rem; border-radius: 0.5rem; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4rem; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);">Authorize Acquisition</button>
                     </div>
                 </form>
 
-                <div style="display: flex; gap: 3rem; padding: 0 1rem; color: #999;">
+                <div style="display: flex; gap: 3rem; padding: 0 1rem; color: #475569;">
                     <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <span style="font-size: 1.5rem;">🔒</span>
-                        <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">256-Bit SSL Secured</span>
+                        <span style="font-size: 1.25rem;">🔒</span>
+                        <span style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;">SSL Secured</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <span style="font-size: 1.5rem;">📦</span>
-                        <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Inspected & Dispatched</span>
+                        <span style="font-size: 1.25rem;">📦</span>
+                        <span style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;">Inspected & Dispatched</span>
                     </div>
                 </div>
             </div>
 
             <!-- Right: Order Summary -->
-            <aside style="position: sticky; top: 120px;">
-                <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 3.5rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
-                    <h2 style="font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2rem; margin-bottom: 2.5rem; color: #fff; letter-spacing: -0.02em;">Manifest</h2>
+            <aside style="position: sticky; top: 100px;">
+                <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 3rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
+                    <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 1.5rem; margin-bottom: 2rem; color: #fff; letter-spacing: -0.02em;">Manifest</h2>
                     
-                    <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 3rem;">
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2.5rem;">
                         <?php foreach ($cart_items as $item): ?>
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem;">
                                 <div style="flex: 1;">
-                                    <div style="font-size: 1.05rem; font-weight: 800; color: #fff; line-height: 1.4;"><?php echo htmlspecialchars($item['name']); ?></div>
-                                    <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Units: <?php echo $item['qty']; ?></div>
+                                    <div style="font-size: 1rem; font-weight: 800; color: #fff; line-height: 1.4;"><?php echo htmlspecialchars($item['name']); ?></div>
+                                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em;">Units: <?php echo $item['qty']; ?></div>
                                 </div>
-                                <span style="font-weight: 800; color: #fff; font-size: 1.1rem;">$<?php echo number_format($item['price'] * $item['qty'], 2); ?></span>
+                                <span style="font-weight: 800; color: #fff; font-size: 1rem;">$<?php echo number_format($item['price'] * $item['qty'], 2); ?></span>
                             </div>
                         <?php endforeach; ?>
                     </div>
 
-                    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 3.5rem;">
-                        <div style="display: flex; justify-content: space-between; font-size: 1rem; color: #94a3b8;">
+                    <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 3rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; color: #94a3b8;">
                             <span>Subtotal</span>
                             <span style="font-weight: 800; color: #fff;">$<?php echo number_format($subtotal, 2); ?></span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 1rem; color: #94a3b8;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; color: #94a3b8;">
                             <span>Shipping</span>
                             <span style="font-weight: 800; color: #4ade80;">COMPLIMENTARY</span>
                         </div>
                     </div>
 
-                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 3rem;">
-                        <span style="font-weight: 800; color: #64748b; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; padding-bottom: 0.5rem;">Total Value</span>
-                        <span style="font-size: 3rem; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -0.04em;">$<?php echo number_format($total, 2); ?></span>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 2.5rem;">
+                        <span style="font-weight: 800; color: #64748b; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;">Total Value</span>
+                        <span style="font-size: 2.5rem; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -0.03em;">$<?php echo number_format($total, 2); ?></span>
                     </div>
                 </div>
             </aside>
