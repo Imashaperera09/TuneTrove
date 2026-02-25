@@ -15,60 +15,66 @@ try {
 }
 ?>
 
-<!-- Sweetwater Style Hero Section -->
-<section class="marketing-hero" style="background: linear-gradient(135deg, #f15a24 0%, #d4145a 100%); padding: 5rem 0; overflow: hidden; color: white;">
-    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+<!-- Blue Premium Hero Section -->
+<section class="marketing-hero" style="background: radial-gradient(circle at 0% 0%, #002d5a 0%, #020617 100%); padding: 8rem 0; overflow: hidden; color: white; position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('/TuneTrove/user/assets/images/mesh-glow.png') no-repeat center center/cover; opacity: 0.1; pointer-events: none;"></div>
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2;">
         <div class="reveal">
-            <h1 style="font-family: var(--font-heading); font-size: 5.5rem; font-weight: 800; line-height: 0.9; margin-bottom: 2.5rem; letter-spacing: -0.04em; text-transform: uppercase;">Software <br>& Recording Sale</h1>
-            <p style="font-size: 1.5rem; margin-bottom: 3.5rem; opacity: 0.95; line-height: 1.3; max-width: 500px;">Huge selection, instant savings. Up to 80% off plug-ins, mics, interfaces, monitors, and more.</p>
+            <p style="text-transform: uppercase; font-size: 0.85rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1.5rem;">The Premium Experience</p>
+            <h1 style="font-family: var(--font-heading); font-size: 5rem; font-weight: 800; line-height: 1; margin-bottom: 2.5rem; letter-spacing: -0.04em;">Elevate Your <br><span style="color: var(--primary); text-shadow: 0 0 30px rgba(14, 165, 233, 0.3);">Sonic</span> Signature</h1>
+            <p style="font-size: 1.25rem; margin-bottom: 3.5rem; color: #94a3b8; line-height: 1.6; max-width: 550px;">Hand-selected masterpieces from the world's most prestigious luthiers. Precision-crafted for the most discerning musicians.</p>
             <div style="display: flex; gap: 1.5rem; align-items: center;">
-                <a href="/TuneTrove/user/shop/" class="btn" style="background: white; color: #d4145a; padding: 1.25rem 3.5rem; font-size: 1.25rem; font-weight: 800; border-radius: 0.25rem; text-transform: uppercase;">Shop Now</a>
-                <span style="font-weight: 700; font-size: 1.1rem; border-bottom: 2px solid white; cursor: pointer;">View the Offers</span>
+                <a href="/TuneTrove/user/shop/" class="btn" style="background: var(--primary); color: white; padding: 1.25rem 3.5rem; font-size: 1.1rem; font-weight: 800; border-radius: 4px; text-transform: uppercase; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.4);">Browse Collection</a>
+                <span style="font-weight: 700; font-size: 1rem; color: #fff; border-bottom: 2px solid var(--accent); cursor: pointer; padding-bottom: 4px;">Explore Virtual Vault</span>
             </div>
         </div>
-        <div class="reveal" style="position: relative; height: 400px; display: flex; align-items: center; justify-content: center;">
-            <div style="font-size: 15rem; opacity: 0.2; transform: rotate(-15deg);">🎧</div>
-            <img src="/TuneTrove/user/assets/images/hero.png" style="position: absolute; width: 140%; transform: translateX(-10%); filter: drop-shadow(0 40px 80px rgba(0,0,0,0.4));" alt="Pro Audio Gear">
+        <div class="reveal" style="position: relative; height: 450px; display: flex; align-items: center; justify-content: center;">
+            <div style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);"></div>
+            <?php if (file_exists('assets/images/hero.png')): ?>
+                <img src="/TuneTrove/user/assets/images/hero.png" style="width: 130%; transform: rotate(-5deg); filter: drop-shadow(0 40px 100px rgba(0,0,0,0.6));" alt="Premium Instrument">
+            <?php else: ?>
+                <div style="font-size: 18rem; opacity: 0.3; filter: drop-shadow(0 0 50px var(--primary));">🎻</div>
+            <?php endif; ?>
         </div>
     </div>
 </section>
 
 <!-- Financing Ticker -->
-<div style="background: #000; color: #fff; padding: 1.25rem 0; text-align: center; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 4px solid var(--primary);">
+<div style="background: #010409; color: #94a3b8; padding: 1rem 0; text-align: center; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
     <div class="container">
-        UP TO 48-MONTH SPECIAL FINANCING* ON QUALIFYING BRANDS &nbsp; <a href="#" style="color: #63b3ed; text-decoration: underline; margin-left: 1rem;">Learn More</a> &nbsp; <a href="#" style="color: #63b3ed; text-decoration: underline; margin-left:1rem;">Shop the Offers</a>
+        UP TO 48-MONTH SPECIAL FINANCING* ON QUALIFYING BRANDS &nbsp; <a href="#" style="color: var(--primary); text-decoration: none; margin-left: 1rem;">View Details</a>
     </div>
 </div>
 
 <!-- Values Section -->
-<section style="padding: 10rem 0; background: #fff;">
+<section style="padding: 10rem 0; background: #020617;">
     <div class="container">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
-            <div class="reveal" style="text-align: center; padding: 2rem;">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🎻</div>
-                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #333;">The Expert Curation</h3>
-                <p style="color: #666; font-size: 1.1rem;">Every instrument is hand-selected and inspected by our team of master luthiers.</p>
+            <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">💎</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #fff;">The Expert Curation</h3>
+                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">Every instrument is hand-selected and inspected by our team of master luthiers.</p>
             </div>
-            <div class="reveal" style="text-align: center; padding: 2rem;">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🚚</div>
-                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #333;">Precision Delivery</h3>
-                <p style="color: #666; font-size: 1.1rem;">Climate-controlled shipping ensure your instrument arrives in perfect tuning.</p>
+            <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🛰️</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #fff;">Precision Delivery</h3>
+                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">Climate-controlled shipping ensure your instrument arrives in perfect tuning.</p>
             </div>
-            <div class="reveal" style="text-align: center; padding: 2rem;">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🎵</div>
-                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #333;">Lifetime Support</h3>
-                <p style="color: #666; font-size: 1.1rem;">Access to professional setup and expert guidance throughout your musical journey.</p>
+            <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🎧</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #fff;">Lifetime Support</h3>
+                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">Access to professional setup and expert guidance throughout your musical journey.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Categories Section -->
-<section style="padding: 10rem 0; background: #f8f9fa; border-top: 1px solid #eee;">
+<section style="padding: 10rem 0; background: #010409;">
     <div class="container">
-        <div style="margin-bottom: 6rem; text-align: left; border-left: 8px solid var(--primary); padding-left: 2rem;">
-            <h2 class="reveal" style="font-family: var(--font-heading); font-size: 3.5rem; font-weight: 800; color: #333; margin-bottom: 1rem; letter-spacing: -0.03em;">Shop by Category</h2>
-            <p style="font-size: 1.25rem; color: #666;">Explore our vast selection of premium musical instruments and gear.</p>
+        <div style="margin-bottom: 6rem; text-align: left; border-left: 4px solid var(--primary); padding-left: 2.5rem;">
+            <h2 class="reveal" style="font-family: var(--font-heading); font-size: 4rem; font-weight: 800; color: #fff; margin-bottom: 1rem; letter-spacing: -0.04em;">Shop by Category</h2>
+            <p style="font-size: 1.25rem; color: #94a3b8;">Explore our vast selection of premium musical instruments and gear.</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
@@ -87,19 +93,20 @@ try {
                 <?php foreach ($categories as $cat): ?>
                     <a href="/TuneTrove/user/shop/collection.php?name=<?php echo urlencode($cat['name']); ?>" 
                        class="reveal" 
-                       style="text-decoration: none; background: white; border: 1px solid #eee; border-radius: 0.5rem; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s;"
-                       onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.05)';"
-                       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                        <div style="height: 200px; background: #fff; display: flex; align-items: center; justify-content: center; position: relative;">
+                       style="text-decoration: none; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem; overflow: hidden; display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);"
+                       onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='rgba(14, 165, 233, 0.4)'; this.style.background='rgba(14, 165, 233, 0.03)';"
+                       onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.background='rgba(255, 255, 255, 0.02)';"
+                    >
+                        <div style="height: 220px; background: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
                             <?php if (!empty($cat['image_url'])): ?>
-                                <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($cat['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($cat['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
                             <?php else: ?>
-                                <div style="font-size: 5rem;"><?php echo $icons[$cat['name']] ?? '📦'; ?></div>
+                                <div style="font-size: 5rem; opacity: 0.5; filter: drop-shadow(0 0 20px var(--primary));"><?php echo $icons[$cat['name']] ?? '📦'; ?></div>
                             <?php endif; ?>
                         </div>
-                        <div style="padding: 2rem;">
-                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; font-weight: 700;"><?php echo htmlspecialchars($cat['name']); ?></h3>
-                            <p style="color: #666; line-height: 1.5; font-size: 0.95rem;"><?php echo htmlspecialchars($cat['description']); ?></p>
+                        <div style="padding: 2.5rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 0.75rem; font-weight: 800; letter-spacing: -0.01em;"><?php echo htmlspecialchars($cat['name']); ?></h3>
+                            <p style="color: #64748b; line-height: 1.6; font-size: 1rem;"><?php echo htmlspecialchars($cat['description']); ?></p>
                         </div>
                     </a>
                 <?php endforeach; ?>

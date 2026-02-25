@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Clear Cart
         unset($_SESSION['cart']);
         
-        $_SESSION['msg'] = "Order placed successfully! Order ID: MM-" . str_pad($order_id, 6, '0', STR_PAD_LEFT);
+        $_SESSION['msg'] = "Order placed successfully! Order ID: TT-" . str_pad($order_id, 6, '0', STR_PAD_LEFT);
         $_SESSION['msg_type'] = "success";
         header("Location: confirmation.php?id=$order_id");
         exit();
@@ -69,113 +69,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="checkout-portal" style="min-height: 100vh; background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.05), transparent), radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.05), transparent); padding-top: 8rem; padding-bottom: 8rem;">
+<div style="background: var(--background); min-height: 100vh; padding-top: 5rem; padding-bottom: 8rem;">
     <div class="container">
-        <header style="margin-bottom: 5rem;">
-            <h1 style="font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: -0.05em; margin-bottom: 0.5rem;">Authorization <span style="color: var(--primary);">Portal</span></h1>
-            <p style="color: var(--text-muted); font-size: 1.1rem;">Securely complete your acquisition protocol.</p>
-        </header>
+        <!-- Header -->
+        <div style="margin-bottom: 5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2.5rem;">
+            <p style="text-transform: uppercase; font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1rem;">Secure Channel</p>
+            <h1 style="font-family: var(--font-heading); font-size: 4rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Finalize Your <span style="color: var(--primary);">Acquisition</span></h1>
+            <p style="color: #64748b; font-size: 1.15rem; margin-top: 1rem;">Authorize your order and specify your premium delivery location.</p>
+        </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 440px; gap: 5rem; align-items: flex-start;">
-            <!-- Authorization Logic -->
-            <div style="display: flex; flex-direction: column; gap: 3rem;">
+        <div style="display: grid; grid-template-columns: 1fr 450px; gap: 5rem; align-items: flex-start;">
+            
+            <!-- Left: Checkout Form -->
+            <div>
                 <form action="checkout.php" method="POST">
-                    <div class="glass-panel" style="background: rgba(30, 41, 59, 0.3); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 3rem; padding: 4rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
-                        <div style="margin-bottom: 3.5rem;">
-                            <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: #fff; margin-bottom: 1rem;">Fulfillment Protocol</h2>
-                            <p style="color: var(--text-muted); font-size: 0.85rem;">Define the target destination for your physical instruments.</p>
-                        </div>
+                    <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 4rem; margin-bottom: 4rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
+                        <h2 style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: #fff; margin-bottom: 3rem; letter-spacing: -0.03em;">Shipping Archive</h2>
                         
-                        <div style="margin-bottom: 3.5rem;">
-                            <label style="display: block; font-size: 0.75rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem;">Shipping Intelligence</label>
-                            <textarea name="address" required placeholder="Full street address, postal code, and contact coordinates..." style="width: 100%; padding: 1.5rem; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 1.5rem; color: #fff; font-family: inherit; font-size: 1rem; min-height: 150px; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--primary)'"></textarea>
+                        <div style="margin-bottom: 4rem;">
+                            <label style="display: block; font-size: 0.75rem; font-weight: 800; color: #64748b; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">Delivery Particulars</label>
+                            <textarea name="address" required placeholder="Street Address, Suite, City, State, Zip Code. Phone Number for courier contact." style="width: 100%; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; background: rgba(0, 0, 0, 0.2); color: #fff; font-family: inherit; font-size: 1.1rem; min-height: 180px; transition: all 0.2s; outline: none; line-height: 1.6;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.05)'"></textarea>
+                            <p style="font-size: 0.85rem; color: #475569; margin-top: 1rem; line-height: 1.5;">Include any technical instructions or gated access codes for our logistics team.</p>
                         </div>
 
-                        <div style="margin-bottom: 3.5rem;">
-                            <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Secure Gateway</h2>
-                            <div style="padding: 2rem; background: rgba(37, 99, 235, 0.05); border: 1px solid rgba(37, 99, 235, 0.2); border-radius: 1.5rem; display: flex; align-items: center; gap: 1.5rem;">
-                                <div style="font-size: 2rem;">💳</div>
-                                <div>
-                                    <p style="font-weight: 800; color: #fff; font-size: 0.9rem; margin-bottom: 0.25rem;">VERIFIED TRANSACTION</p>
-                                    <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">Demonstration node active. Secure sandbox authorization will be executed.</p>
-                                </div>
+                        <h2 style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: #fff; margin-top: 5rem; margin-bottom: 3rem; letter-spacing: -0.03em;">Transfer Method</h2>
+                        <div style="background: rgba(14, 165, 233, 0.03); border: 1px solid rgba(14, 165, 233, 0.1); border-radius: 1rem; padding: 3rem; display: flex; align-items: flex-start; gap: 2.5rem;">
+                            <div style="font-size: 3.5rem; filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.3));">💎</div>
+                            <div>
+                                <p style="font-weight: 800; color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem; letter-spacing: 0.05em;">SECURE ACQUISITION PROTOCOL</p>
+                                <p style="font-size: 0.95rem; color: #94a3b8; line-height: 1.6;">This transaction is protected by enterprise-grade encryption. As this is a curated demonstration, your order will be authorized instantly.</p>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.5rem; border-radius: 1.5rem; font-weight: 800; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.4);">EXECUTE AUTHORIZATION</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.75rem; border-radius: 0.5rem; font-weight: 800; font-size: 1.25rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 5rem; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);">Authorize Acquisition</button>
                     </div>
                 </form>
 
-                <div style="display: flex; gap: 2rem; align-items: center; padding: 0 2rem; color: var(--text-muted);">
-                    <div style="display: flex; items-center; gap: 0.75rem;">
-                        <span style="font-size: 1.25rem;">🛡️</span>
-                        <span style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;">SSL ENCRYPTED</span>
+                <div style="display: flex; gap: 3rem; padding: 0 1rem; color: #999;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <span style="font-size: 1.5rem;">🔒</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">256-Bit SSL Secured</span>
                     </div>
-                    <div style="display: flex; items-center; gap: 0.75rem;">
-                        <span style="font-size: 1.25rem;">🛰️</span>
-                        <span style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;">GLOBAL LOGISTICS</span>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <span style="font-size: 1.5rem;">📦</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Inspected & Dispatched</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Allocation Summary -->
+            <!-- Right: Order Summary -->
             <aside style="position: sticky; top: 120px;">
-                <div class="glass-panel" style="background: rgba(30, 41, 59, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 3rem; padding: 3rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.3);">
-                    <h2 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 2.5rem;">Investment Summary</h2>
+                <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 3.5rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
+                    <h2 style="font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2rem; margin-bottom: 2.5rem; color: #fff; letter-spacing: -0.02em;">Manifest</h2>
                     
-                    <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 2.5rem;">
+                    <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 3rem;">
                         <?php foreach ($cart_items as $item): ?>
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem;">
-                                <div>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff; line-height: 1.2;"><?php echo htmlspecialchars($item['name']); ?></div>
-                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-top: 0.25rem;">QTY: <?php echo $item['qty']; ?></div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 1.05rem; font-weight: 800; color: #fff; line-height: 1.4;"><?php echo htmlspecialchars($item['name']); ?></div>
+                                    <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Units: <?php echo $item['qty']; ?></div>
                                 </div>
-                                <span style="font-weight: 800; color: #fff; font-size: 0.95rem;"><?php echo format_price($item['price'] * $item['qty']); ?></span>
+                                <span style="font-weight: 800; color: #fff; font-size: 1.1rem;">$<?php echo number_format($item['price'] * $item['qty'], 2); ?></span>
                             </div>
                         <?php endforeach; ?>
                     </div>
 
-                    <div style="display: grid; gap: 1.25rem; margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 2.5rem;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Core Allocation</span>
-                            <span style="font-weight: 700; color: #fff;"><?php echo format_price($subtotal); ?></span>
+                    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 3.5rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 1rem; color: #94a3b8;">
+                            <span>Subtotal</span>
+                            <span style="font-weight: 800; color: #fff;">$<?php echo number_format($subtotal, 2); ?></span>
                         </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Fulfillment Logic</span>
-                            <span style="font-weight: 700; color: #fff;"><?php echo $shipping > 0 ? format_price($shipping) : '<span style="color: var(--success);">N/A (FREE)</span>'; ?></span>
+                        <div style="display: flex; justify-content: space-between; font-size: 1rem; color: #94a3b8;">
+                            <span>Shipping</span>
+                            <span style="font-weight: 800; color: #4ade80;">COMPLIMENTARY</span>
                         </div>
                     </div>
 
-                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                        <span style="font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;">Final Investment</span>
-                        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 2.25rem; color: #fff; line-height: 1;"><?php echo format_price($total); ?></span>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 3rem;">
+                        <span style="font-weight: 800; color: #64748b; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; padding-bottom: 0.5rem;">Total Value</span>
+                        <span style="font-size: 3rem; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -0.04em;">$<?php echo number_format($total, 2); ?></span>
                     </div>
-
-                    <?php if (count(array_filter($cart_items, fn($i) => $i['is_digital'])) > 0): ?>
-                        <div style="margin-top: 3rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); padding: 1.5rem; border-radius: 1.5rem; text-align: center;">
-                            <p style="font-size: 0.7rem; color: #a855f7; font-weight: 800; text-transform: uppercase; line-height: 1.4;">Digital performance assets will be provisioned instantly in your secure vault.</p>
-                        </div>
-                    <?php endif; ?>
                 </div>
             </aside>
         </div>
     </div>
 </div>
-
-<style>
-@keyframes authReveal {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@media (max-width: 1100px) {
-    div[style*="grid-template-columns: 1fr 440px"] {
-        grid-template-columns: 1fr !important;
-    }
-    aside {
-        position: static !important;
-        margin-top: 5rem;
-    }
-}
-</style>
 
 <?php require_once '../includes/footer.php'; ?>

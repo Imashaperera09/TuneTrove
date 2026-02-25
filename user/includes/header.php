@@ -27,10 +27,9 @@ require_once __DIR__ . '/functions.php';
                 
                 <nav class="main-nav-links">
                     <ul>
+                        <li><a href="/TuneTrove/user/shop/index.php">Shop</a></li>
                         <li><a href="/TuneTrove/user/shop/categories.php">Categories</a></li>
                         <li><a href="/TuneTrove/user/shop/?sale=1">Deals</a></li>
-                        <li><a href="/TuneTrove/user/shop/?sort=newest">What's New</a></li>
-                        <li><a href="/TuneTrove/user/shop/?type=used">Used Gear</a></li>
                     </ul>
                 </nav>
 
@@ -43,6 +42,9 @@ require_once __DIR__ . '/functions.php';
 
                 <div class="header-actions">
                     <?php if (is_logged_in()): ?>
+                        <?php if (has_role('admin') || has_role('staff')): ?>
+                            <a href="/TuneTrove/admin/" class="admin-link">Dashboard</a>
+                        <?php endif; ?>
                         <a href="/TuneTrove/user/account/index.php" class="account-link">Account</a>
                         <a href="/TuneTrove/user/auth/logout.php" class="account-link">Logout</a>
                     <?php else: ?>

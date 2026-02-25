@@ -32,44 +32,41 @@ foreach ($items as $item) {
 }
 ?>
 
-<div class="confirmation-stage" style="min-height: 100vh; background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08), transparent); padding-top: 10rem; padding-bottom: 10rem; text-align: center;">
-    <div class="container" style="max-width: 800px;">
-        <div class="glass-panel" style="background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4rem; padding: 5rem; box-shadow: 0 50px 120px -30px rgba(0,0,0,0.6); animation: authReveal 1s cubic-bezier(0.16, 1, 0.3, 1);">
+<div style="background: var(--background); min-height: 100vh; padding-top: 8rem; padding-bottom: 10rem;">
+    <div class="container" style="max-width: 900px; text-align: center;">
+        <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1.5rem; padding: 6rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
             
-            <div style="font-size: 5rem; margin-bottom: 3rem; animation: trophyBounce 2s infinite alternate ease-in-out;">🏆</div>
-            
-            <header style="margin-bottom: 4rem;">
-                <h1 style="font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: -0.05em; color: #fff; margin-bottom: 0.5rem;">Acquisition <span style="color: var(--primary);">Verified</span></h1>
-                <p style="color: var(--text-muted); font-size: 1.1rem;">Order Reference: <span style="color: #fff; font-weight: 800;">MM-<?php echo str_pad($id, 6, '0', STR_PAD_LEFT); ?></span></p>
-            </header>
+            <div style="font-size: 6rem; margin-bottom: 3rem; filter: drop-shadow(0 0 30px rgba(14, 165, 233, 0.4));">🏆</div>
+            <h1 style="font-family: var(--font-heading); font-size: 4rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem; letter-spacing: -0.04em;">Acquisition <span style="color: var(--primary);">Confirmed</span></h1>
+            <p style="color: #64748b; font-size: 1.35rem; margin-bottom: 5rem;">Order <span style="font-weight: 800; color: #fff;">TT-<?php echo str_pad($id, 6, '0', STR_PAD_LEFT); ?></span> has been authorized and queued for precision fulfillment.</p>
 
-            <div style="text-align: left; background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 2.5rem; padding: 3rem; margin-bottom: 4rem;">
-                <h3 style="font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1.5rem;">Allocation Summary</h3>
-                <div style="display: grid; gap: 1.25rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Masterpiece Allocation</span>
-                        <span style="font-weight: 800; color: #fff;"><?php echo format_price($order['total_amount'] - $order['shipping_cost']); ?></span>
+            <div style="text-align: left; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.02); border-radius: 1rem; padding: 3.5rem; margin-bottom: 5rem;">
+                <h3 style="font-size: 0.8rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 1.5rem;">Acquisition Summary</h3>
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #94a3b8;">Items Value</span>
+                        <span style="font-weight: 800; color: #fff;">$<?php echo number_format($order['total_amount'] - $order['shipping_cost'], 2); ?></span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Fulfillment Logic</span>
-                        <span style="font-weight: 800; color: #fff;"><?php echo format_price($order['shipping_cost']); ?></span>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #94a3b8;">Logistics & Handling</span>
+                        <span style="font-weight: 800; color: #4ade80;"><?php echo $order['shipping_cost'] > 0 ? '$' . number_format($order['shipping_cost'], 2) : 'COMPLIMENTARY'; ?></span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; margin-top: 0.5rem;">
-                        <span style="font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase;">Total Investment Authorized</span>
-                        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: #fff;"><?php echo format_price($order['total_amount']); ?></span>
+                    <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 2rem; margin-top: 1rem;">
+                        <span style="font-weight: 800; color: #64748b; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; padding-bottom: 0.5rem;">Final Amount</span>
+                        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 2.5rem; color: #fff; letter-spacing: -0.04em;">$<?php echo number_format($order['total_amount'], 2); ?></span>
                     </div>
                 </div>
             </div>
 
             <?php if ($has_digital): ?>
-                <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); padding: 3rem; border-radius: 2.5rem; margin-bottom: 4rem; text-align: left;">
-                    <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.5rem; margin-bottom: 1rem;">Digital Assets Ready</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2.5rem;">Your high-fidelity digital performance assets have been provisioned in your secure vault.</p>
-                    <div style="display: grid; gap: 1rem;">
+                <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.1); padding: 4rem; border-radius: 1rem; margin-bottom: 5rem; text-align: left;">
+                    <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em;">Digital Gear Access</h3>
+                    <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 3rem; line-height: 1.6;">Your high-fidelity digital assets are ready for download below.</p>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
                         <?php foreach ($items as $item): ?>
                             <?php if ($item['is_digital']): ?>
-                                <a href="download.php?order_id=<?php echo $id; ?>&product_id=<?php echo $item['product_id']; ?>" class="btn" style="background: var(--primary); color: #fff; text-decoration: none; padding: 1.25rem; border-radius: 1.25rem; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 0.75rem; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 10px 20px rgba(37, 99, 235, 0.3)'" onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
-                                    📥 DOWNLOAD <?php echo strtoupper(htmlspecialchars($item['name'])); ?>
+                                <a href="download.php?order_id=<?php echo $id; ?>&product_id=<?php echo $item['product_id']; ?>" style="background: var(--primary); color: #fff; text-decoration: none; padding: 1rem; border-radius: 4px; font-weight: 800; text-align: center; font-size: 0.9rem; text-transform: uppercase;">
+                                    Download <?php echo htmlspecialchars($item['name']); ?>
                                 </a>
                             <?php endif; ?>
                         <?php endforeach; ?>
@@ -77,23 +74,14 @@ foreach ($items as $item) {
                 </div>
             <?php endif; ?>
 
-            <div style="display: flex; gap: 1.5rem; justify-content: center;">
-                <a href="../account/index.php" class="btn btn-primary" style="padding: 1.25rem 2.5rem; border-radius: 1.25rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;">ENTER PATRON PORTAL</a>
-                <a href="index.php" class="btn" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-decoration: none; padding: 1.25rem 2.5rem; border-radius: 1.25rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">CONTINUE BROWSING</a>
+            <div style="display: flex; gap: 2rem; justify-content: center;">
+                <a href="../account/index.php" class="btn btn-primary" style="padding: 1.5rem 3.5rem; border-radius: 0.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);">View Archive</a>
+                <a href="/TuneTrove/user/shop/" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); color: #fff; text-decoration: none; padding: 1.5rem 3.5rem; border-radius: 0.5rem; font-weight: 800; text-transform: uppercase; font-size: 1rem; letter-spacing: 0.1em; transition: all 0.2s;" onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'">Explore More</a>
             </div>
+
+            <p style="margin-top: 5rem; color: #475569; font-size: 0.9rem; letter-spacing: 0.05em;">A detailed manifest has been dispatched to your registered communique channel.</p>
         </div>
     </div>
 </div>
-
-<style>
-@keyframes authReveal {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes trophyBounce {
-    from { transform: translateY(0) scale(1); }
-    to { transform: translateY(-15px) scale(1.1); }
-}
-</style>
 
 <?php require_once '../includes/footer.php'; ?>

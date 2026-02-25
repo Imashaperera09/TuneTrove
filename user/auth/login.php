@@ -36,60 +36,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="auth-page-wrapper" style="min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; padding: 2rem; background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent), radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.08), transparent);">
-    <div class="auth-glass-card" style="width: 100%; max-width: 440px; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 2.5rem; padding: 3.5rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.7); animation: authReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+<div style="background: var(--background); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem;">
+    <div style="width: 100%; max-width: 520px; background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1.5rem; padding: 5rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
         
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <div style="width: 54px; height: 54px; background: linear-gradient(135deg, var(--primary), #1e40af); border-radius: 1.25rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 1rem; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);">🔑</div>
-            <h2 style="font-family: var(--font-heading); font-size: 1.85rem; letter-spacing: -0.02em; color: #fff; margin-bottom: 0.25rem;">Welcome <span style="color: var(--primary);">Back</span></h2>
-            <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">Enter credentials to access account</p>
+        <div style="text-align: center; margin-bottom: 4rem;">
+            <div style="font-size: 4rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.4));">🎻</div>
+            <h2 style="font-family: var(--font-heading); font-size: 2.75rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem; letter-spacing: -0.04em;">Welcome <span style="color: var(--primary);">Back</span></h2>
+            <p style="color: #64748b; font-size: 1.1rem; letter-spacing: 0.02em;">Access your premium sonic vault.</p>
         </div>
 
         <?php if (!empty($errors)): ?>
-            <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); padding: 1rem; border-radius: 0.75rem; color: var(--error); margin-bottom: 1.5rem; font-size: 0.8rem; font-weight: 600;">
-                <ul style="list-style: none; padding: 0;">
+            <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 1.25rem; border-radius: 0.5rem; color: #ef4444; margin-bottom: 2.5rem; font-size: 0.95rem; font-weight: 700;">
+                <ul style="list-style: none; padding: 0; margin: 0;">
                     <?php foreach ($errors as $error): ?>
-                        <li style="display: flex; align-items: center; gap: 0.5rem;"><span>⚠️</span> <?php echo $error; ?></li>
+                        <li><?php echo $error; ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
 
         <form action="login.php" method="POST">
-            <div style="margin-bottom: 1.25rem;">
-                <label for="username" style="display: block; margin-bottom: 0.5rem; font-size: 0.65rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.12em;">Username</label>
-                <div style="position: relative;">
-                    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-size: 1rem; opacity: 0.4;">👤</span>
-                    <input type="text" id="username" name="username" required placeholder="your_username" style="width: 100%; padding: 1rem 1rem 1rem 3rem; background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 0.85rem; color: #fff; font-family: inherit; font-size: 0.95rem; transition: all 0.3s ease; outline: none;" onfocus="this.style.borderColor='var(--primary)'; this.style.background='rgba(15, 23, 42, 0.6)';" onblur="this.style.borderColor='rgba(255,255,255,0.05)'; this.style.background='rgba(15, 23, 42, 0.4)';">
-                </div>
+            <div style="margin-bottom: 2rem;">
+                <label for="username" style="display: block; font-size: 0.75rem; font-weight: 800; color: #64748b; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">System Identifier</label>
+                <input type="text" id="username" name="username" required placeholder="Enter username" style="width: 100%; padding: 1rem 1.25rem; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; background: rgba(0, 0, 0, 0.2); color: #fff; font-size: 1.1rem; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.05)'">
             </div>
 
-            <div style="margin-bottom: 1.75rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <label for="password" style="font-size: 0.65rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.12em;">Password</label>
-                    <a href="#" style="font-size: 0.65rem; color: var(--primary); text-decoration: none; font-weight: 800; letter-spacing: 0.05em;">FORGOT?</a>
+            <div style="margin-bottom: 3rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <label for="password" style="font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.1em;">Master Key</label>
+                    <a href="#" style="font-size: 0.8rem; color: var(--primary); text-decoration: none; font-weight: 800; letter-spacing: 0.02em;">Recovery options?</a>
                 </div>
-                <div style="position: relative;">
-                    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-size: 1rem; opacity: 0.4;">🔒</span>
-                    <input type="password" id="password" name="password" required placeholder="••••••••" style="width: 100%; padding: 1rem 1rem 1rem 3rem; background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 0.85rem; color: #fff; font-family: inherit; font-size: 0.95rem; transition: all 0.3s ease; outline: none;" onfocus="this.style.borderColor='var(--primary)'; this.style.background='rgba(15, 23, 42, 0.6)';" onblur="this.style.borderColor='rgba(255,255,255,0.05)'; this.style.background='rgba(15, 23, 42, 0.4)';">
-                </div>
+                <input type="password" id="password" name="password" required placeholder="••••••••" style="width: 100%; padding: 1rem 1.25rem; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; background: rgba(0, 0, 0, 0.2); color: #fff; font-size: 1.1rem; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.05)'">
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.15rem; border-radius: 1rem; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 0 12px 25px -5px rgba(37, 99, 235, 0.3); margin-bottom: 1.75rem;">Sign In</button>
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.5rem; border-radius: 0.5rem; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2.5rem; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);">Authorize Session</button>
         </form>
 
-        <div style="text-align: center; font-size: 0.9rem;">
-            <span style="color: var(--text-muted);">New to Melody Masters?</span>
-            <a href="register.php" style="color: var(--primary); text-decoration: none; font-weight: 700; margin-left: 0.5rem;">CREATE ACCOUNT</a>
+        <div style="text-align: center; font-size: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 3rem;">
+            <p style="color: #64748b;">New to the Archive? <a href="register.php" style="color: var(--primary); text-decoration: none; font-weight: 800; margin-left: 0.75rem;">Create Identity</a></p>
         </div>
     </div>
 </div>
-
-<style>
-@keyframes authReveal {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-</style>
 
 <?php require_once '../includes/footer.php'; ?>
