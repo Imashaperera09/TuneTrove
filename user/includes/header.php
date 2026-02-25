@@ -13,37 +13,46 @@ require_once __DIR__ . '/functions.php';
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <!-- Main Style -->
-    <link rel="stylesheet" href="/TuneTrove/user/assets/css/style.css">
+    <link rel="stylesheet" href="/TuneTrove/user/assets/css/style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <header class="main-header">
-        <div class="container header-container">
-            <div class="logo">
-                <a href="/TuneTrove/user/">
-                    <span class="logo-accent">Melody</span>Masters
-                </a>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="/TuneTrove/user/">Home</a></li>
-                    <li><a href="/TuneTrove/user/shop/">Shop</a></li>
-                    <li><a href="/TuneTrove/user/shop/categories.php">Categories</a></li>
+        <div class="container">
+            <div class="header-content-row">
+                <div class="logo">
+                    <a href="/TuneTrove/user/">
+                        <span class="logo-accent">Tune</span>Trove
+                    </a>
+                </div>
+                
+                <nav class="main-nav-links">
+                    <ul>
+                        <li><a href="/TuneTrove/user/shop/categories.php">Categories</a></li>
+                        <li><a href="/TuneTrove/user/shop/?sale=1">Deals</a></li>
+                        <li><a href="/TuneTrove/user/shop/?sort=newest">What's New</a></li>
+                        <li><a href="/TuneTrove/user/shop/?type=used">Used Gear</a></li>
+                    </ul>
+                </nav>
+
+                <div class="search-container">
+                    <form action="/TuneTrove/user/shop/" method="GET">
+                        <input type="text" name="search" class="search-input" placeholder="Search gear...">
+                        <button type="submit" class="search-btn">🔍</button>
+                    </form>
+                </div>
+
+                <div class="header-actions">
                     <?php if (is_logged_in()): ?>
-                        <li><a href="/TuneTrove/user/account/index.php">My Account</a></li>
-                        <?php if (has_role('admin') || has_role('staff')): ?>
-                            <li class="admin-nav-item"><a href="/TuneTrove/admin/">Admin Dashboard</a></li>
-                        <?php endif; ?>
-                        <li><a href="/TuneTrove/user/auth/logout.php">Logout</a></li>
+                        <a href="/TuneTrove/user/account/index.php" class="account-link">Account</a>
+                        <a href="/TuneTrove/user/auth/logout.php" class="account-link">Logout</a>
                     <?php else: ?>
-                        <li><a href="/TuneTrove/user/auth/login.php">Login</a></li>
+                        <a href="/TuneTrove/user/auth/login.php" class="account-link">Login</a>
                     <?php endif; ?>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <a href="/TuneTrove/user/shop/cart.php" class="cart-link">
-                    <span class="cart-icon">🛒</span>
-                    <span class="cart-count"><?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?></span>
-                </a>
+                    <a href="/TuneTrove/user/shop/cart.php" class="cart-link">
+                        <span class="cart-icon">🛒</span>
+                        <span class="cart-count"><?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?></span>
+                    </a>
+                </div>
             </div>
         </div>
     </header>

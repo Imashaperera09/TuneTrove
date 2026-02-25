@@ -15,58 +15,63 @@ try {
 }
 ?>
 
-<!-- Full Page Hero Section -->
-<section class="hero">
-    <div class="hero-content">
-        <h1 class="reveal">Experience <br><span class="logo-accent">Pure Sound</span></h1>
-        <p class="reveal">From classical craftsmanship to modern digital innovation. Discover the world's finest musical instruments curated for the true artist.</p>
-        <div class="hero-actions reveal" style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap;">
-            <a href="/TuneTrove/user/shop/" class="btn btn-primary" style="padding: 1.5rem 4rem; font-size: 1.25rem;">Explore Collection</a>
-            <a href="/TuneTrove/user/shop/categories.php" class="btn" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 1.5rem 2.5rem; font-size: 1.125rem;">The Collections</a>
+<!-- Sweetwater Style Hero Section -->
+<section class="marketing-hero" style="background: linear-gradient(135deg, #f15a24 0%, #d4145a 100%); padding: 5rem 0; overflow: hidden; color: white;">
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+        <div class="reveal">
+            <h1 style="font-family: var(--font-heading); font-size: 5.5rem; font-weight: 800; line-height: 0.9; margin-bottom: 2.5rem; letter-spacing: -0.04em; text-transform: uppercase;">Software <br>& Recording Sale</h1>
+            <p style="font-size: 1.5rem; margin-bottom: 3.5rem; opacity: 0.95; line-height: 1.3; max-width: 500px;">Huge selection, instant savings. Up to 80% off plug-ins, mics, interfaces, monitors, and more.</p>
+            <div style="display: flex; gap: 1.5rem; align-items: center;">
+                <a href="/TuneTrove/user/shop/" class="btn" style="background: white; color: #d4145a; padding: 1.25rem 3.5rem; font-size: 1.25rem; font-weight: 800; border-radius: 0.25rem; text-transform: uppercase;">Shop Now</a>
+                <span style="font-weight: 700; font-size: 1.1rem; border-bottom: 2px solid white; cursor: pointer;">View the Offers</span>
+            </div>
+        </div>
+        <div class="reveal" style="position: relative; height: 400px; display: flex; align-items: center; justify-content: center;">
+            <div style="font-size: 15rem; opacity: 0.2; transform: rotate(-15deg);">🎧</div>
+            <img src="/TuneTrove/user/assets/images/hero.png" style="position: absolute; width: 140%; transform: translateX(-10%); filter: drop-shadow(0 40px 80px rgba(0,0,0,0.4));" alt="Pro Audio Gear">
         </div>
     </div>
 </section>
 
-<!-- Values Section (Why Us) -->
-<section style="padding: 6rem 0; background: var(--background);">
+<!-- Financing Ticker -->
+<div style="background: #000; color: #fff; padding: 1.25rem 0; text-align: center; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 4px solid var(--primary);">
     <div class="container">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 3rem;">
+        UP TO 48-MONTH SPECIAL FINANCING* ON QUALIFYING BRANDS &nbsp; <a href="#" style="color: #63b3ed; text-decoration: underline; margin-left: 1rem;">Learn More</a> &nbsp; <a href="#" style="color: #63b3ed; text-decoration: underline; margin-left:1rem;">Shop the Offers</a>
+    </div>
+</div>
+
+<!-- Values Section -->
+<section style="padding: 10rem 0; background: #fff;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
             <div class="reveal" style="text-align: center; padding: 2rem;">
-                <div style="font-size: 3rem; margin-bottom: 1.5rem;">🎻</div>
-                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">Expert Curation</h3>
-                <p style="color: var(--text-muted);">Every instrument is hand-selected and inspected by our team of master luthiers and musicians.</p>
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🎻</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #333;">The Expert Curation</h3>
+                <p style="color: #666; font-size: 1.1rem;">Every instrument is hand-selected and inspected by our team of master luthiers.</p>
             </div>
             <div class="reveal" style="text-align: center; padding: 2rem;">
-                <div style="font-size: 3rem; margin-bottom: 1.5rem;">🚚</div>
-                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">Precision Delivery</h3>
-                <p style="color: var(--text-muted);">Temperature-controlled shipping to ensure your instrument arrives in perfect tuning and condition.</p>
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🚚</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #333;">Precision Delivery</h3>
+                <p style="color: #666; font-size: 1.1rem;">Climate-controlled shipping ensure your instrument arrives in perfect tuning.</p>
             </div>
             <div class="reveal" style="text-align: center; padding: 2rem;">
-                <div style="font-size: 3rem; margin-bottom: 1.5rem;">🎵</div>
-                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">Lifetime Support</h3>
-                <p style="color: var(--text-muted);">Professional setup and maintenance services included with every premium instrument purchase.</p>
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🎵</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #333;">Lifetime Support</h3>
+                <p style="color: #666; font-size: 1.1rem;">Access to professional setup and expert guidance throughout your musical journey.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Categories Section -->
-<section style="padding: 10rem 0; background: radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.05), transparent 40%), #020617; overflow: hidden;">
+<section style="padding: 10rem 0; background: #f8f9fa; border-top: 1px solid #eee;">
     <div class="container">
-        <div style="margin-bottom: 5rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 3rem; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 300px;">
-                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.875rem; display: block; margin-bottom: 1rem;" class="reveal">Explore Your Passion</span>
-                <h2 class="section-title reveal" style="text-align: left; margin-bottom: 1.5rem; line-height: 1.1;">Browse <br>Collections</h2>
-                <p class="reveal" style="color: var(--text-muted); max-width: 450px; font-size: 1.125rem; line-height: 1.6;">Exquisite instruments for every stage of your musical journey. Hand-picked and meticulously tested for the professional artist.</p>
-            </div>
-            <div class="reveal" style="margin-bottom: 1rem;">
-                <a href="/TuneTrove/user/shop/categories.php" class="btn" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 1rem 2rem; border-radius: 1rem; text-decoration: none; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">View All Categories →</a>
-            </div>
+        <div style="margin-bottom: 6rem; text-align: left; border-left: 8px solid var(--primary); padding-left: 2rem;">
+            <h2 class="reveal" style="font-family: var(--font-heading); font-size: 3.5rem; font-weight: 800; color: #333; margin-bottom: 1rem; letter-spacing: -0.03em;">Shop by Category</h2>
+            <p style="font-size: 1.25rem; color: #666;">Explore our vast selection of premium musical instruments and gear.</p>
         </div>
-    </div>
-    
-    <div class="container">
-        <div class="category-grid-scroll">
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
             <?php 
             $icons = [
                 'Guitars' => '🎸',
@@ -80,52 +85,27 @@ try {
             ?>
             <?php if (!empty($categories)): ?>
                 <?php foreach ($categories as $cat): ?>
-                    <a href="/TuneTrove/user/shop/collection.php?name=<?php echo urlencode($cat['name']); ?>" class="category-card reveal">
-                        <div class="category-img" <?php echo !empty($cat['image_url']) ? 'style="background-image: url(\'/TuneTrove/user/assets/images/' . htmlspecialchars($cat['image_url']) . '\');"' : ''; ?>>
-                            <?php if (empty($cat['image_url'])): ?>
-                                <span><?php echo $icons[$cat['name']] ?? '📦'; ?></span>
+                    <a href="/TuneTrove/user/shop/collection.php?name=<?php echo urlencode($cat['name']); ?>" 
+                       class="reveal" 
+                       style="text-decoration: none; background: white; border: 1px solid #eee; border-radius: 0.5rem; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s;"
+                       onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.05)';"
+                       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <div style="height: 200px; background: #fff; display: flex; align-items: center; justify-content: center; position: relative;">
+                            <?php if (!empty($cat['image_url'])): ?>
+                                <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($cat['image_url']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <?php else: ?>
+                                <div style="font-size: 5rem;"><?php echo $icons[$cat['name']] ?? '📦'; ?></div>
                             <?php endif; ?>
                         </div>
-                        <div class="category-info">
-                            <h3><?php echo htmlspecialchars($cat['name']); ?></h3>
-                            <p><?php echo htmlspecialchars($cat['description']); ?></p>
+                        <div style="padding: 2rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; font-weight: 700;"><?php echo htmlspecialchars($cat['name']); ?></h3>
+                            <p style="color: #666; line-height: 1.5; font-size: 0.95rem;"><?php echo htmlspecialchars($cat['description']); ?></p>
                         </div>
                     </a>
                 <?php endforeach; ?>
-            <?php else: ?>
-                <!-- Fallback Static Cards (Edit style tags to add your images) -->
-                <a href="/TuneTrove/user/shop/?cat=Guitars" class="category-card reveal">
-                    <div class="category-img" style="background-image: url('/TuneTrove/user/assets/images/guitar.');">
-                        <span>🎸</span>
-                    </div>
-                    <div class="category-info">
-                        <h3>Guitars</h3>
-                        <p>Acoustic, Electric, and Bass guitars from top brands.</p>
-                    </div>
-                </a>
-                <a href="/TuneTrove/user/shop/?cat=Keyboards" class="category-card reveal">
-                    <div class="category-img" style="background-image: url('/TuneTrove/user/assets/images/keyboard_cat.jpg');">
-                        <span>🎹</span>
-                    </div>
-                    <div class="category-info">
-                        <h3>Keyboards</h3>
-                        <p>Digital pianos, synthesizers, and modern MIDI gear.</p>
-                    </div>
-                </a>
-                <a href="/TuneTrove/user/shop/?cat=Drums%20%26%20Percussion" class="category-card reveal">
-                    <div class="category-img" style="background-image: url('/TuneTrove/user/assets/images/drum_cat.jpg');">
-                        <span>🥁</span>
-                    </div>
-                    <div class="category-info">
-                        <h3>Percussion</h3>
-                        <p>Acoustic sets and electronic drum kits for any stage.</p>
-                    </div>
-                </a>
             <?php endif; ?>
         </div>
     </div>
 </section>
-
-
 
 <?php require_once 'includes/footer.php'; ?>
