@@ -27,9 +27,10 @@ require_once __DIR__ . '/functions.php';
                 
                 <nav class="main-nav-links">
                     <ul>
+                        <li><a href="/TuneTrove/user/">Home</a></li>
                         <li><a href="/TuneTrove/user/shop/index.php">Shop</a></li>
                         <li><a href="/TuneTrove/user/shop/categories.php">Categories</a></li>
-                        <li><a href="/TuneTrove/user/shop/?sale=1">Deals</a></li>
+                        <li><a href="/TuneTrove/user/shop/deals.php">Deals</a></li>
                     </ul>
                 </nav>
 

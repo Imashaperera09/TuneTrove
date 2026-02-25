@@ -125,7 +125,12 @@ $all_categories = $cat_stmt->fetchAll();
                                         </h3>
                                         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
                                             <span style="font-size: 1.5rem; font-weight: 800; color: #fff;">
-                                                $<?php echo number_format($p['price'], 2); ?>
+                                                <?php if (!empty($p['sale_price'])): ?>
+                                                    <span style="color: var(--primary);">$<?php echo number_format($p['sale_price'], 2); ?></span>
+                                                    <span style="font-size: 0.9rem; color: #64748b; text-decoration: line-through; margin-left: 0.5rem;">$<?php echo number_format($p['price'], 2); ?></span>
+                                                <?php else: ?>
+                                                    $<?php echo number_format($p['price'], 2); ?>
+                                                <?php endif; ?>
                                             </span>
                                             <span style="font-size: 0.75rem; color: #4ade80; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">In Stock</span>
                                         </div>

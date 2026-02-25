@@ -82,7 +82,15 @@ if (is_logged_in()) {
                     <h1 style="font-family: var(--font-heading); font-size: 2.75rem; font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 2rem; letter-spacing: -0.02em;"><?php echo htmlspecialchars($product['name']); ?></h1>
                     
                     <div style="margin-bottom: 3rem;">
-                        <span style="font-size: 3.5rem; font-weight: 800; color: #fff; display: block; margin-bottom: 0.75rem; letter-spacing: -0.04em;">$<?php echo number_format($product['price'], 2); ?></span>
+                        <?php if (!empty($product['sale_price'])): ?>
+                            <div style="display: flex; align-items: baseline; gap: 1.5rem;">
+                                <span style="font-size: 3.5rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 0.25rem; letter-spacing: -0.04em;">$<?php echo number_format($product['sale_price'], 2); ?></span>
+                                <span style="font-size: 1.5rem; color: #64748b; text-decoration: line-through; font-weight: 600;">$<?php echo number_format($product['price'], 2); ?></span>
+                            </div>
+                            <p style="color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Special Archival Value</p>
+                        <?php else: ?>
+                            <span style="font-size: 3.5rem; font-weight: 800; color: #fff; display: block; margin-bottom: 0.75rem; letter-spacing: -0.04em;">$<?php echo number_format($product['price'], 2); ?></span>
+                        <?php endif; ?>
                         <div style="display: flex; align-items: center; gap: 1rem;">
                             <?php if ($product['stock_quantity'] > 0): ?>
                                 <span style="background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.2); padding: 0.4rem 0.8rem; border-radius: 4px; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem;">
