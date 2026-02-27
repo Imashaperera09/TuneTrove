@@ -58,7 +58,7 @@ function has_role($role) {
  * Returns discounted price if a deal is currently active, else original price.
  */
 function get_effective_price($product) {
-    if (empty($product['discount_percent']) || $product['discount_percent'] <= 0) {
+    if (empty($product['is_deal']) || empty($product['discount_percent']) || $product['discount_percent'] <= 0) {
         return (float)$product['price'];
     }
 

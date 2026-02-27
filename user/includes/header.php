@@ -44,7 +44,17 @@ require_once __DIR__ . '/functions.php';
 
                 <div class="header-actions">
                     <?php if (is_logged_in()): ?>
-                        <a href="/TuneTrove/user/auth/logout.php" class="account-link">Logout</a>
+                        <div style="display: flex; align-items: center; gap: 1.25rem;">
+                            <a href="/TuneTrove/user/account/" style="text-decoration: none; display: flex; align-items: center; gap: 0.75rem; group" title="My Account">
+                                <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.2s;" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 0 15px rgba(14, 165, 233, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)'">
+                                    <?php 
+                                        $display_name = $_SESSION['full_name'] ?: $_SESSION['username'] ?: 'U';
+                                        echo strtoupper(substr($display_name, 0, 1)); 
+                                    ?>
+                                </div>
+                            </a>
+                            <a href="/TuneTrove/user/auth/logout.php" class="account-link">Logout</a>
+                        </div>
                     <?php else: ?>
                         <a href="/TuneTrove/user/auth/login.php" class="account-link">Login</a>
                     <?php endif; ?>

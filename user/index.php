@@ -2,7 +2,7 @@
 require_once 'includes/header.php';
 require_once 'includes/db.php';
 
-// Fetch main categories for the homepage with custom ordering
+// Fetch main categories...
 try {
     $order = ['Guitars', 'Keyboards', 'Drums & Percussion', 'Wind Instruments', 'String Instruments', 'Accessories', 'Digital Sheet Music'];
     $placeholders = implode(',', array_fill(0, count($order), '?'));
@@ -10,8 +10,20 @@ try {
     $stmt = $pdo->prepare($sql);
     $stmt->execute($order);
     $categories = $stmt->fetchAll();
-} catch (PDOException $e) {
-    $categories = [];
+} catch (PDOException $e) { $categories = []; }
+
+// Fetch active deals for Featured Section
+$today = date('Y-m-d');
+$deals_stmt = $pdo->query("SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id=c.id WHERE p.is_deal=1 AND p.discount_percent > 0 AND (p.deal_start_date IS NULL OR p.deal_start_date <= '$today') AND (p.deal_end_date IS NULL OR p.deal_end_date >= '$today') ORDER BY p.discount_percent DESC LIMIT 3");
+$featured_deals = $deals_stmt->fetchAll();
+
+// Fetch recent orders if logged in
+$recent_orders = [];
+if (is_logged_in()) {
+    $user_id = $_SESSION['user_id'];
+    $orders_stmt = $pdo->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC LIMIT 3");
+    $orders_stmt->execute([$user_id]);
+    $recent_orders = $orders_stmt->fetchAll();
 }
 ?>
 
@@ -37,6 +49,50 @@ try {
         </div>
     </div>
 </section>
+
+<?php if (!empty($featured_deals)): ?>
+<!-- Featured Deals Section -->
+<section style="padding: 6rem 0; background: #060b1e; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 0; right: 0; width: 600px; height: 600px; background: radial-gradient(circle, rgba(14, 165, 233, 0.05) 0%, transparent 70%); pointer-events: none;"></div>
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem;">
+            <div>
+                <p style="text-transform: uppercase; font-size: 0.75rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1rem;">Limited Time</p>
+                <h2 style="font-family: var(--font-heading); font-size: 3.5rem; font-weight: 800; color: #fff; letter-spacing: -0.04em; margin: 0;">Featured <span style="color: var(--primary);">Deals</span></h2>
+            </div>
+            <a href="/TuneTrove/user/shop/deals.php" class="btn btn-primary" style="padding: 1rem 2.5rem; border-radius: 4px; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.1em; box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);">Explore All Deals</a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem;">
+            <?php foreach ($featured_deals as $d): 
+                $deal_price = round($d['price'] * (1 - $d['discount_percent'] / 100), 2);
+            ?>
+            <div class="reveal" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1.5rem; overflow: hidden; display: flex; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='rgba(14, 165, 233, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255, 255, 255, 0.05)';" >
+                <div style="width: 150px; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; padding: 1.5rem; position: relative;">
+                    <div style="position: absolute; top: 0.75rem; left: 0.75rem; background: var(--primary); color: #fff; padding: 0.2rem 0.5rem; font-size: 0.6rem; font-weight: 900; border-radius: 4px; z-index: 5;">
+                        -<?php echo (int)$d['discount_percent']; ?>%
+                    </div>
+                    <?php if ($d['image_url']): ?>
+                        <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($d['image_url']); ?>" style="max-width: 100%; max-height: 120px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));">
+                    <?php else: ?>
+                        <div style="font-size: 4rem; opacity: 0.2;">🎻</div>
+                    <?php endif; ?>
+                </div>
+                <div style="flex: 1; padding: 2rem; display: flex; flex-direction: column; justify-content: center;">
+                    <p style="font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.1em;"><?php echo htmlspecialchars($d['brand']); ?></p>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 1rem; line-height: 1.3;"><?php echo htmlspecialchars($d['name']); ?></h3>
+                    <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 1.5rem; font-weight: 800; color: #fff;">£<?php echo number_format($deal_price, 2); ?></span>
+                        <span style="font-size: 0.9rem; color: #64748b; text-decoration: line-through;">£<?php echo number_format($d['price'], 2); ?></span>
+                    </div>
+                    <a href="/TuneTrove/user/shop/product.php?id=<?php echo $d['id']; ?>" style="text-align: center; background: rgba(255,255,255,0.03); color: #fff; text-decoration: none; padding: 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.08); transition: all 0.2s;" onmouseover="this.style.background='var(--primary)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.background='rgba(255,255,255,0.03)'; this.style.borderColor='rgba(255,255,255,0.08)';">View Deal</a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
 
 <?php if (is_logged_in() && !empty($recent_orders)): ?>
 <!-- Recent Activity Section -->

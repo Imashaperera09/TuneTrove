@@ -30,15 +30,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <body>
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="sidebar-header">
-            <span style="color: var(--admin-primary);">🎵</span> TuneTrove
-            <div style="margin-top: 0.5rem;">
+        <div class="sidebar-header" style="padding: 2rem 1.5rem; text-align: left; display: flex; flex-direction: column; gap: 0.5rem;">
+            <div style="font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 0.75rem; color: #fff; letter-spacing: -0.02em;">
+                <span style="color: var(--admin-primary); font-size: 1.75rem;">🎵</span> TuneTrove
+            </div>
+            <div>
                 <?php 
                 $role = $_SESSION['user_role'] ?? 'staff';
                 $badge_color = in_array($role, ['admin', 'superadmin']) ? '#6366f1' : '#10b981';
                 $role_label  = in_array($role, ['admin', 'superadmin']) ? '🛡️ Admin' : '👤 Staff';
                 ?>
-                <span style="background: <?php echo $badge_color; ?>22; color: <?php echo $badge_color; ?>; border: 1px solid <?php echo $badge_color; ?>55; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;">
+                <span style="background: <?php echo $badge_color; ?>15; color: <?php echo $badge_color; ?>; border: 1px solid <?php echo $badge_color; ?>33; padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;">
                     <?php echo $role_label; ?>
                 </span>
             </div>
@@ -52,11 +54,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <li>
                     <a href="deals.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'deals.php' ? 'active' : ''; ?>">
                         <span class="icon">🏷️</span> Promotions
-                    </a>
-                </li>
-                <li>
-                    <a href="digital_files.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'digital_files.php' ? 'active' : ''; ?>">
-                        <span class="icon">📑</span> Digital Assets
                     </a>
                 </li>
                 <li><a href="reviews.php" class="<?php echo $current_page == 'reviews.php' ? 'active' : ''; ?>"><span>⭐</span> Reviews</a></li>
