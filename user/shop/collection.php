@@ -36,11 +36,11 @@ $icons = [
 ];
 ?>
 
-<div class="collection-spotlight" style="min-height: 100vh; background: var(--background);">
+<div class="collection-spotlight" style="min-height: 100vh; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);">
     <!-- Removed Adaptive Collection Hero section for minimal look -->
 
     <!-- Collection Mosaic -->
-    <section style="padding: 1.5rem 0; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.05), transparent 70%);">
+    <section style="padding: 1.5rem 0; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.03), transparent 70%);">
         <div class="container">
             <?php if (empty($products)): ?>
                 <div style="text-align: center; padding: 8rem 2rem; background: rgba(255, 255, 255, 0.01); border-radius: 2rem; border: 1px dashed rgba(255, 255, 255, 0.05);">
@@ -72,7 +72,7 @@ $icons = [
                                 </div>
                                 <div style="padding: 1rem 0; display: flex; justify-content: space-between; align-items: center;">
                                     <span style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: #fff; letter-spacing: -0.04em;"><?php echo format_price($p['price']); ?></span>
-                                    <span style="font-size: 0.8rem; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; border-bottom: 2px solid var(--primary); padding-bottom: 4px;">Acquire →</span>
+                                    <button style="font-size: 0.85rem; color: #fff; background: var(--primary); border: none; border-radius: 6px; padding: 0.7rem 2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 8px 32px -8px rgba(14,165,233,0.15); cursor: pointer; transition: background 0.2s;" onclick="window.location.href='product.php?id=<?php echo $p['id']; ?>'">Buy</button>
                                 </div>
                             </a>
                         </div>
