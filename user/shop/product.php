@@ -178,11 +178,11 @@ if (is_logged_in()) {
         <div style="margin-top: 10rem;">
              <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 2.5rem;">
                  <div>
-                    <h2 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: #fff; margin-top: 0; letter-spacing: -0.04em;">Performance <span style="color: var(--primary);">Reports</span></h2>
-                    <p style="color: #64748b; font-size: 1.1rem;"><?php echo count($reviews); ?> curated insights from world-class musicians.</p>
+                    <h2 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: #fff; margin-top: 0; letter-spacing: -0.04em;">Customer <span style="color: var(--primary);">Reviews</span></h2>
+                    <p style="color: #64748b; font-size: 1.1rem;"><?php echo count($reviews); ?> verified reviews from our customers.</p>
                  </div>
                  <?php if (is_logged_in() && $can_review && !$has_reviewed): ?>
-                    <button onclick="document.getElementById('review-form').style.display='block'" class="btn btn-primary" style="padding: 1rem 2rem; border-radius: 0.5rem; font-weight: 800; text-transform: uppercase;">Write Report</button>
+                    <button onclick="document.getElementById('review-form').style.display='block'; window.scrollTo({top: document.getElementById('review-form').offsetTop - 100, behavior: 'smooth'});" class="btn btn-primary" style="padding: 1rem 2rem; border-radius: 0.5rem; font-weight: 800; text-transform: uppercase;">Write a Review</button>
                  <?php elseif (is_logged_in() && $has_reviewed): ?>
                     <span style="color: #4ade80; font-weight: bold;">You have already reviewed this item.</span>
                  <?php elseif (is_logged_in() && !$can_review): ?>
@@ -194,7 +194,7 @@ if (is_logged_in()) {
 
              <?php if (is_logged_in() && $can_review && !$has_reviewed): ?>
              <div id="review-form" style="display: none; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 3rem; margin-bottom: 4rem;">
-                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 2rem;">Submit Your Insight</h3>
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 2rem;">Write your review</h3>
                 <form action="submit_review.php" method="POST">
                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                     <div style="margin-bottom: 1.5rem;">

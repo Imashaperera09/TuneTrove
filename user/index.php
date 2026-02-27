@@ -39,11 +39,11 @@ try {
 </section>
 
 <!-- Categories Section -->
-<section style="padding: 2rem 0 6rem; background: #060b1e;">
+<section style="padding: 6rem 0 6rem; background: #060b1e;">
     <div class="container">
         <div style="margin-bottom: 6rem; text-align: left; border-left: 4px solid var(--primary); padding-left: 2.5rem;">
             <h2 class="reveal" style="font-family: var(--font-heading); font-size: 4rem; font-weight: 800; color: #fff; margin-bottom: 1rem; letter-spacing: -0.04em;">Shop by Category</h2>
-            <p style="font-size: 1.25rem; color: #94a3b8;">Explore our vast selection of premium musical instruments and gear.</p>
+            <p style="font-size: 1.25rem; color: #94a3b8;">Explore our vast selection of premium musical instruments and catalog.</p>
         </div>
 
         <style>

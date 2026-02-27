@@ -80,13 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
     <div class="container">
         <!-- Header -->
-        <div style="margin-bottom: 5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2.5rem;">
-            <p style="text-transform: uppercase; font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1rem;">Secure Channel</p>
+        <div style="margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 1.5rem;">
             <h1 style="font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Finalize Your <span style="color: var(--primary);">Acquisition</span></h1>
-            <p style="color: #64748b; font-size: 1.15rem; margin-top: 1rem;">Authorize your order and specify your delivery location.</p>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 450px; gap: 5rem; align-items: flex-start;">
+        <div style="display: grid; grid-template-columns: 1fr 450px; gap: 3rem; align-items: flex-start;">
             
             <!-- Left: Checkout Form -->
             <div>
@@ -102,15 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div style="margin-bottom: 3rem;">
                             <label style="display: block; font-size: 0.75rem; font-weight: 800; color: #64748b; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">Delivery Particulars</label>
                             <textarea name="address" required placeholder="Street Address, Suite, City, State, Zip Code..." style="width: 100%; padding: 1.25rem; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; background: rgba(0, 0, 0, 0.2); color: #fff; font-family: inherit; font-size: 1.05rem; min-height: 150px; transition: all 0.2s; outline: none; line-height: 1.6;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.05)'"></textarea>
-                        </div>
-
-                        <h2 style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: #fff; margin-top: 4rem; margin-bottom: 2.5rem; letter-spacing: -0.02em;">Transfer Method</h2>
-                        <div style="background: rgba(14, 165, 233, 0.03); border: 1px solid rgba(14, 165, 233, 0.1); border-radius: 1rem; padding: 2.5rem; display: flex; align-items: flex-start; gap: 2rem;">
-                            <div style="font-size: 3rem; filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.3));">💎</div>
-                            <div>
-                                <p style="font-weight: 800; color: #fff; font-size: 1rem; margin-bottom: 0.4rem; letter-spacing: 0.05em;">SECURE ACQUISITION PROTOCOL</p>
-                                <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6;">Protection by enterprise-grade encryption. Demonstration authorization is instant.</p>
-                            </div>
                         </div>
 
                         <!-- Payment Section -->

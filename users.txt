@@ -1,3 +1,0 @@
-﻿email	role
-admin@gmail.com	customer
-imashaperera09@gmail.com	customer

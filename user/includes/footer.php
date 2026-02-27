@@ -4,7 +4,7 @@
         <div class="container footer-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
             <div class="footer-section">
                 <h3 style="color: #fff; font-size: 2rem; font-family: var(--font-heading); font-weight: 800; margin-bottom: 1rem;"><span style="color: var(--accent);">Tune</span>Trove</h3>
-                <p style="color: #cbd5e0; line-height: 1.6; font-size: 0.95rem;">The world's most popular music store. Since 2024, TuneTrove has been providing musicians with the best gear, expert advice, and unbeatable service.</p>
+                <p style="color: #cbd5e0; line-height: 1.6; font-size: 0.95rem;">The world's most popular music store. Since 2024, TuneTrove has been providing musicians with the best instruments, expert advice, and unbeatable service.</p>
             </div>
             <div class="footer-section">
                 <h4 style="color: #fff; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; margin-bottom: 1rem;">Quick Links</h4>
@@ -21,7 +21,7 @@
                     <li style="margin-bottom: 0.5rem;"><a href="/TuneTrove/user/shop/?cat=Guitars" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;">Guitars</a></li>
                     <li style="margin-bottom: 0.5rem;"><a href="/TuneTrove/user/shop/?cat=Keyboards" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;">Keyboards & Pianos</a></li>
                     <li style="margin-bottom: 0.5rem;"><a href="/TuneTrove/user/shop/?cat=Drums%20%26%20Percussion" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;">Drums & Percussion</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/TuneTrove/user/shop/categories.php" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;">All Gear</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/TuneTrove/user/shop/categories.php" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;">All Instruments</a></li>
                 </ul>
             </div>
         </div>

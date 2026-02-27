@@ -37,7 +37,7 @@ require_once __DIR__ . '/functions.php';
 
                 <div class="search-container">
                     <form action="/TuneTrove/user/shop/" method="GET">
-                        <input type="text" name="search" class="search-input" placeholder="Search gear...">
+                        <input type="text" name="search" class="search-input" placeholder="Search catalog...">
                         <button type="submit" class="search-btn">🔍</button>
                     </form>
                 </div>

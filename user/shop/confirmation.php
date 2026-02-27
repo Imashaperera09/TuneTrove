@@ -60,7 +60,7 @@ foreach ($items as $item) {
 
             <?php if ($has_digital): ?>
                 <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.1); padding: 2rem; border-radius: 1rem; margin-bottom: 2rem; text-align: left;">
-                    <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em;">Digital Gear Access</h3>
+                    <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em;">Digital Masterpiece Access</h3>
                     <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 3rem; line-height: 1.6;">Your high-fidelity digital assets are ready for download below.</p>
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
                         <?php foreach ($items as $item): ?>

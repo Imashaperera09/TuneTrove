@@ -90,7 +90,7 @@ $all_categories = $cat_stmt->fetchAll();
                 <?php if (empty($products)): ?>
                     <div style="text-align: center; padding: 10rem 0; background: #f8f9fa; border-radius: 0.5rem; border: 2px dashed #eee;">
                         <span style="font-size: 4rem; opacity: 0.3; display: block; margin-bottom: 1rem;">🔍</span>
-                        <h2 style="font-family: var(--font-heading); color: #333;">No Gear Found</h2>
+                        <h2 style="font-family: var(--font-heading); color: #333;">No Instruments Found</h2>
                         <p style="color: #666;">Try adjusting your filters or search keywords.</p>
                         <a href="index.php" style="color: var(--primary); font-weight: 700;">View All Inventory</a>
                     </div>
