@@ -1,6 +1,26 @@
 <?php
 require_once 'includes/admin-header.php';
 
+// Handle Delete Category
+if (isset($_GET['delete'])) {
+    $id = (int)$_GET['delete'];
+    
+    // Optional: Check if products exist for this category
+    $checkStmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE category_id = ?");
+    $checkStmt->execute([$id]);
+    $count = $checkStmt->fetchColumn();
+    
+    if ($count > 0) {
+        header("Location: categories.php?error=Cannot delete category: contains products");
+        exit();
+    }
+    
+    $stmt = $pdo->prepare("DELETE FROM categories WHERE id = ?");
+    $stmt->execute([$id]);
+    header("Location: categories.php?msg=Category deleted");
+    exit();
+}
+
 // Handle Add Category
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_category'])) {
     $name = $_POST['name'];
@@ -43,6 +63,7 @@ $categories = $stmt->fetchAll();
                             <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,6 +72,12 @@ $categories = $stmt->fetchAll();
                                 <td><?php echo $cat['id']; ?></td>
                                 <td><strong><?php echo htmlspecialchars($cat['name']); ?></strong></td>
                                 <td><?php echo htmlspecialchars($cat['description']); ?></td>
+                                <td>
+                                    <div style="display: flex; gap: 1rem;">
+                                        <a href="edit_category.php?id=<?php echo $cat['id']; ?>" style="color: var(--admin-primary); text-decoration: none; font-weight: 600;">Edit</a>
+                                        <a href="?delete=<?php echo $cat['id']; ?>" onclick="return confirm('Are you sure you want to delete this category?')" style="color: var(--admin-danger); text-decoration: none; font-weight: 600;">Delete</a>
+                                    </div>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
