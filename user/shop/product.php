@@ -46,10 +46,10 @@ if (is_logged_in()) {
 ?>
 
 <style>
-    main { padding-top: 1.5rem !important; }
+    /* Product page styles */
 </style>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
+<div style="background: var(--background); min-height: 100vh; padding-top: 2rem; padding-bottom: 8rem;">
     <div class="container">
         <!-- Breadcrumbs -->
         <nav style="margin-bottom: 3rem; display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">
@@ -86,14 +86,20 @@ if (is_logged_in()) {
                     <h1 style="font-family: var(--font-heading); font-size: 2.75rem; font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 2rem; letter-spacing: -0.02em;"><?php echo htmlspecialchars($product['name']); ?></h1>
                     
                     <div style="margin-bottom: 2.5rem;">
-                        <?php if (!empty($product['sale_price'])): ?>
+                        <?php 
+                        $eff_price = get_effective_price($product);
+                        $has_deal  = has_active_deal($product);
+                        $deal_pct  = get_deal_percent($product);
+                        ?>
+                        <?php if ($has_deal): ?>
                             <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem;">
-                                <span style="font-size: 2.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.02em;">$<?php echo number_format($product['sale_price'], 2); ?></span>
-                                <span style="font-size: 1.25rem; color: #64748b; text-decoration: line-through; font-weight: 600;">$<?php echo number_format($product['price'], 2); ?></span>
+                                <span style="font-size: 2.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.02em;">£<?php echo number_format($eff_price, 2); ?></span>
+                                <span style="font-size: 1.25rem; color: #64748b; text-decoration: line-through; font-weight: 600;">£<?php echo number_format($product['price'], 2); ?></span>
+                                <span style="background: var(--primary); color: #fff; padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 800;">SAVE <?php echo $deal_pct; ?>%</span>
                             </div>
-                            <p style="color: var(--accent); font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Special Archival Value</p>
+                            <p style="color: var(--accent); font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Special Offer</p>
                         <?php else: ?>
-                            <span style="font-size: 2.5rem; font-weight: 800; color: #fff; display: block; margin-bottom: 0.75rem; letter-spacing: -0.02em;">$<?php echo number_format($product['price'], 2); ?></span>
+                            <span style="font-size: 2.5rem; font-weight: 800; color: #fff; display: block; margin-bottom: 0.75rem; letter-spacing: -0.02em;">£<?php echo number_format($eff_price, 2); ?></span>
                         <?php endif; ?>
                         <div style="display: flex; align-items: center; gap: 1rem;">
                             <?php if ($product['stock_quantity'] > 0): ?>

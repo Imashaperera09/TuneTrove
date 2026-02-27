@@ -1,6 +1,7 @@
 <?php
 require_once '../includes/header.php';
 require_once '../includes/db.php';
+require_once '../includes/functions.php';
 
 $category_name = isset($_GET['name']) ? $_GET['name'] : null;
 
@@ -69,9 +70,24 @@ $icons = [
                                     <?php if ($p['is_digital']): ?>
                                         <div style="position: absolute; top: 2rem; right: 2rem; background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); backdrop-filter: blur(12px); color: var(--primary); padding: 0.6rem 1.25rem; border-radius: 4px; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase;">Digital High-Fidelity</div>
                                     <?php endif; ?>
+                                    
+                                    <?php if (has_active_deal($p)): ?>
+                                        <div style="position: absolute; top: 2rem; left: 2rem; background: var(--primary); color: #fff; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.8rem; font-weight: 900; letter-spacing: 0.1em; z-index: 10;">
+                                            SAVE <?php echo get_deal_percent($p); ?>%
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
-                                <div style="padding: 1rem 0; display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: #fff; letter-spacing: -0.04em;"><?php echo format_price($p['price']); ?></span>
+                                <div style="padding: 1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                                        <?php 
+                                        $eff_price = get_effective_price($p);
+                                        if ($eff_price < $p['price']): ?>
+                                            <span style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: #fff; letter-spacing: -0.04em; line-height: 1;">£<?php echo number_format($eff_price, 2); ?></span>
+                                            <span style="font-size: 1rem; color: rgba(255,255,255,0.4); text-decoration: line-through; font-weight: 600; margin-top: 0.25rem;">£<?php echo number_format($p['price'], 2); ?></span>
+                                        <?php else: ?>
+                                            <span style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: #fff; letter-spacing: -0.04em; line-height: 1;">£<?php echo number_format($p['price'], 2); ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                     <button style="font-size: 0.85rem; color: #fff; background: var(--primary); border: none; border-radius: 6px; padding: 0.7rem 2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 8px 32px -8px rgba(14,165,233,0.15); cursor: pointer; transition: background 0.2s;" onclick="window.location.href='product.php?id=<?php echo $p['id']; ?>'">Buy</button>
                                 </div>
                             </a>

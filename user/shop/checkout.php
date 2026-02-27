@@ -21,8 +21,9 @@ $products = $stmt->fetchAll();
 
 foreach ($products as $p) {
     $qty = $_SESSION['cart'][$p['id']];
-    $subtotal += $p['price'] * $qty;
-    $cart_items[] = array_merge($p, ['qty' => $qty]);
+    $effective_price = get_effective_price($p);
+    $subtotal += $effective_price * $qty;
+    $cart_items[] = array_merge($p, ['qty' => $qty, 'price' => $effective_price]);
 }
 
 $shipping = calculate_shipping($subtotal);
@@ -67,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } catch (Exception $e) {
         $pdo->rollBack();
-        $error = "Failed to process order. Please try again.";
+        $error = "Failed to process order: " . $e->getMessage();
     }
 }
 ?>
@@ -90,6 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Left: Checkout Form -->
             <div>
                 <form action="checkout.php" method="POST">
+                    <?php if (isset($error)): ?>
+                        <div style="background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 2rem; color: #ef4444; font-weight: 700; font-size: 0.95rem;">
+                            ⚠️ <?php echo htmlspecialchars($error); ?>
+                        </div>
+                    <?php endif; ?>
                     <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem; padding: 3.5rem; margin-bottom: 4rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
                         <h2 style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 2.5rem; letter-spacing: -0.02em;">Shipping Archive</h2>
                         
@@ -118,19 +124,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="radio" name="payment_method" value="cod" style="margin-right: 0.5rem;"> Cash on Delivery
                                 </label>
                             </div>
-                            <div id="card-details" style="display: block;">
+                            <div id="card-details" style="display: block; margin-top: 1.5rem;">
                                 <div style="margin-bottom: 1.5rem;">
-                                    <input type="text" name="card_number" placeholder="Card Number" maxlength="19" required style="width: 100%; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem; margin-bottom: 1rem;">
-                                    <input type="text" name="card_name" placeholder="Name on Card" required style="width: 100%; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem; margin-bottom: 1rem;">
+                                    <div style="margin-bottom: 1rem;">
+                                        <label style="display: block; font-size: 0.75rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.08em;">Card Number</label>
+                                        <input type="text" name="card_number" id="card_number" placeholder="1234 5678 9012 3456" maxlength="19" class="card-input" style="width: 100%; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem; font-family: monospace; letter-spacing: 0.1em;">
+                                    </div>
+                                    <div style="margin-bottom: 1rem;">
+                                        <label style="display: block; font-size: 0.75rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.08em;">Name on Card</label>
+                                        <input type="text" name="card_name" id="card_name" placeholder="John Doe" class="card-input" style="width: 100%; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem;">
+                                    </div>
                                     <div style="display: flex; gap: 1rem;">
-                                        <input type="text" name="card_expiry" placeholder="MM/YY" maxlength="5" required style="flex: 1; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem;">
-                                        <input type="text" name="card_cvc" placeholder="CVC" maxlength="4" required style="flex: 1; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem;">
+                                        <div style="flex: 1;">
+                                            <label style="display: block; font-size: 0.75rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.08em;">Expiry</label>
+                                            <input type="text" name="card_expiry" id="card_expiry" placeholder="MM/YY" maxlength="5" class="card-input" style="width: 100%; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem; font-family: monospace;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <label style="display: block; font-size: 0.75rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.08em;">CVC</label>
+                                            <input type="password" name="card_cvc" id="card_cvc" placeholder="•••" maxlength="4" class="card-input" style="width: 100%; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem; font-family: monospace;">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.5rem; border-radius: 0.5rem; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4rem; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);">Authorize Acquisition</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem 2rem; border-radius: 0.5rem; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 3rem; box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.4);">Place Order</button>
                     </div>
                 </form>
 
@@ -185,12 +203,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script>
-// Toggle card details form based on payment method
-const cardDetails = document.getElementById('card-details');
+// Toggle card details and required attributes based on payment method
+function togglePaymentMethod(method) {
+    const cardDetails = document.getElementById('card-details');
+    const cardInputs = document.querySelectorAll('.card-input');
+    if (method === 'card') {
+        cardDetails.style.display = 'block';
+        cardInputs.forEach(i => i.setAttribute('required', 'required'));
+    } else {
+        cardDetails.style.display = 'none';
+        cardInputs.forEach(i => i.removeAttribute('required'));
+    }
+}
+
+// Set initial state
+togglePaymentMethod('card');
+
+// Listen for radio changes
 document.querySelectorAll('input[name="payment_method"]').forEach(function(radio) {
-    radio.addEventListener('change', function() {
-        cardDetails.style.display = (this.value === 'card') ? 'block' : 'none';
-    });
+    radio.addEventListener('change', function() { togglePaymentMethod(this.value); });
+});
+
+// Auto-format card number: groups of 4
+document.getElementById('card_number').addEventListener('input', function(e) {
+    let val = this.value.replace(/\D/g, '').substring(0, 16);
+    this.value = val.match(/.{1,4}/g)?.join(' ') || val;
+});
+
+// Auto-format expiry MM/YY
+document.getElementById('card_expiry').addEventListener('input', function(e) {
+    let val = this.value.replace(/\D/g, '').substring(0, 4);
+    if (val.length >= 3) val = val.substring(0,2) + '/' + val.substring(2);
+    this.value = val;
 });
 </script>
 

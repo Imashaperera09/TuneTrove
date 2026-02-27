@@ -1,6 +1,7 @@
 <?php
 require_once '../includes/header.php';
 require_once '../includes/db.php';
+require_once '../includes/functions.php';
 
 $category = isset($_GET['cat']) ? $_GET['cat'] : null;
 $search = isset($_GET['search']) ? $_GET['search'] : '';
@@ -44,7 +45,7 @@ $cat_stmt->execute($order);
 $all_categories = $cat_stmt->fetchAll();
 ?>
 
-<div class="shop-showroom" style="min-height: 100vh; background: var(--background); padding-top: 0.5rem; padding-bottom: 8rem;">
+<div class="shop-showroom" style="min-height: 100vh; background: var(--background); padding-top: 2rem; padding-bottom: 8rem;">
     <div class="container">
         <!-- Removed Breadcrumbs-style header for minimal look -->
         <div style="margin-bottom: 2.5rem;">
@@ -98,7 +99,12 @@ $all_categories = $cat_stmt->fetchAll();
                         <?php foreach ($products as $p): ?>
                             <div class="product-card-pro" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.borderColor='rgba(14, 165, 233, 0.4)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';" >
                                 <a href="product.php?id=<?php echo $p['id']; ?>" style="text-decoration: none; color: inherit; flex: 1; display: flex; flex-direction: column;">
-                                    <div style="height: 180px; background: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+                                    <div style="height: 180px; background: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 1px solid rgba(255, 255, 255, 0.03); position: relative;">
+                                        <?php if (has_active_deal($p)): ?>
+                                            <div style="position: absolute; top: 1rem; right: 1rem; background: var(--primary); color: #fff; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 800; z-index: 10;">
+                                                SAVE <?php echo get_deal_percent($p); ?>%
+                                            </div>
+                                        <?php endif; ?>
                                         <?php if (!empty($p['image_url'])): ?>
                                             <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($p['image_url']); ?>" style="max-width: 90%; max-height: 90%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));">
                                         <?php else: ?>
@@ -112,11 +118,13 @@ $all_categories = $cat_stmt->fetchAll();
                                         </h3>
                                         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
                                             <span style="font-size: 1.5rem; font-weight: 800; color: #fff;">
-                                                <?php if (!empty($p['sale_price'])): ?>
-                                                    <span style="color: var(--primary);">$<?php echo number_format($p['sale_price'], 2); ?></span>
-                                                    <span style="font-size: 0.9rem; color: #64748b; text-decoration: line-through; margin-left: 0.5rem;">$<?php echo number_format($p['price'], 2); ?></span>
+                                                <?php 
+                                                $eff_price = get_effective_price($p);
+                                                if ($eff_price < $p['price']): ?>
+                                                    <span style="color: var(--primary);">£<?php echo number_format($eff_price, 2); ?></span>
+                                                    <span style="font-size: 0.9rem; color: #64748b; text-decoration: line-through; margin-left: 0.5rem;">£<?php echo number_format($p['price'], 2); ?></span>
                                                 <?php else: ?>
-                                                    $<?php echo number_format($p['price'], 2); ?>
+                                                    £<?php echo number_format($p['price'], 2); ?>
                                                 <?php endif; ?>
                                             </span>
                                             <span style="font-size: 0.75rem; color: #4ade80; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">In Stock</span>

@@ -55,9 +55,10 @@ if (!empty($_SESSION['cart'])) {
 
     foreach ($products as $p) {
         $qty = $_SESSION['cart'][$p['id']];
-        $line_total = $p['price'] * $qty;
+        $effective_price = get_effective_price($p);
+        $line_total = $effective_price * $qty;
         $subtotal += $line_total;
-        $cart_items[] = array_merge($p, ['qty' => $qty, 'line_total' => $line_total]);
+        $cart_items[] = array_merge($p, ['qty' => $qty, 'line_total' => $line_total, 'effective_price' => $effective_price]);
     }
 }
 
@@ -66,7 +67,7 @@ $total = $subtotal + $shipping;
 ?>
 
 <style>
-    main { padding-top: 1.5rem !important; }
+    /* Cart page styles */
     .qty-input::-webkit-outer-spin-button,
     .qty-input::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -77,13 +78,11 @@ $total = $subtotal + $shipping;
     }
 </style>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
+<div style="background: var(--background); min-height: 100vh; padding-top: 2rem; padding-bottom: 8rem;">
     <div class="container">
         <!-- Header -->
-        <div style="margin-bottom: 5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2.5rem;">
-            <p style="text-transform: uppercase; font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1rem;">Transaction Portal</p>
+        <div style="margin-bottom: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2.5rem;">
             <h1 style="font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Review Your <span style="color: var(--primary);">Selection</span></h1>
-            <p style="color: #64748b; font-size: 1.15rem; margin-top: 1rem;">Prepare your curated gear for final acquisition.</p>
         </div>
 
         <?php if (empty($cart_items)): ?>
@@ -94,7 +93,7 @@ $total = $subtotal + $shipping;
                 <a href="/TuneTrove/user/shop/" class="btn btn-primary" style="padding: 1.25rem 4rem; font-weight: 800; font-size: 1rem; border-radius: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em;">Browse Collection</a>
             </div>
         <?php else: ?>
-            <div style="display: grid; grid-template-columns: 1fr 400px; gap: 4rem; align-items: flex-start;">
+            <div style="display: grid; grid-template-columns: 1fr 400px; gap: 4rem; align-items: start;">
                 
                 <!-- Items Table-like List -->
                 <div style="display: flex; flex-direction: column; gap: 1.5rem;">

@@ -32,13 +32,13 @@ foreach ($items as $item) {
 }
 ?>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 8rem; padding-bottom: 10rem;">
-    <div class="container" style="max-width: 900px; text-align: center;">
-        <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1.5rem; padding: 6rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
+<div style="background: var(--background); min-height: 100vh; padding-top: 3rem; padding-bottom: 5rem;">
+    <div class="container" style="max-width: 800px; text-align: center;">
+        <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1.5rem; padding: 3rem; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);">
             
-            <div style="font-size: 6rem; margin-bottom: 3rem; filter: drop-shadow(0 0 30px rgba(14, 165, 233, 0.4));">🏆</div>
-            <h1 style="font-family: var(--font-heading); font-size: 4rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem; letter-spacing: -0.04em;">Acquisition <span style="color: var(--primary);">Confirmed</span></h1>
-            <p style="color: #64748b; font-size: 1.35rem; margin-bottom: 5rem;">Order <span style="font-weight: 800; color: #fff;">TT-<?php echo str_pad($id, 6, '0', STR_PAD_LEFT); ?></span> has been authorized and queued for precision fulfillment.</p>
+            <div style="font-size: 3.5rem; margin-bottom: 1.5rem;">🏆</div>
+            <h1 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 1rem; letter-spacing: -0.04em;">Order <span style="color: var(--primary);">Confirmed!</span></h1>
+            <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 3rem;">Order <span style="font-weight: 800; color: #fff;">TT-<?php echo str_pad($id, 6, '0', STR_PAD_LEFT); ?></span> has been placed and is being processed.</p>
 
             <div style="text-align: left; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.02); border-radius: 1rem; padding: 3.5rem; margin-bottom: 5rem;">
                 <h3 style="font-size: 0.8rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 1.5rem;">Acquisition Summary</h3>
@@ -59,7 +59,7 @@ foreach ($items as $item) {
             </div>
 
             <?php if ($has_digital): ?>
-                <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.1); padding: 4rem; border-radius: 1rem; margin-bottom: 5rem; text-align: left;">
+                <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.1); padding: 2rem; border-radius: 1rem; margin-bottom: 2rem; text-align: left;">
                     <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em;">Digital Gear Access</h3>
                     <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 3rem; line-height: 1.6;">Your high-fidelity digital assets are ready for download below.</p>
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
@@ -74,12 +74,12 @@ foreach ($items as $item) {
                 </div>
             <?php endif; ?>
 
-            <div style="display: flex; gap: 2rem; justify-content: center;">
-                <a href="../account/index.php" class="btn btn-primary" style="padding: 1.5rem 3.5rem; border-radius: 0.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);">View Archive</a>
-                <a href="/TuneTrove/user/shop/" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); color: #fff; text-decoration: none; padding: 1.5rem 3.5rem; border-radius: 0.5rem; font-weight: 800; text-transform: uppercase; font-size: 1rem; letter-spacing: 0.1em; transition: all 0.2s;" onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'">Explore More</a>
+            <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                <a href="../account/index.php" class="btn btn-primary" style="padding: 1rem 2.5rem; border-radius: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">View Orders</a>
+                <a href="/TuneTrove/user/shop/" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); color: #fff; text-decoration: none; padding: 1rem 2.5rem; border-radius: 0.5rem; font-weight: 700; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 0.05em; transition: all 0.2s;" onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'">Continue Shopping</a>
             </div>
 
-            <p style="margin-top: 5rem; color: #475569; font-size: 0.9rem; letter-spacing: 0.05em;">A detailed manifest has been dispatched to your registered communique channel.</p>
+            <p style="margin-top: 2.5rem; color: #475569; font-size: 0.85rem;">A confirmation email has been sent to your registered address.</p>
         </div>
     </div>
 </div>
