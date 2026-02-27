@@ -49,10 +49,10 @@ if (is_logged_in()) {
     /* Product page styles */
 </style>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 2rem; padding-bottom: 8rem;">
+<div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
     <div class="container">
         <!-- Breadcrumbs -->
-        <nav style="margin-bottom: 3rem; display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">
+        <nav style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">
             <a href="index.php" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='inherit'">Shop</a>
             <span style="opacity: 0.3;">/</span>
             <a href="categories.php" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='inherit'">Categories</a>

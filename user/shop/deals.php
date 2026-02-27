@@ -28,11 +28,11 @@ $products = $stmt->fetchAll();
 .countdown-lbl { font-size: 0.6rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
 </style>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 2rem; padding-bottom: 8rem;">
+<div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
     <div class="container">
 
         <!-- Header -->
-        <div style="margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 1.5rem;">
+        <div style="margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 1.5rem;">
             <p style="text-transform: uppercase; font-size: 0.75rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 0.75rem;">Limited Time Offers</p>
             <h1 style="font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Today's <span style="color: var(--primary);">Deals</span></h1>
             <p style="color: #64748b; margin-top: 0.75rem; font-size: 1rem;">Exclusive discounts — updated regularly.</p>

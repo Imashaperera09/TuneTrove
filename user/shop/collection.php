@@ -41,7 +41,7 @@ $icons = [
     <!-- Removed Adaptive Collection Hero section for minimal look -->
 
     <!-- Collection Mosaic -->
-    <section style="padding: 1.5rem 0; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.03), transparent 70%);">
+    <section style="padding: 0 0 1.5rem; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.03), transparent 70%);">
         <div class="container">
             <?php if (empty($products)): ?>
                 <div style="text-align: center; padding: 8rem 2rem; background: rgba(255, 255, 255, 0.01); border-radius: 2rem; border: 1px dashed rgba(255, 255, 255, 0.05);">

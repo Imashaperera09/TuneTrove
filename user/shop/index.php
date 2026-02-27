@@ -45,10 +45,10 @@ $cat_stmt->execute($order);
 $all_categories = $cat_stmt->fetchAll();
 ?>
 
-<div class="shop-showroom" style="min-height: 100vh; background: var(--background); padding-top: 2rem; padding-bottom: 8rem;">
+<div class="shop-showroom" style="min-height: 100vh; background: var(--background); padding-top: 0; padding-bottom: 8rem;">
     <div class="container">
         <!-- Removed Breadcrumbs-style header for minimal look -->
-        <div style="margin-bottom: 2.5rem;">
+        <div style="margin-bottom: 1.5rem;">
             <h1 style="font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: -0.04em; color: #fff; margin-top: 0;">
                 <?php echo $category ? htmlspecialchars($category) : 'The <span style="color: var(--primary);">Complete</span> Catalog'; ?>
             </h1>

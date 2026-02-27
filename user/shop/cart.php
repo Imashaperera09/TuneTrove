@@ -78,10 +78,10 @@ $total = $subtotal + $shipping;
     }
 </style>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 2rem; padding-bottom: 8rem;">
+<div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
     <div class="container">
         <!-- Header -->
-        <div style="margin-bottom: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 2.5rem;">
+        <div style="margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 1.5rem;">
             <h1 style="font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Review Your <span style="color: var(--primary);">Selection</span></h1>
         </div>
 

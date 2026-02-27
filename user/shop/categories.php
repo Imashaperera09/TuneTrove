@@ -15,10 +15,10 @@ try {
 }
 ?>
 
-<div style="background: var(--background); min-height: 100vh; padding-top: 2rem; padding-bottom: 8rem;">
+<div style="background: var(--background); min-height: 100vh; padding-top: 0; padding-bottom: 8rem;">
     <div class="container">
         <!-- Breadcrumb / Header -->
-        <div style="text-align: center; margin-bottom: 2.5rem;">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
             <h1 style="font-family: var(--font-heading); font-size: 4rem; weight: 800; color: #fff; letter-spacing: -0.04em; margin: 0;">Shop by <span style="color: var(--primary);">Category</span></h1>
             <div style="width: 60px; height: 4px; background: var(--primary); margin: 2rem auto; border-radius: 999px;"></div>
         </div>
