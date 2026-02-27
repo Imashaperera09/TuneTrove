@@ -13,10 +13,10 @@ $stmt->execute();
 $products = $stmt->fetchAll();
 ?>
 
-<div class="deals-showroom" style="min-height: 100vh; background: var(--background); padding-top: 5rem; padding-bottom: 8rem;">
+<div class="deals-showroom" style="min-height: 100vh; background: var(--background); padding-top: 0.5rem; padding-bottom: 8rem;">
     <div class="container">
         <!-- Header -->
-        <div style="margin-bottom: 5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 3rem;">
+        <div style="margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 1.5rem;">
             <p style="text-transform: uppercase; font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1rem;">Exclusive Acquisition</p>
             <h1 style="font-family: var(--font-heading); font-size: 4rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Archival <span style="color: var(--primary);">Specials</span></h1>
             <p style="color: #64748b; font-size: 1.25rem; margin-top: 1rem; max-width: 700px;">Curated masterpieces available with significant archival value. Secure your sonic legacy today.</p>

@@ -25,9 +25,17 @@ if (isset($_GET['delete'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_category'])) {
     $name = $_POST['name'];
     $desc = $_POST['description'];
-    
-    $stmt = $pdo->prepare("INSERT INTO categories (name, description) VALUES (?, ?)");
-    $stmt->execute([$name, $desc]);
+    $image_url = null;
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $filename = 'cat_' . time() . '_' . rand(1000,9999) . '.' . $ext;
+        $target = '../user/assets/images/' . $filename;
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+            $image_url = $filename;
+        }
+    }
+    $stmt = $pdo->prepare("INSERT INTO categories (name, description, image_url) VALUES (?, ?, ?)");
+    $stmt->execute([$name, $desc, $image_url]);
     header("Location: categories.php?msg=Category added");
     exit();
 }
@@ -41,7 +49,7 @@ $categories = $stmt->fetchAll();
             <div class="content-card" style="flex: 1; min-width: 300px;">
                 <div class="card-header"><h3 class="card-title">Add Category</h3></div>
                 <div style="padding: 1.5rem;">
-                    <form method="POST" style="display: grid; gap: 1rem;">
+                    <form method="POST" enctype="multipart/form-data" style="display: grid; gap: 1rem;">
                         <div>
                             <label style="display: block; font-size: 0.875rem; margin-bottom: 0.5rem;">Category Name</label>
                             <input type="text" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--admin-border); border-radius: 0.5rem;">
@@ -49,6 +57,10 @@ $categories = $stmt->fetchAll();
                         <div>
                             <label style="display: block; font-size: 0.875rem; margin-bottom: 0.5rem;">Description</label>
                             <textarea name="description" rows="3" style="width: 100%; padding: 0.75rem; border: 1px solid var(--admin-border); border-radius: 0.5rem;"></textarea>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.875rem; margin-bottom: 0.5rem;">Category Image</label>
+                            <input type="file" name="image" accept="image/*" style="width: 100%;">
                         </div>
                         <button type="submit" name="add_category" style="background: var(--admin-primary); color: white; border: none; padding: 1rem; border-radius: 0.5rem; font-weight:600; cursor:pointer;">Add Category</button>
                     </form>

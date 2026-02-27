@@ -22,9 +22,17 @@ if (!$category) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_category'])) {
     $name = $_POST['name'];
     $description = $_POST['description'];
-
-    $stmt = $pdo->prepare("UPDATE categories SET name = ?, description = ? WHERE id = ?");
-    $stmt->execute([$name, $description, $id]);
+    $image_url = $category['image_url'];
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $filename = 'cat_' . time() . '_' . rand(1000,9999) . '.' . $ext;
+        $target = '../user/assets/images/' . $filename;
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+            $image_url = $filename;
+        }
+    }
+    $stmt = $pdo->prepare("UPDATE categories SET name = ?, description = ?, image_url = ? WHERE id = ?");
+    $stmt->execute([$name, $description, $image_url, $id]);
     header("Location: categories.php?msg=Category updated successfully");
     exit();
 }
@@ -40,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_category'])) {
             <h3 class="card-title">Edit Category: <?php echo htmlspecialchars($category['name']); ?></h3>
         </div>
         <div style="padding: 2rem;">
-            <form method="POST" style="display: grid; gap: 1.5rem;">
+            <form method="POST" enctype="multipart/form-data" style="display: grid; gap: 1.5rem;">
                 <div>
                     <label style="display: block; font-size: 0.875rem; margin-bottom: 0.5rem; font-weight: 600;">Category Name</label>
                     <input type="text" name="name" value="<?php echo htmlspecialchars($category['name']); ?>" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--admin-border); border-radius: 0.5rem;">
@@ -49,6 +57,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_category'])) {
                 <div>
                     <label style="display: block; font-size: 0.875rem; margin-bottom: 0.5rem; font-weight: 600;">Category Description</label>
                     <textarea name="description" rows="5" style="width: 100%; padding: 0.75rem; border: 1px solid var(--admin-border); border-radius: 0.5rem;"><?php echo htmlspecialchars($category['description']); ?></textarea>
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 0.875rem; margin-bottom: 0.5rem; font-weight: 600;">Category Image</label>
+                    <?php if (!empty($category['image_url'])): ?>
+                        <img src="../user/assets/images/<?php echo htmlspecialchars($category['image_url']); ?>" style="max-width:120px; max-height:80px; display:block; margin-bottom:0.5rem; border-radius:8px;">
+                    <?php endif; ?>
+                    <input type="file" name="image" accept="image/*" style="width: 100%;">
+                    <small style="color:var(--admin-text-muted);">Upload to change image</small>
                 </div>
 
                 <div style="padding-top: 1.5rem; border-top: 1px solid var(--admin-border); display: flex; justify-content: flex-end; gap: 1rem;">

@@ -16,7 +16,7 @@ try {
 ?>
 
 <!-- Blue Premium Hero Section -->
-<section class="marketing-hero" style="background: radial-gradient(circle at 0% 0%, #002d5a 0%, var(--background) 100%); padding: 8rem 0; overflow: hidden; color: white; position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+<section class="marketing-hero" style="background: radial-gradient(circle at 0% 0%, #002d5a 0%, var(--background) 100%); padding: 3rem 0; overflow: hidden; color: white; position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('/TuneTrove/user/assets/images/mesh-glow.png') no-repeat center center/cover; opacity: 0.1; pointer-events: none;"></div>
     <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2;">
         <div class="reveal">
@@ -27,12 +27,12 @@ try {
                 <a href="/TuneTrove/user/shop/" class="btn" style="background: var(--primary); color: white; padding: 1.25rem 3.5rem; font-size: 1.1rem; font-weight: 800; border-radius: 4px; text-transform: uppercase; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.4);">Browse Collection</a>
             </div>
         </div>
-        <div class="reveal" style="position: relative; height: 450px; display: flex; align-items: center; justify-content: center;">
-            <div style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);"></div>
+        <div class="reveal" style="position: relative; height: 350px; display: flex; align-items: center; justify-content: center;">
+            <div style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);"></div>
             <?php if (file_exists('assets/images/hero.png')): ?>
-                <img src="/TuneTrove/user/assets/images/hero.png" style="width: 130%; transform: rotate(-5deg); filter: drop-shadow(0 40px 100px rgba(0,0,0,0.6));" alt="Premium Instrument">
+                <img src="/TuneTrove/user/assets/images/hero.png" style="width: 100%; transform: rotate(-5deg); filter: drop-shadow(0 40px 100px rgba(0,0,0,0.6));" alt="Premium Instrument">
             <?php else: ?>
-                <div style="font-size: 18rem; opacity: 0.3; filter: drop-shadow(0 0 50px var(--primary));">🎻</div>
+                <div style="font-size: 14rem; opacity: 0.3; filter: drop-shadow(0 0 50px var(--primary));">🎻</div>
             <?php endif; ?>
         </div>
     </div>
@@ -46,7 +46,7 @@ try {
 </div>
 
 <!-- Values Section -->
-<section style="padding: 10rem 0; background: var(--background);">
+<section style="padding: 4rem 0 2rem; background: var(--background);">
     <div class="container">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
             <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
@@ -69,7 +69,7 @@ try {
 </section>
 
 <!-- Categories Section -->
-<section style="padding: 10rem 0; background: #060b1e;">
+<section style="padding: 2rem 0 6rem; background: #060b1e;">
     <div class="container">
         <div style="margin-bottom: 6rem; text-align: left; border-left: 4px solid var(--primary); padding-left: 2.5rem;">
             <h2 class="reveal" style="font-family: var(--font-heading); font-size: 4rem; font-weight: 800; color: #fff; margin-bottom: 1rem; letter-spacing: -0.04em;">Shop by Category</h2>
