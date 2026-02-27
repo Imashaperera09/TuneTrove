@@ -96,4 +96,3 @@ function get_deal_percent($product) {
     }
     return 0;
 }
-?>
