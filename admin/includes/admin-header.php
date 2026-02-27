@@ -2,7 +2,13 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// Note: In a real app, strictly check for admin role here.
+
+// Check if user is logged in and is an admin
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_role']) || ($_SESSION['user_role'] !== 'admin' && $_SESSION['user_role'] !== 'superadmin')) {
+    header("Location: /TuneTrove/admin/login.php");
+    exit();
+}
+
 require_once __DIR__ . '/../../user/includes/db.php';
 require_once __DIR__ . '/../../user/includes/functions.php';
 
@@ -41,6 +47,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a href="/TuneTrove/user/" style="color: var(--admin-sidebar-text); text-decoration: none; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem;">
                 <span>⬅️</span> Back to Shop
             </a>
+            <a href="logout.php" style="color: var(--admin-sidebar-text); text-decoration: none; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem;">
+                <span>🚪</span> Logout
+            </a>
         </div>
     </aside>
 
@@ -62,11 +71,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
             <div class="user-profile" style="display: flex; align-items: center; gap: 1rem;">
                 <div style="text-align: right;">
-                    <div style="font-weight: 600;">Admin User</div>
-                    <div style="font-size: 0.75rem; color: var(--admin-text-muted);">Super Admin</div>
+                    <div style="font-weight: 600;"><?php echo htmlspecialchars($_SESSION['username'] ?? 'Admin User'); ?></div>
+                    <div style="font-size: 0.75rem; color: var(--admin-text-muted); text-transform: capitalize;"><?php echo htmlspecialchars($_SESSION['user_role'] ?? 'Admin'); ?></div>
                 </div>
                 <div style="width: 40px; height: 40px; background: var(--admin-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
-                    A
+                    <?php echo strtoupper(substr($_SESSION['username'] ?? 'A', 0, 1)); ?>
                 </div>
             </div>
         </header>
