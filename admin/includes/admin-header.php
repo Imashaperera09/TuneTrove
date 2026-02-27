@@ -49,7 +49,16 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <li><a href="products.php" class="<?php echo $current_page == 'products.php' ? 'active' : ''; ?>"><span>📦</span> Products</a></li>
                 <li><a href="categories.php" class="<?php echo $current_page == 'categories.php' ? 'active' : ''; ?>"><span>📁</span> Categories</a></li>
                 <li><a href="orders.php" class="<?php echo $current_page == 'orders.php' ? 'active' : ''; ?>"><span>🛒</span> Orders</a></li>
-                <li><a href="deals.php" class="<?php echo $current_page == 'deals.php' ? 'active' : ''; ?>"><span>🏷️</span> Deals</a></li>
+                <li>
+                    <a href="deals.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'deals.php' ? 'active' : ''; ?>">
+                        <span class="icon">🏷️</span> Promotions
+                    </a>
+                </li>
+                <li>
+                    <a href="digital_files.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'digital_files.php' ? 'active' : ''; ?>">
+                        <span class="icon">📑</span> Digital Assets
+                    </a>
+                </li>
                 <li><a href="reviews.php" class="<?php echo $current_page == 'reviews.php' ? 'active' : ''; ?>"><span>⭐</span> Reviews</a></li>
                 <?php if (in_array($_SESSION['user_role'], ['admin', 'superadmin'])): ?>
                 <li><a href="users.php" class="<?php echo $current_page == 'users.php' ? 'active' : ''; ?>"><span>👥</span> Users</a></li>

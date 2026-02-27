@@ -1,51 +1,80 @@
 <?php
 require_once '../includes/db.php';
-session_start();
+require_once '../includes/functions.php';
 
-if (!isset($_SESSION['user_id'])) {
-    die("Unauthorized access.");
+// Ensure user is logged in
+if (!is_logged_in()) {
+    redirect('/TuneTrove/user/auth/login.php', 'Please login to download files.', 'error');
 }
 
 $order_id = isset($_GET['order_id']) ? (int)$_GET['order_id'] : 0;
 $product_id = isset($_GET['product_id']) ? (int)$_GET['product_id'] : 0;
 $user_id = $_SESSION['user_id'];
 
-// Verify purchase
-$stmt = $pdo->prepare("SELECT dp.file_path, p.name 
-                      FROM order_items oi 
-                      JOIN orders o ON oi.order_id = o.id 
-                      JOIN products p ON oi.product_id = p.id 
-                      JOIN digital_products dp ON p.id = dp.product_id 
-                      WHERE o.id = ? AND o.user_id = ? AND p.id = ? AND o.status = 'paid'");
-$stmt->execute([$order_id, $user_id, $product_id]);
-$file_info = $stmt->fetch();
-
-if (!$file_info) {
-    die("Invalid download link or order not paid.");
+if (!$order_id || !$product_id) {
+    redirect('index.php', 'Invalid download request.', 'error');
 }
 
-$file_path = $file_info['file_path'];
-// In a real app, this path would be outside public_html
-// For this demo, we'll assume files are in assets/downloads
-$full_path = '../assets/' . $file_path;
+// 1. Verify that the order belongs to the user and is in a valid state
+$stmt = $pdo->prepare("SELECT id, status FROM orders WHERE id = ? AND user_id = ?");
+$stmt->execute([$order_id, $user_id]);
+$order = $stmt->fetch();
 
-if (file_exists($full_path)) {
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="' . basename($full_path) . '"');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($full_path));
-    readfile($full_path);
-    exit;
-} else {
-    // For demo purposes, we will just simulate the download if the file doesn't exist
-    // to avoid errors during the presentation
-    header('Content-Type: text/plain');
-    header('Content-Disposition: attachment; filename="' . str_replace(' ', '_', $file_info['name']) . '_Demo.txt"');
-    echo "This is a demo download for " . $file_info['name'] . ".\n";
-    echo "In a production environment, the actual PDF/MP3 file would be served here.";
-    exit;
+if (!$order) {
+    redirect('index.php', 'Order not found.', 'error');
 }
+
+if (!in_array($order['status'], ['paid', 'shipped', 'completed'])) {
+    redirect("view_order.php?id=$order_id", 'Payment must be completed to download digital assets.', 'error');
+}
+
+// 2. Verify that the product is actually part of this order
+$stmt = $pdo->prepare("SELECT quantity FROM order_items WHERE order_id = ? AND product_id = ?");
+$stmt->execute([$order_id, $product_id]);
+$order_item = $stmt->fetch();
+
+if (!$order_item) {
+    redirect("view_order.php?id=$order_id", 'Product not found in this order.', 'error');
+}
+
+// 3. Look up the digital file path
+$stmt = $pdo->prepare("SELECT file_path FROM digital_products WHERE product_id = ?");
+$stmt->execute([$product_id]);
+$digital_product = $stmt->fetch();
+
+if (!$digital_product || empty($digital_product['file_path'])) {
+    redirect("view_order.php?id=$order_id", 'Digital file not found. Please contact support.', 'error');
+}
+
+// 4. Determine absolute file path and verify it exists
+$base_path = dirname(__DIR__, 2); // Goes up two directories from user/account to root
+$absolute_path = $base_path . '/' . ltrim($digital_product['file_path'], '/');
+
+if (!file_exists($absolute_path)) {
+    // Also try checking relative to htdocs
+    $alternative_path = '../../' . ltrim($digital_product['file_path'], '/');
+    if (!file_exists($alternative_path)) {
+        redirect("view_order.php?id=$order_id", 'The file is temporarily unavailable. Please contact support.', 'error');
+    } else {
+        $absolute_path = $alternative_path;
+    }
+}
+
+// 5. Serve the file for download securely
+$file_name = basename($absolute_path);
+$mime_type = mime_content_type($absolute_path) ?: 'application/octet-stream';
+
+// If it's a ZIP or PDF, force download, otherwise try inline (optional)
+header('Content-Type: ' . $mime_type);
+header('Content-Disposition: attachment; filename="' . $file_name . '"');
+header('Expires: 0');
+header('Cache-Control: must-revalidate');
+header('Pragma: public');
+header('Content-Length: ' . filesize($absolute_path));
+
+// Clear output buffer and read file
+ob_clean();
+flush();
+readfile($absolute_path);
+exit;
 ?>

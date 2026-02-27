@@ -65,7 +65,7 @@ foreach ($items as $item) {
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
                         <?php foreach ($items as $item): ?>
                             <?php if ($item['is_digital']): ?>
-                                <a href="download.php?order_id=<?php echo $id; ?>&product_id=<?php echo $item['product_id']; ?>" style="background: var(--primary); color: #fff; text-decoration: none; padding: 1rem; border-radius: 4px; font-weight: 800; text-align: center; font-size: 0.9rem; text-transform: uppercase;">
+                                <a href="../account/download.php?order_id=<?php echo $id; ?>&product_id=<?php echo $item['product_id']; ?>" style="background: var(--primary); color: #fff; text-decoration: none; padding: 1rem; border-radius: 4px; font-weight: 800; text-align: center; font-size: 0.9rem; text-transform: uppercase;">
                                     Download <?php echo htmlspecialchars($item['name']); ?>
                                 </a>
                             <?php endif; ?>
