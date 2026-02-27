@@ -38,6 +38,45 @@ try {
     </div>
 </section>
 
+<?php if (is_logged_in() && !empty($recent_orders)): ?>
+<!-- Recent Activity Section -->
+<section style="padding: 4rem 0; background: #080d21; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+            <div>
+                <p style="text-transform: uppercase; font-size: 0.7rem; font-weight: 800; color: var(--accent); letter-spacing: 0.2em; margin-bottom: 0.75rem;">Your Journey</p>
+                <h2 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: #fff; letter-spacing: -0.03em;">Recent <span style="color: var(--primary);">Acquisitions</span></h2>
+            </div>
+            <a href="/TuneTrove/user/account/index.php" style="color: #64748b; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(100, 116, 139, 0.3); padding-bottom: 4px; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">View All Orders</a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+            <?php foreach ($recent_orders as $order): ?>
+                <a href="/TuneTrove/user/account/view_order.php?id=<?php echo $order['id']; ?>" style="text-decoration: none; display: block;">
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden;" onmouseover="this.style.background='rgba(14, 165, 233, 0.03)'; this.style.borderColor='rgba(14, 165, 233, 0.2)';" onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)';">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                            <div>
+                                <p style="font-size: 0.7rem; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem;">Order Reference</p>
+                                <p style="font-family: var(--font-heading); font-weight: 800; color: #fff; font-size: 1.25rem;">TT-<?php echo str_pad($order['id'], 6, '0', STR_PAD_LEFT); ?></p>
+                            </div>
+                            <span style="padding: 0.25rem 0.6rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 4px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: #fff; letter-spacing: 0.05em;">
+                                <?php echo htmlspecialchars($order['status']); ?>
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                            <div>
+                                <p style="color: #64748b; font-size: 0.85rem;"><?php echo date('M d, Y', strtotime($order['created_at'])); ?></p>
+                            </div>
+                            <p style="font-weight: 800; color: var(--primary); font-size: 1.25rem;">$<?php echo number_format($order['total_amount'], 2); ?></p>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
 <!-- Categories Section -->
 <section style="padding: 6rem 0 6rem; background: #060b1e;">
     <div class="container">

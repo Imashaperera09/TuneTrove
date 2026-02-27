@@ -22,10 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $file_path = $upload_dir . $file_name;
             $db_path = 'user/assets/downloads/' . $file_name;
 
-            // Only allow PDF or specific extensions for security if needed
+            // Allow PDF, ZIP, and common image formats
+            $allowed_exts = ['pdf', 'zip', 'jpg', 'jpeg', 'png', 'webp', 'gif'];
             $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-            if ($file_ext !== 'pdf' && $file_ext !== 'zip') {
-                redirect('digital_files.php', 'Only PDF and ZIP files are allowed.', 'error');
+            if (!in_array($file_ext, $allowed_exts)) {
+                redirect('digital_files.php', 'Invalid file format. Allowed: ' . implode(', ', $allowed_exts), 'error');
             }
 
             if (move_uploaded_file($file_tmp, $file_path)) {
@@ -146,15 +147,15 @@ require_once 'includes/admin-header.php';
                             <button onclick="this.parentElement.parentElement.style.display='none'" style="position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">&times;</button>
                             
                             <h3 style="font-family: var(--font-heading); font-size: 1.75rem; color: #fff; margin-bottom: 2rem; letter-spacing: -0.02em;">Upload <span style="color: var(--primary);">Asset</span></h3>
-                            <p style="color: #94a3b8; font-size: 1rem; margin-bottom: 2rem;">Attach a PDF or ZIP file for <strong><?php echo htmlspecialchars($item['name']); ?></strong>.</p>
+                            <p style="color: #94a3b8; font-size: 1rem; margin-bottom: 2rem;">Attach a PDF, ZIP, or high-resolution Image for <strong><?php echo htmlspecialchars($item['name']); ?></strong>.</p>
                             
                             <form action="digital_files.php" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="upload_file" value="1">
                                 <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                                 
                                 <div style="margin-bottom: 1.5rem;">
-                                    <label style="display: block; font-size: 0.75rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Digital File (.pdf, .zip)</label>
-                                    <input type="file" name="digital_file" required accept=".pdf,.zip" style="width: 100%; padding: 1rem; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 0.5rem; color: #fff;">
+                                    <label style="display: block; font-size: 0.75rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Digital File (PDF, ZIP, or Image)</label>
+                                    <input type="file" name="digital_file" required accept=".pdf,.zip,.jpg,.jpeg,.png,.webp,.gif" style="width: 100%; padding: 1rem; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 0.5rem; color: #fff;">
                                 </div>
 
                                 <div style="margin-bottom: 2.5rem;">

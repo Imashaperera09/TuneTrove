@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once '../includes/db.php';
 require_once '../includes/functions.php';
 
@@ -73,8 +76,6 @@ header('Pragma: public');
 header('Content-Length: ' . filesize($absolute_path));
 
 // Clear output buffer and read file
-ob_clean();
-flush();
+if (ob_get_length()) ob_end_clean();
 readfile($absolute_path);
 exit;
-?>
