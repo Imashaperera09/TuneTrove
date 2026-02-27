@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
     $brand = $_POST['brand'];
     $description = $_POST['description'];
     $sale_price = $_POST['sale_price'] ?: null;
+    $is_deal = isset($_POST['is_deal']) ? 1 : 0;
     $image_url = '';
 
     // Handle Image Upload
@@ -36,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
         }
     }
 
-    $stmt = $pdo->prepare("INSERT INTO products (name, category_id, price, stock_quantity, brand, description, sale_price, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$name, $category_id, $price, $stock, $brand, $description, $sale_price, $image_url]);
+    $stmt = $pdo->prepare("INSERT INTO products (name, category_id, price, stock_quantity, brand, description, sale_price, image_url, is_deal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$name, $category_id, $price, $stock, $brand, $description, $sale_price, $image_url, $is_deal]);
     header("Location: products.php?msg=Product added successfully");
     exit();
 }
@@ -101,6 +102,11 @@ $products = $prodStmt->fetchAll();
                             <label style="display: block; font-size: 0.875rem; margin-bottom: 0.5rem; font-weight: 500;">Product Image</label>
                             <input type="file" name="image" accept="image/*" style="width: 100%; padding: 0.5rem; font-size: 0.875rem;">
                         </div>
+                        <div>
+                            <label style="display: flex; align-items: center; font-size: 0.875rem; margin-bottom: 1rem; font-weight: 500; cursor: pointer;">
+                                <input type="checkbox" name="is_deal" style="margin-right: 0.5rem; width: 1.2rem; height: 1.2rem;"> Mark as Deal
+                            </label>
+                        </div>
                         <button type="submit" name="add_product" style="background: var(--admin-primary); color: white; border: none; padding: 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Add Product</button>
                     </form>
                 </div>
@@ -119,6 +125,7 @@ $products = $prodStmt->fetchAll();
                             <th>Category</th>
                             <th>Price</th>
                             <th>Stock</th>
+                            <th>Deal</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -130,6 +137,7 @@ $products = $prodStmt->fetchAll();
                                 <td><?php echo htmlspecialchars($p['category_name'] ?: 'N/A'); ?></td>
                                 <td>$<?php echo number_format($p['price'], 2); ?></td>
                                 <td><?php echo $p['stock_quantity']; ?></td>
+                                <td><?php echo $p['is_deal'] ? '<span style="color: #10b981; font-weight: 600;">Yes</span>' : '<span style="color: #64748b;">No</span>'; ?></td>
                                 <td>
                                     <div style="display: flex; gap: 1rem;">
                                         <a href="edit_product.php?id=<?php echo $p['id']; ?>" style="color: var(--admin-primary); text-decoration: none; font-weight: 600;">Edit</a>

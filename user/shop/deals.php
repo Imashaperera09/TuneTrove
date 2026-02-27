@@ -2,11 +2,11 @@
 require_once '../includes/header.php';
 require_once '../includes/db.php';
 
-// Fetch products with a sale price
+// Fetch products marked as deals
 $query = "SELECT p.*, c.name as category_name FROM products p 
           LEFT JOIN categories c ON p.category_id = c.id 
-          WHERE p.sale_price IS NOT NULL AND p.sale_price > 0
-          ORDER BY (p.price - p.sale_price) DESC";
+          WHERE p.is_deal = 1
+          ORDER BY p.id DESC";
 
 $stmt = $pdo->prepare($query);
 $stmt->execute();

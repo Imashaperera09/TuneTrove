@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
     $brand = $_POST['brand'];
     $description = $_POST['description'];
     $sale_price = $_POST['sale_price'] ?: null;
+    $is_deal = isset($_POST['is_deal']) ? 1 : 0;
     $image_url = $product['image_url'];
 
     // Handle Image Upload (if new image provided)
@@ -45,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
         }
     }
 
-    $stmt = $pdo->prepare("UPDATE products SET name = ?, category_id = ?, price = ?, stock_quantity = ?, brand = ?, description = ?, sale_price = ?, image_url = ? WHERE id = ?");
-    $stmt->execute([$name, $category_id, $price, $stock, $brand, $description, $sale_price, $image_url, $id]);
+    $stmt = $pdo->prepare("UPDATE products SET name = ?, category_id = ?, price = ?, stock_quantity = ?, brand = ?, description = ?, sale_price = ?, image_url = ?, is_deal = ? WHERE id = ?");
+    $stmt->execute([$name, $category_id, $price, $stock, $brand, $description, $sale_price, $image_url, $is_deal, $id]);
     header("Location: products.php?msg=Product updated successfully");
     exit();
 }
@@ -109,6 +110,12 @@ $categories = $catStmt->fetchAll();
                 <div>
                     <label style="display: block; font-size: 0.875rem; margin-bottom: 0.5rem; font-weight: 600;">Product Description</label>
                     <textarea name="description" rows="5" style="width: 100%; padding: 0.75rem; border: 1px solid var(--admin-border); border-radius: 0.5rem;"><?php echo htmlspecialchars($product['description']); ?></textarea>
+                </div>
+
+                <div>
+                    <label style="display: flex; align-items: center; font-size: 0.875rem; font-weight: 600; cursor: pointer;">
+                        <input type="checkbox" name="is_deal" style="margin-right: 0.5rem; width: 1.2rem; height: 1.2rem;" <?php echo $product['is_deal'] ? 'checked' : ''; ?>> Mark as Deal
+                    </label>
                 </div>
 
                 <div>
