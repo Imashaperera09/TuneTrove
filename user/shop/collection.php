@@ -37,55 +37,18 @@ $icons = [
 ?>
 
 <div class="collection-spotlight" style="min-height: 100vh; background: var(--background);">
-    <!-- Adaptive Collection Hero -->
-    <section style="position: relative; min-height: 40vh; display: flex; align-items: center; overflow: hidden; background: var(--surface); padding: 1.5rem 0 5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
-        <!-- Removed blurred background image for minimal look -->
-        <div class="container" style="position: relative; z-index: 10;">
-            <div style="max-width: 900px;">
-                <nav style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent);">
-                    <a href="categories.php" style="color: inherit; text-decoration: none; opacity: 0.6;">Vault</a>
-                    <span style="opacity: 0.3;">/</span>
-                    <span><?php echo htmlspecialchars($category_name); ?></span>
-                </nav>
-                
-                <h1 style="font-family: var(--font-heading); font-size: 4.5rem; letter-spacing: -0.05em; line-height: 1; margin-bottom: 2rem; color: #fff;">
-                    The <span style="color: var(--primary);"><?php echo htmlspecialchars($category_name); ?></span> <br>Archive
-                </h1>
-                
-                <p style="font-size: 1.15rem; color: #94a3b8; line-height: 1.6; max-width: 650px;">
-                    <?php echo htmlspecialchars($category['description']); ?>
-                </p>
-                
-                <div style="margin-top: 3rem; display: flex; gap: 3rem; align-items: center;">
-                    <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 1.5rem; font-weight: 800; color: #fff;"><?php echo count($products); ?></span>
-                        <span style="font-size: 0.65rem; color: #64748b; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em;">Masterworks</span>
-                    </div>
-                    <div style="height: 30px; width: 1px; background: rgba(255,255,255,0.05);"></div>
-                    <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 1.5rem; font-weight: 800; color: #fff; filter: drop-shadow(0 0 10px var(--primary));"><?php echo $icons[$category_name] ?? '📦'; ?></span>
-                        <span style="font-size: 0.65rem; color: #64748b; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em;">Signature</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Animated Background Element -->
-        <div style="position: absolute; right: 2%; bottom: 5%; font-size: 20rem; opacity: 0.1; color: var(--primary); filter: blur(5px); font-family: var(--font-heading); pointer-events: none; transform: rotate(-5deg); z-index: 1;" class="reveal">
-            <?php echo $icons[$category_name] ?? 'TT'; ?>
-        </div>
-    </section>
+    <!-- Removed Adaptive Collection Hero section for minimal look -->
 
     <!-- Collection Mosaic -->
-    <section style="padding: 3rem 0; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.05), transparent 70%);">
+    <section style="padding: 1.5rem 0; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.05), transparent 70%);">
         <div class="container">
             <?php if (empty($products)): ?>
-                <div style="text-align: center; padding: 12rem 2rem; background: rgba(255, 255, 255, 0.01); border-radius: 2rem; border: 1px dashed rgba(255, 255, 255, 0.05);">
+                <div style="text-align: center; padding: 8rem 2rem; background: rgba(255, 255, 255, 0.01); border-radius: 2rem; border: 1px dashed rgba(255, 255, 255, 0.05);">
                     <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: #fff; margin-bottom: 1.5rem; letter-spacing: -0.02em;">Vault Curating</h2>
                     <p style="color: #64748b; font-size: 1.1rem;">This collection is currently being appraised. Check back soon for the unveiling.</p>
                 </div>
             <?php else: ?>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 4rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">
                     <?php foreach ($products as $p): ?>
                         <div class="mosaic-card reveal">
                             <a href="product.php?id=<?php echo $p['id']; ?>" style="text-decoration: none; color: inherit; display: block;">
@@ -107,7 +70,7 @@ $icons = [
                                         <div style="position: absolute; top: 2rem; right: 2rem; background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); backdrop-filter: blur(12px); color: var(--primary); padding: 0.6rem 1.25rem; border-radius: 4px; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase;">Digital High-Fidelity</div>
                                     <?php endif; ?>
                                 </div>
-                                <div style="padding: 2rem 0; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="padding: 1rem 0; display: flex; justify-content: space-between; align-items: center;">
                                     <span style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: #fff; letter-spacing: -0.04em;"><?php echo format_price($p['price']); ?></span>
                                     <span style="font-size: 0.8rem; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; border-bottom: 2px solid var(--primary); padding-bottom: 4px;">Acquire →</span>
                                 </div>
@@ -145,7 +108,7 @@ $icons = [
 
 @media (max-width: 768px) {
     h1[style*="font-size: 4.5rem"] { font-size: 3rem !important; }
-    section[style*="min-height: 40vh"] { min-height: auto !important; padding: 10rem 0 5rem !important; }
+    section[style*="min-height: 40vh"] { min-height: auto !important; padding: 6rem 0 3rem !important; }
 }
 </style>
 
