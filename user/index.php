@@ -38,13 +38,6 @@ try {
     </div>
 </section>
 
-<!-- Financing Ticker -->
-<div style="background: #060b1e; color: #94a3b8; padding: 1rem 0; text-align: center; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
-    <div class="container">
-        UP TO 48-MONTH SPECIAL FINANCING* ON QUALIFYING BRANDS &nbsp; <a href="#" style="color: var(--primary); text-decoration: none; margin-left: 1rem;">View Details</a>
-    </div>
-</div>
-
 <!-- Values Section -->
 <section style="padding: 4rem 0 2rem; background: var(--background);">
     <div class="container">

@@ -31,6 +31,7 @@ require_once __DIR__ . '/functions.php';
                         <li><a href="/TuneTrove/user/shop/index.php">Shop</a></li>
                         <li><a href="/TuneTrove/user/shop/categories.php">Categories</a></li>
                         <li><a href="/TuneTrove/user/shop/deals.php">Deals</a></li>
+                        <li><a href="/TuneTrove/user/about.php">About Us</a></li>
                     </ul>
                 </nav>
 
@@ -43,18 +44,16 @@ require_once __DIR__ . '/functions.php';
 
                 <div class="header-actions">
                     <?php if (is_logged_in()): ?>
-                        <?php if (has_role('admin') || has_role('staff')): ?>
-                            <a href="/TuneTrove/admin/" class="admin-link">Dashboard</a>
-                        <?php endif; ?>
-                        <a href="/TuneTrove/user/account/index.php" class="account-link">Account</a>
                         <a href="/TuneTrove/user/auth/logout.php" class="account-link">Logout</a>
                     <?php else: ?>
                         <a href="/TuneTrove/user/auth/login.php" class="account-link">Login</a>
                     <?php endif; ?>
+                    <?php if (!empty($_SESSION['cart'])): ?>
                     <a href="/TuneTrove/user/shop/cart.php" class="cart-link">
                         <span class="cart-icon">🛒</span>
-                        <span class="cart-count"><?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?></span>
+                        <span class="cart-count"><?php echo count($_SESSION['cart']); ?></span>
                     </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

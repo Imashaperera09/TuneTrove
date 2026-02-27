@@ -46,22 +46,18 @@ $all_categories = $cat_stmt->fetchAll();
 
 <div class="shop-showroom" style="min-height: 100vh; background: var(--background); padding-top: 0.5rem; padding-bottom: 8rem;">
     <div class="container">
-        <!-- Breadcrumbs-style header -->
-        <div style="margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 1.2rem;">
-            <p style="text-transform: uppercase; font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Shop the Collection</p>
+        <!-- Removed Breadcrumbs-style header for minimal look -->
+        <div style="margin-bottom: 2.5rem;">
             <h1 style="font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: -0.04em; color: #fff; margin-top: 0;">
                 <?php echo $category ? htmlspecialchars($category) : 'The <span style="color: var(--primary);">Complete</span> Catalog'; ?>
             </h1>
-            <p style="color: #94a3b8; font-size: 1.1rem;"><?php echo count($products); ?> items available in our premium inventory.</p>
         </div>
 
-        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 4rem; align-items: flex-start;">
-            
-            <!-- Professional Sidebar -->
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 4rem; align-items: start;">
+            <!-- Sidebar -->
             <aside style="position: sticky; top: 100px;">
                 <div style="background: var(--surface); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 0.5rem; padding: 2.5rem;">
-                    <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; margin-bottom: 2rem; color: #fff; letter-spacing: -0.02em;">Narrow Results</h3>
-                    
+                    <!-- Removed 'Narrow Results' heading -->
                     <form action="index.php" method="GET">
                         <div style="margin-bottom: 2rem;">
                             <label style="display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 1rem;">Category</label>
@@ -74,7 +70,6 @@ $all_categories = $cat_stmt->fetchAll();
                                 <?php endforeach; ?>
                             </div>
                         </div>
-
                         <div style="margin-bottom: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 2rem;">
                             <label style="display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 1rem;">Sort Order</label>
                             <select name="sort" onchange="this.form.submit()" style="width: 100%; padding: 0.85rem; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; background: rgba(0, 0, 0, 0.2); color: #fff; font-size: 0.9rem;">
@@ -83,20 +78,12 @@ $all_categories = $cat_stmt->fetchAll();
                                 <option value="price_high" <?php echo $sort === 'price_high' ? 'selected' : ''; ?>>Price: High to Low</option>
                             </select>
                         </div>
-                        
                         <?php if ($search): ?>
                             <input type="hidden" name="search" value="<?php echo htmlspecialchars($search); ?>">
                         <?php endif; ?>
                     </form>
                 </div>
-
-                <div style="margin-top: 2rem; background: var(--primary); color: white; border-radius: 0.5rem; padding: 2.5rem; text-align: center; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.2);">
-                    <p style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.75rem; letter-spacing: 0.1em; opacity: 0.8;">Expert Help</p>
-                    <h4 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 1rem;">(800) 222-4700</h4>
-                    <p style="font-size: 0.9rem; opacity: 0.9; line-height: 1.4;">Call for free pros advice from a Gear Pro.</p>
-                </div>
             </aside>
-
             <!-- Product Display Grid -->
             <div>
                 <?php if (empty($products)): ?>
@@ -111,7 +98,7 @@ $all_categories = $cat_stmt->fetchAll();
                         <?php foreach ($products as $p): ?>
                             <div class="product-card-pro" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.borderColor='rgba(14, 165, 233, 0.4)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';" >
                                 <a href="product.php?id=<?php echo $p['id']; ?>" style="text-decoration: none; color: inherit; flex: 1; display: flex; flex-direction: column;">
-                                    <div style="height: 240px; background: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+                                    <div style="height: 180px; background: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
                                         <?php if (!empty($p['image_url'])): ?>
                                             <img src="/TuneTrove/user/assets/images/<?php echo htmlspecialchars($p['image_url']); ?>" style="max-width: 90%; max-height: 90%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));">
                                         <?php else: ?>

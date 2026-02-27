@@ -38,9 +38,8 @@ $icons = [
 
 <div class="collection-spotlight" style="min-height: 100vh; background: var(--background);">
     <!-- Adaptive Collection Hero -->
-    <section style="position: relative; min-height: 40vh; display: flex; align-items: center; overflow: hidden; background: var(--surface); padding: 5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
-        <div style="position: absolute; inset: 0; background-image: url('/TuneTrove/user/assets/images/<?php echo !empty($category['image_url']) ? htmlspecialchars($category['image_url']) : ''; ?>'); background-size: cover; background-position: center; opacity: 0.15; filter: blur(30px) brightness(0.4); transform: scale(1.1);"></div>
-        
+    <section style="position: relative; min-height: 40vh; display: flex; align-items: center; overflow: hidden; background: var(--surface); padding: 1.5rem 0 5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+        <!-- Removed blurred background image for minimal look -->
         <div class="container" style="position: relative; z-index: 10;">
             <div style="max-width: 900px;">
                 <nav style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent);">
@@ -78,7 +77,7 @@ $icons = [
     </section>
 
     <!-- Collection Mosaic -->
-    <section style="padding: 8rem 0; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.05), transparent 70%);">
+    <section style="padding: 3rem 0; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.05), transparent 70%);">
         <div class="container">
             <?php if (empty($products)): ?>
                 <div style="text-align: center; padding: 12rem 2rem; background: rgba(255, 255, 255, 0.01); border-radius: 2rem; border: 1px dashed rgba(255, 255, 255, 0.05);">
