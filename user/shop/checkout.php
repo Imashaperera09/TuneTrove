@@ -36,9 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $pdo->beginTransaction();
 
+        $payment_method = $_POST['payment_method'] ?? 'card';
+        $status = ($payment_method === 'card') ? 'paid' : 'pending_payment';
+
         // 1. Create Order
-        $stmt = $pdo->prepare("INSERT INTO orders (user_id, total_amount, shipping_cost, shipping_address, status) VALUES (?, ?, ?, ?, 'paid')");
-        $stmt->execute([$user_id, $total, $shipping, $address]);
+        $stmt = $pdo->prepare("INSERT INTO orders (user_id, total_amount, shipping_cost, shipping_address, status, payment_method) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$user_id, $total, $shipping, $address, $status, $payment_method]);
         $order_id = $pdo->lastInsertId();
 
         // 2. Add Order Items & Update Stock

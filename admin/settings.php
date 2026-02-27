@@ -1,4 +1,11 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'staff') {
+    header("Location: index.php");
+    exit();
+}
 require_once 'includes/admin-header.php';
 ?>
 

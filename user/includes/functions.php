@@ -14,7 +14,7 @@ function format_price($amount) {
  * Calculate shipping cost based on total amount
  */
 function calculate_shipping($total) {
-    if ($total > 100) {
+    if ($total >= 100) {
         return 0;
     }
     return 10.00; // Standard shipping fee

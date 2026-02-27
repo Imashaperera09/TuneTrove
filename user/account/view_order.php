@@ -74,15 +74,21 @@ $items = $stmt->fetchAll();
                 ?>
                     <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.1); padding: 3.5rem; border-radius: 1.5rem;">
                         <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.75rem; margin-bottom: 1.5rem; letter-spacing: -0.02em;">Digital Archive Access</h3>
-                        <p style="color: #94a3b8; font-size: 1rem; margin-bottom: 3rem; line-height: 1.6;">Your high-fidelity assets are available for immediate download.</p>
-                        <div style="display: grid; gap: 1.25rem;">
-                            <?php foreach ($digital_items as $item): ?>
-                                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.2); padding: 1.5rem 2rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.03);">
-                                    <span style="font-weight: 700; color: #fff; font-size: 1.1rem;"><?php echo htmlspecialchars($item['name']); ?></span>
-                                    <a href="download.php?order_id=<?php echo $id; ?>&product_id=<?php echo $item['product_id']; ?>" style="color: var(--primary); text-decoration: none; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 2px solid var(--primary); padding-bottom: 2px;">Retrieve File</a>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
+                        
+                        <?php if (in_array($order['status'], ['paid', 'completed'])): ?>
+                            <p style="color: #94a3b8; font-size: 1rem; margin-bottom: 3rem; line-height: 1.6;">Your high-fidelity assets are available for immediate download.</p>
+                            <div style="display: grid; gap: 1.25rem;">
+                                <?php foreach ($digital_items as $item): ?>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.2); padding: 1.5rem 2rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.03);">
+                                        <span style="font-weight: 700; color: #fff; font-size: 1.1rem;"><?php echo htmlspecialchars($item['name']); ?></span>
+                                        <a href="download.php?order_id=<?php echo $id; ?>&product_id=<?php echo $item['product_id']; ?>" style="color: var(--primary); text-decoration: none; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 2px solid var(--primary); padding-bottom: 2px;">Retrieve File</a>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <p style="color: #ef4444; font-size: 1rem; margin-bottom: 1rem; line-height: 1.6; font-weight: 800;">Downloads Locked</p>
+                            <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">Your digital assets will be available for download once payment has been confirmed for this order.</p>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </div>

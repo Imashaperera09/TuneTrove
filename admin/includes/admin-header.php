@@ -3,8 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if user is logged in and is an admin
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_role']) || ($_SESSION['user_role'] !== 'admin' && $_SESSION['user_role'] !== 'superadmin')) {
+// Check if user is logged in and has access
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['admin', 'superadmin', 'staff'])) {
     header("Location: /TuneTrove/admin/login.php");
     exit();
 }
@@ -32,6 +32,16 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <aside class="sidebar">
         <div class="sidebar-header">
             <span style="color: var(--admin-primary);">🎵</span> TuneTrove
+            <div style="margin-top: 0.5rem;">
+                <?php 
+                $role = $_SESSION['user_role'] ?? 'staff';
+                $badge_color = in_array($role, ['admin', 'superadmin']) ? '#6366f1' : '#10b981';
+                $role_label  = in_array($role, ['admin', 'superadmin']) ? '🛡️ Admin' : '👤 Staff';
+                ?>
+                <span style="background: <?php echo $badge_color; ?>22; color: <?php echo $badge_color; ?>; border: 1px solid <?php echo $badge_color; ?>55; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;">
+                    <?php echo $role_label; ?>
+                </span>
+            </div>
         </div>
         <nav class="sidebar-nav">
             <ul>
@@ -39,8 +49,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <li><a href="products.php" class="<?php echo $current_page == 'products.php' ? 'active' : ''; ?>"><span>📦</span> Products</a></li>
                 <li><a href="categories.php" class="<?php echo $current_page == 'categories.php' ? 'active' : ''; ?>"><span>📁</span> Categories</a></li>
                 <li><a href="orders.php" class="<?php echo $current_page == 'orders.php' ? 'active' : ''; ?>"><span>🛒</span> Orders</a></li>
+                <li><a href="reviews.php" class="<?php echo $current_page == 'reviews.php' ? 'active' : ''; ?>"><span>⭐</span> Reviews</a></li>
+                <?php if (in_array($_SESSION['user_role'], ['admin', 'superadmin'])): ?>
                 <li><a href="users.php" class="<?php echo $current_page == 'users.php' ? 'active' : ''; ?>"><span>👥</span> Users</a></li>
                 <li><a href="settings.php" class="<?php echo $current_page == 'settings.php' ? 'active' : ''; ?>"><span>⚙️</span> Settings</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
         <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: auto;">
@@ -62,12 +75,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         case 'products.php': echo 'Product Management'; break;
                         case 'categories.php': echo 'Category Management'; break;
                         case 'orders.php': echo 'Order Management'; break;
+                        case 'reviews.php': echo 'Customer Reviews'; break;
                         case 'users.php': echo 'User Management'; break;
                         case 'settings.php': echo 'System Settings'; break;
                         default: echo 'Dashboard Overview';
                     }
                 ?></h1>
-                <p style="color: var(--admin-text-muted);">Welcome back, administrator.</p>
+                <p style="color: var(--admin-text-muted);">Welcome back, <?php echo $_SESSION['user_role'] === 'staff' ? 'staff member' : 'administrator'; ?>.</p>
             </div>
             <div class="user-profile" style="display: flex; align-items: center; gap: 1rem;">
                 <div style="text-align: right;">

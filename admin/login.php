@@ -5,31 +5,33 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../user/includes/db.php';
 require_once __DIR__ . '/../user/includes/functions.php';
 
-// Redirect if already logged in as admin
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_role']) && ($_SESSION['user_role'] === 'admin' || $_SESSION['user_role'] === 'superadmin')) {
+// Redirect if already logged in as admin or staff
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_role']) && in_array($_SESSION['user_role'], ['admin', 'superadmin', 'staff'])) {
     header("Location: index.php");
     exit();
 }
 
 $errors = [];
 
+// Fetch admin/staff users for the quick login dropdown
+$admins_stmt = $pdo->query("SELECT username, full_name, role FROM users WHERE role IN ('admin', 'superadmin', 'staff') ORDER BY role, full_name");
+$admin_users = $admins_stmt->fetchAll();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = sanitize($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
 
-    if (empty($username) || empty($password)) {
-        $errors[] = "Please enter both username and password.";
+    if (empty($username)) {
+        $errors[] = "Please select a user.";
     }
 
     if (empty($errors)) {
-        // We can allow login by username or email
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
-        $stmt->execute([$username, $username]);
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$username]);
         $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password_hash'])) {
-            // Check if user is an admin
-            if ($user['role'] === 'admin' || $user['role'] === 'superadmin') {
+        if ($user) {
+            // Check if user is an admin or staff
+            if (in_array($user['role'], ['admin', 'superadmin', 'staff'])) {
                 // Success
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
@@ -39,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: index.php");
                 exit();
             } else {
-                $errors[] = "Access denied. You do not have administrator privileges.";
+                $errors[] = "Access denied. You do not have administrative privileges.";
             }
         } else {
-            $errors[] = "Invalid credentials.";
+            $errors[] = "Invalid user selected.";
         }
     }
 }
@@ -76,17 +78,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form method="POST" action="login.php">
-            <div style="margin-bottom: 1.25rem;">
-                <label for="username" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--admin-text-dark); margin-bottom: 0.5rem;">Username or Email</label>
-                <input type="text" id="username" name="username" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--admin-border); border-radius: 0.5rem; font-size: 1rem;">
-            </div>
-
             <div style="margin-bottom: 2rem;">
-                <label for="password" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--admin-text-dark); margin-bottom: 0.5rem;">Password</label>
-                <input type="password" id="password" name="password" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--admin-border); border-radius: 0.5rem; font-size: 1rem;">
+                <label for="username" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--admin-text-dark); margin-bottom: 0.5rem;">Select Account</label>
+                <select id="username" name="username" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--admin-border); border-radius: 0.5rem; font-size: 1rem; background: white; cursor: pointer;">
+                    <option value="">-- Select Admin/Staff User --</option>
+                    <?php foreach ($admin_users as $admin): ?>
+                        <option value="<?php echo htmlspecialchars($admin['username']); ?>">
+                            <?php echo htmlspecialchars($admin['full_name'] . ' (' . ucfirst($admin['role']) . ')'); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
 
-            <button type="submit" style="width: 100%; background: var(--admin-primary); color: white; border: none; padding: 0.875rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);">Sign In to Dashboard</button>
+            <button type="submit" style="width: 100%; background: var(--admin-primary); color: white; border: none; padding: 0.875rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);">Quick Sign In</button>
         </form>
         
         <div style="text-align: center; margin-top: 1.5rem;">

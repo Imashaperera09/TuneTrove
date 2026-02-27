@@ -1,8 +1,12 @@
 <?php
 require_once 'includes/admin-header.php';
 
-// Handle Product Deletion
+// Handle Product Deletion (Admin only)
 if (isset($_GET['delete'])) {
+    if (!in_array($_SESSION['user_role'], ['admin', 'superadmin'])) {
+        header("Location: products.php?error=You do not have permission to delete products.");
+        exit();
+    }
     $id = (int)$_GET['delete'];
     $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
     $stmt->execute([$id]);
@@ -141,7 +145,9 @@ $products = $prodStmt->fetchAll();
                                 <td>
                                     <div style="display: flex; gap: 1rem;">
                                         <a href="edit_product.php?id=<?php echo $p['id']; ?>" style="color: var(--admin-primary); text-decoration: none; font-weight: 600;">Edit</a>
+                                        <?php if (in_array($_SESSION['user_role'], ['admin', 'superadmin'])): ?>
                                         <a href="?delete=<?php echo $p['id']; ?>" onclick="return confirm('Are you sure you want to delete this archival piece?')" style="color: var(--admin-danger); text-decoration: none; font-weight: 600;">Delete</a>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>

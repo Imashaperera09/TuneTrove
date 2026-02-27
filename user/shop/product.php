@@ -175,7 +175,41 @@ if (is_logged_in()) {
                     <h2 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: #fff; margin-top: 0; letter-spacing: -0.04em;">Performance <span style="color: var(--primary);">Reports</span></h2>
                     <p style="color: #64748b; font-size: 1.1rem;"><?php echo count($reviews); ?> curated insights from world-class musicians.</p>
                  </div>
+                 <?php if (is_logged_in() && $can_review && !$has_reviewed): ?>
+                    <button onclick="document.getElementById('review-form').style.display='block'" class="btn btn-primary" style="padding: 1rem 2rem; border-radius: 0.5rem; font-weight: 800; text-transform: uppercase;">Write Report</button>
+                 <?php elseif (is_logged_in() && $has_reviewed): ?>
+                    <span style="color: #4ade80; font-weight: bold;">You have already reviewed this item.</span>
+                 <?php elseif (is_logged_in() && !$can_review): ?>
+                    <span style="color: #94a3b8; font-style: italic;">Only verified buyers can review this item.</span>
+                 <?php else: ?>
+                    <a href="/TuneTrove/user/auth/login.php" class="btn btn-secondary" style="padding: 1rem 2rem; border-radius: 0.5rem; font-weight: 800; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2); color: white; text-decoration: none;">Login to Review</a>
+                 <?php endif; ?>
              </div>
+
+             <?php if (is_logged_in() && $can_review && !$has_reviewed): ?>
+             <div id="review-form" style="display: none; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 3rem; margin-bottom: 4rem;">
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 2rem;">Submit Your Insight</h3>
+                <form action="submit_review.php" method="POST">
+                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem; font-size: 0.8rem;">Rating (1-5)</label>
+                        <select name="rating" required style="width: 100%; padding: 1rem; border-radius: 0.5rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1rem;">
+                            <option value="5">⭐⭐⭐⭐⭐ Outstanding Performance</option>
+                            <option value="4">⭐⭐⭐⭐ Professional Grade</option>
+                            <option value="3">⭐⭐⭐ Good Quality</option>
+                            <option value="2">⭐⭐ Needs Improvement</option>
+                            <option value="1">⭐ Not Recommended</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display: block; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem; font-size: 0.8rem;">Your Review</label>
+                        <textarea name="comment" required rows="4" style="width: 100%; padding: 1rem; border-radius: 0.5rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1rem;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="padding: 1rem 3rem; border-radius: 0.5rem; font-weight: 800; text-transform: uppercase;">Submit Review</button>
+                    <button type="button" onclick="document.getElementById('review-form').style.display='none'" style="padding: 1rem 2rem; background: none; border: none; color: #94a3b8; font-weight: bold; cursor: pointer; text-transform: uppercase;">Cancel</button>
+                </form>
+             </div>
+             <?php endif; ?>
 
              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
                 <?php if (empty($reviews)): ?>

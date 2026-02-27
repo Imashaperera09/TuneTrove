@@ -36,7 +36,7 @@ $icons = [
 ];
 ?>
 
-<div class="collection-spotlight" style="min-height: 100vh; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);">
+<div class="collection-spotlight" style="min-height: 100vh; background: var(--background); padding-bottom: 8rem;">
     <!-- Removed Adaptive Collection Hero section for minimal look -->
 
     <!-- Collection Mosaic -->

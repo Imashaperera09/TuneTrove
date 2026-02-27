@@ -13,10 +13,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
     if ($action === 'update') {
         $quantity = (int)$_POST['quantity'];
-        if ($quantity <= 0) {
-            unset($_SESSION['cart'][$product_id]);
-        } else {
-            $_SESSION['cart'][$product_id] = $quantity;
+        
+        // Fetch product stock to validate
+        $stmt = $pdo->prepare("SELECT stock_quantity, is_digital FROM products WHERE id = ?");
+        $stmt->execute([$product_id]);
+        $prod = $stmt->fetch();
+        
+        if ($prod) {
+            if ($quantity <= 0) {
+                unset($_SESSION['cart'][$product_id]);
+            } else {
+                // If not digital, enforce stock limit
+                if (!$prod['is_digital'] && $quantity > $prod['stock_quantity']) {
+                    $quantity = $prod['stock_quantity'];
+                    $_SESSION['msg'] = "Only {$prod['stock_quantity']} items available in stock.";
+                    $_SESSION['msg_type'] = "error";
+                }
+                if ($quantity > 0) {
+                    $_SESSION['cart'][$product_id] = $quantity;
+                } else {
+                    unset($_SESSION['cart'][$product_id]);
+                }
+            }
         }
     }
 
@@ -143,7 +161,7 @@ $total = $subtotal + $shipping;
                             </div>
                             <?php if ($shipping > 0): ?>
                                 <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.1); padding: 1rem; border-radius: 0.5rem; font-size: 0.85rem; color: var(--primary); text-align: center; line-height: 1.4;">
-                                    Add <strong>$<?php echo number_format(101 - $subtotal, 2); ?></strong> more for <strong>FREE Shipping</strong>!
+                                    Add <strong>$<?php echo number_format(100 - $subtotal, 2); ?></strong> more for <strong>FREE Shipping</strong>!
                                 </div>
                             <?php endif; ?>
                         </div>
