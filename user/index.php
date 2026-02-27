@@ -38,29 +38,6 @@ try {
     </div>
 </section>
 
-<!-- Values Section -->
-<section style="padding: 4rem 0 2rem; background: var(--background);">
-    <div class="container">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
-            <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">💎</div>
-                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #fff;">The Expert Curation</h3>
-                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">Every instrument is hand-selected and inspected by our team of master luthiers.</p>
-            </div>
-            <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🛰️</div>
-                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #fff;">Precision Delivery</h3>
-                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">Climate-controlled shipping ensure your instrument arrives in perfect tuning.</p>
-            </div>
-            <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🎧</div>
-                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #fff;">Lifetime Support</h3>
-                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">Access to professional setup and expert guidance throughout your musical journey.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Categories Section -->
 <section style="padding: 2rem 0 6rem; background: #060b1e;">
     <div class="container">
@@ -152,6 +129,29 @@ try {
                         </a>
                     <?php endforeach; ?>
                 <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section moved above footer -->
+<section style="padding: 4rem 0 2rem; background: var(--background);">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
+            <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">💎</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #fff;">The Expert Curation</h3>
+                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">Every instrument is hand-selected and inspected by our team of master luthiers.</p>
+            </div>
+            <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🛰️</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #fff;">Precision Delivery</h3>
+                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">Climate-controlled shipping ensure your instrument arrives in perfect tuning.</p>
+            </div>
+            <div class="reveal" style="text-align: center; padding: 3rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 1rem;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--primary);">🎧</div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: #fff;">Lifetime Support</h3>
+                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">Access to professional setup and expert guidance throughout your musical journey.</p>
             </div>
         </div>
     </div>

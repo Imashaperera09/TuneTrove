@@ -17,14 +17,14 @@ $products = $stmt->fetchAll();
     <div class="container">
         <!-- Header -->
         <div style="margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 1.5rem;">
-            <p style="text-transform: uppercase; font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1rem;">Exclusive Acquisition</p>
-            <h1 style="font-family: var(--font-heading); font-size: 4rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Archival <span style="color: var(--primary);">Specials</span></h1>
+            <p style="text-transform: uppercase; font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1rem;">Exclusive Archive</p>
+            <h1 style="font-family: var(--font-heading); font-size: 4rem; letter-spacing: -0.04em; color: #fff; margin: 0;">Archive <span style="color: var(--primary);">Deals</span></h1>
         </div>
 
         <?php if (empty($products)): ?>
             <div style="text-align: center; padding: 10rem 2rem; background: rgba(255, 255, 255, 0.01); border-radius: 2rem; border: 1px dashed rgba(255, 255, 255, 0.05);">
                 <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: #fff; margin-bottom: 1.5rem; letter-spacing: -0.02em;">Curation in Progress</h2>
-                <p style="color: #64748b; font-size: 1.1rem;">New archival deals are being appraised. Check back soon for the unveiling.</p>
+                <p style="color: #64748b; font-size: 1.1rem;">New archive deals are being appraised. Check back soon for the unveiling.</p>
                 <a href="index.php" class="btn btn-primary" style="margin-top: 3rem; padding: 1.25rem 3rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 4px;">Browse Full Collection</a>
             </div>
         <?php else: ?>

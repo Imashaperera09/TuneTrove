@@ -104,6 +104,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
 
+                        <!-- Payment Section -->
+                        <div style="background: var(--surface); border: 1px solid rgba(14, 165, 233, 0.1); border-radius: 1rem; padding: 2.5rem; margin-bottom: 2rem; margin-top: 2rem;">
+                            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 2rem; letter-spacing: -0.02em;">Payment Method</h2>
+                            <div style="margin-bottom: 2rem;">
+                                <label style="font-weight: 800; color: #fff; margin-right: 2rem;">
+                                    <input type="radio" name="payment_method" value="card" checked style="margin-right: 0.5rem;"> Credit/Debit Card
+                                </label>
+                                <label style="font-weight: 800; color: #fff;">
+                                    <input type="radio" name="payment_method" value="cod" style="margin-right: 0.5rem;"> Cash on Delivery
+                                </label>
+                            </div>
+                            <div id="card-details" style="display: block;">
+                                <div style="margin-bottom: 1.5rem;">
+                                    <input type="text" name="card_number" placeholder="Card Number" maxlength="19" required style="width: 100%; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem; margin-bottom: 1rem;">
+                                    <input type="text" name="card_name" placeholder="Name on Card" required style="width: 100%; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem; margin-bottom: 1rem;">
+                                    <div style="display: flex; gap: 1rem;">
+                                        <input type="text" name="card_expiry" placeholder="MM/YY" maxlength="5" required style="flex: 1; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem;">
+                                        <input type="text" name="card_cvc" placeholder="CVC" maxlength="4" required style="flex: 1; padding: 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); color: #fff; font-size: 1.1rem;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.5rem; border-radius: 0.5rem; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4rem; box-shadow: 0 15px 40px -10px rgba(14, 165, 233, 0.4);">Authorize Acquisition</button>
                     </div>
                 </form>
@@ -157,5 +180,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </div>
+
+<script>
+// Toggle card details form based on payment method
+const cardDetails = document.getElementById('card-details');
+document.querySelectorAll('input[name="payment_method"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        cardDetails.style.display = (this.value === 'card') ? 'block' : 'none';
+    });
+});
+</script>
 
 <?php require_once '../includes/footer.php'; ?>
