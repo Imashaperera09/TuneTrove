@@ -1,5 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
+    session_name('TUNETROVE_ADMIN_SESSION');
     session_start();
 }
 

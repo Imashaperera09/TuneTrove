@@ -62,6 +62,9 @@ $items = $stmt->fetchAll();
                                 <div style="text-align: right;">
                                     <p style="font-weight: 800; color: #fff; font-size: 1.25rem;">$<?php echo number_format($item['price_at_purchase'] * $item['quantity'], 2); ?></p>
                                     <p style="font-size: 0.85rem; color: #64748b; font-weight: 600; margin-top: 0.25rem;">Units: <?php echo $item['quantity']; ?></p>
+                                    <?php if (in_array($order['status'], ['paid', 'shipped', 'completed'])): ?>
+                                        <a href="../shop/product.php?id=<?php echo $item['product_id']; ?>&review=1" style="color: var(--primary); text-decoration: none; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; display: inline-block; margin-top: 0.5rem; border-bottom: 1px solid var(--primary);">Write Review</a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>

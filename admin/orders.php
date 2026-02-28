@@ -33,6 +33,16 @@ $status_colors = [
     'completed'       => '#22c55e',
     'cancelled'       => '#ef4444',
 ];
+
+$status_icons = [
+    'pending'         => '⏳',
+    'pending_payment' => '💳',
+    'paid'            => '✅',
+    'processing'      => '⚙️',
+    'shipped'         => '🚚',
+    'completed'       => '🎉',
+    'cancelled'       => '❌',
+];
 ?>
 
         <?php if (isset($_GET['msg'])): ?>
@@ -71,8 +81,13 @@ $status_colors = [
                             </td>
                             <td><strong>$<?php echo number_format($order['total_amount'], 2); ?></strong></td>
                             <td>
-                                <span style="background: <?php echo $color; ?>22; color: <?php echo $color; ?>; border: 1px solid <?php echo $color; ?>44; padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
-                                    <?php echo htmlspecialchars($order['status']); ?>
+                                <?php 
+                                    $display_status = $order['status'] ?: 'pending';
+                                    $icon = $status_icons[$display_status] ?? '❓';
+                                ?>
+                                <span class="status-badge status-<?php echo $display_status; ?>">
+                                    <span style="font-size: 0.85rem;"><?php echo $icon; ?></span>
+                                    <?php echo htmlspecialchars($display_status); ?>
                                 </span>
                             </td>
                             <td style="max-width: 180px; font-size: 0.875rem; color: var(--admin-text-muted);"><?php echo htmlspecialchars($order['shipping_address'] ?: 'N/A'); ?></td>
