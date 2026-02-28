@@ -1,6 +1,9 @@
 <?php
-require_once '../includes/header.php';
 require_once '../includes/db.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once '../includes/functions.php';
 
 // Handle Actions (Ajax or POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -41,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     header("Location: cart.php");
     exit();
 }
+
+require_once '../includes/header.php';
 
 // Fetch Cart items details
 $cart_items = [];

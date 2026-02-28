@@ -1,6 +1,9 @@
 <?php
-require_once '../includes/header.php';
 require_once '../includes/db.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once '../includes/functions.php';
 
 if (!is_logged_in()) {
     redirect('/TuneTrove/user/auth/login.php', 'Please login to proceed with checkout.', 'error');
@@ -71,6 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Failed to process order: " . $e->getMessage();
     }
 }
+
+require_once '../includes/header.php';
 ?>
 
 <style>
