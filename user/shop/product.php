@@ -241,21 +241,4 @@ if (is_logged_in()) {
     </div>
 </div>
 
-<script>
-    // Auto-show review form if 'review' parameter is present
-    window.addEventListener('DOMContentLoaded', (event) => {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('review') === '1') {
-            const reviewForm = document.getElementById('review-form');
-            if (reviewForm) {
-                reviewForm.style.display = 'block';
-                window.scrollTo({
-                    top: reviewForm.offsetTop - 150,
-                    behavior: 'smooth'
-                });
-            }
-        }
-    });
-</script>
-
 <?php require_once '../includes/footer.php'; ?>

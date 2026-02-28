@@ -229,6 +229,53 @@ if (is_logged_in()) {
     </div>
 </section>
 
+<!-- Customer Reviews Section -->
+<section style="padding: 6rem 0; background: #060b1e; position: relative; overflow: hidden; border-top: 1px solid rgba(255, 255, 255, 0.03);">
+    <div style="position: absolute; bottom: 0; left: 0; width: 600px; height: 600px; background: radial-gradient(circle, rgba(14, 165, 233, 0.05) 0%, transparent 70%); pointer-events: none;"></div>
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 5rem;">
+            <p style="text-transform: uppercase; font-size: 0.75rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 1rem;">Testimonials</p>
+            <h2 style="font-family: var(--font-heading); font-size: 3.5rem; font-weight: 800; color: #fff; letter-spacing: -0.04em; margin: 0;">Customer <span style="color: var(--primary);">Reviews</span></h2>
+        </div>
+
+        <?php
+        $reviews_stmt = $pdo->query("SELECT r.*, u.username, p.name as product_name, p.id as product_id 
+                                   FROM reviews r 
+                                   JOIN users u ON r.user_id = u.id 
+                                   JOIN products p ON r.product_id = p.id 
+                                   WHERE r.rating >= 4 
+                                   ORDER BY r.created_at DESC 
+                                   LIMIT 6");
+        $homepage_reviews = $reviews_stmt->fetchAll();
+        ?>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem;">
+            <?php if (empty($homepage_reviews)): ?>
+                <p style="grid-column: 1 / -1; text-align: center; color: #64748b; font-style: italic; font-size: 1.1rem;">No reviews yet. Be the first to share your experience!</p>
+            <?php else: ?>
+                <?php foreach ($homepage_reviews as $rev): ?>
+                <div class="reveal" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1.5rem; padding: 2.5rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='rgba(14, 165, 233, 0.3)'; this.style.background='rgba(14, 165, 233, 0.02)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.background='rgba(255, 255, 255, 0.02)';" >
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                        <div>
+                            <p style="font-weight: 800; color: #fff; font-size: 1rem; margin-bottom: 0.25rem;">@<?php echo htmlspecialchars($rev['username']); ?></p>
+                            <p style="font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.1em;"><?php echo date('M d, Y', strtotime($rev['created_at'])); ?></p>
+                        </div>
+                        <div style="color: var(--primary); font-size: 1.1rem; letter-spacing: 0.1em;">
+                            <?php echo str_repeat('★', $rev['rating']); ?>
+                        </div>
+                    </div>
+                    <p style="color: #94a3b8; line-height: 1.7; font-size: 1.1rem; font-style: italic; flex-grow: 1; margin-bottom: 2rem;">"<?php echo nl2br(htmlspecialchars(substr($rev['comment'], 0, 150))) . (strlen($rev['comment']) > 150 ? '...' : ''); ?>"</p>
+                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 1.5rem;">
+                        <p style="font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.1em;">Regarding</p>
+                        <a href="/TuneTrove/user/shop/product.php?id=<?php echo $rev['product_id']; ?>" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#fff'"><?php echo htmlspecialchars($rev['product_name']); ?></a>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
 <!-- Values Section moved above footer -->
 <section style="padding: 4rem 0 2rem; background: var(--background);">
     <div class="container">

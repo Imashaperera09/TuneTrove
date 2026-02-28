@@ -85,16 +85,7 @@ try {
                                 <td>#<?php echo $order['id']; ?></td>
                                 <td><?php echo htmlspecialchars($order['customer_name'] ?? 'Guest'); ?></td>
                                 <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
-                                <td>
-                                    <?php 
-                                        $display_status = $order['status'] ?: 'pending';
-                                        $icon = ['pending'=>'⏳','pending_payment'=>'💳','paid'=>'✅','processing'=>'⚙️','shipped'=>'🚚','completed'=>'🎉','cancelled'=>'❌'][$display_status] ?? '❓';
-                                    ?>
-                                    <span class="status-badge status-<?php echo $display_status; ?>" style="display: inline-flex; align-items: center; gap: 0.3rem;">
-                                        <span><?php echo $icon; ?></span>
-                                        <?php echo $display_status; ?>
-                                    </span>
-                                </td>
+                                <td><span class="status-badge status-<?php echo $order['status']; ?>"><?php echo $order['status']; ?></span></td>
                                 <td><?php echo date('M d, Y', strtotime($order['created_at'])); ?></td>
                             </tr>
                         <?php endforeach; ?>
