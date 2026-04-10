@@ -20,10 +20,9 @@ $admin_users = $admins_stmt->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = sanitize($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
 
-    if (empty($username) || empty($password)) {
-        $errors[] = "Please enter both username and password.";
+    if (empty($username)) {
+        $errors[] = "Please select a user.";
     }
 
     if (empty($errors)) {
@@ -34,19 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user) {
             // Check if user is an admin or staff
             if (in_array($user['role'], ['admin', 'superadmin', 'staff'])) {
-                // Check plain-text password
-                if ($password === $user['password_hash']) {
-                    // Success
-                    $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['username'] = $user['username'];
-                    $_SESSION['user_role'] = $user['role'];
-                    $_SESSION['full_name'] = $user['full_name'];
+                // Success
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['user_role'] = $user['role'];
+                $_SESSION['full_name'] = $user['full_name'];
 
-                    header("Location: index.php");
-                    exit();
-                } else {
-                    $errors[] = "Invalid password.";
-                }
+                header("Location: index.php");
+                exit();
             } else {
                 $errors[] = "Access denied. You do not have administrative privileges.";
             }
@@ -97,15 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
             </div>
 
-            <div style="margin-bottom: 2rem;">
-                <label for="password" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--admin-text-dark); margin-bottom: 0.5rem;">Security Key</label>
-                <input type="password" id="password" name="password" required placeholder="Enter password" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--admin-border); border-radius: 0.5rem; font-size: 1rem; background: white; outline: none;">
-            </div>
-
-            <button type="submit" style="width: 100%; background: var(--admin-primary); color: white; border: none; padding: 0.875rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);">Sign In</button>
+            <button type="submit" style="width: 100%; background: var(--admin-primary); color: white; border: none; padding: 0.875rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);">Quick Sign In</button>
         </form>
         
-        <div style="text-align: center; margin-top: 1.5rem;">
+        <div style="text-align: center; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <a href="admin_signup.php" style="color: var(--admin-primary); text-decoration: none; font-size: 0.875rem; font-weight: 700;">New Admin/Staff? Create Account</a>
             <a href="/TuneTrove/user/" style="color: var(--admin-text-muted); text-decoration: none; font-size: 0.875rem; font-weight: 500;">&larr; Return to Storefront</a>
         </div>
     </div>
