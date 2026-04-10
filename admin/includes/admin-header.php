@@ -92,13 +92,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 ?></h1>
                 <p style="color: var(--admin-text-muted);">Welcome back, <?php echo $_SESSION['user_role'] === 'staff' ? 'staff member' : 'administrator'; ?>.</p>
             </div>
-            <div class="user-profile" style="display: flex; align-items: center; gap: 1rem;">
+            <a href="settings.php" class="user-profile" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; transition: all 0.2s; cursor: pointer; padding: 0.5rem; border-radius: 0.75rem;" onmouseover="this.style.background='rgba(255,255,255,0.05)'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='transparent'; this.style.transform='translateY(0)'">
                 <div style="text-align: right;">
                     <div style="font-weight: 600;"><?php echo htmlspecialchars($_SESSION['username'] ?? 'Admin User'); ?></div>
                     <div style="font-size: 0.75rem; color: var(--admin-text-muted); text-transform: capitalize;"><?php echo htmlspecialchars($_SESSION['user_role'] ?? 'Admin'); ?></div>
                 </div>
-                <div style="width: 40px; height: 40px; background: var(--admin-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                <div style="width: 40px; height: 40px; background: var(--admin-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);">
                     <?php echo strtoupper(substr($_SESSION['username'] ?? 'A', 0, 1)); ?>
                 </div>
-            </div>
+            </a>
         </header>

@@ -37,6 +37,9 @@ if (is_logged_in()) {
             <p style="font-size: 1.25rem; margin-bottom: 3.5rem; color: #94a3b8; line-height: 1.6; max-width: 550px;">Hand-selected masterpieces from the world's most prestigious luthiers. Precision-crafted for the most discerning musicians.</p>
             <div style="display: flex; gap: 1.5rem; align-items: center;">
                 <a href="/TuneTrove/user/shop/" class="btn" style="background: var(--primary); color: white; padding: 1.25rem 3.5rem; font-size: 1.1rem; font-weight: 800; border-radius: 4px; text-transform: uppercase; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.4);">Browse Collection</a>
+                <?php if (!is_logged_in()): ?>
+                    <a href="/TuneTrove/user/auth/login.php" class="btn" style="background: rgba(255,255,255,0.05); color: white; padding: 1.25rem 3.5rem; font-size: 1.1rem; font-weight: 800; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">Sign In</a>
+                <?php endif; ?>
             </div>
         </div>
         <div class="reveal" style="position: relative; height: 350px; display: flex; align-items: center; justify-content: center;">

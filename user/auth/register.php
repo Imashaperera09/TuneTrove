@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        // WARNING: Storing passwords in plain text as requested by user. This is insecure.
+        $password_hash = $password;
         
         try {
             $stmt = $pdo->prepare("INSERT INTO users (username, email, full_name, password_hash) VALUES (?, ?, ?, ?)");

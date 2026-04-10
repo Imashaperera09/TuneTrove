@@ -17,7 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$username]);
         $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password_hash'])) {
+        // WARNING: Using plain text comparison as requested by user. This is insecure.
+        if ($user && $password === $user['password_hash']) {
             // Success
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
